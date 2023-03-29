@@ -18,7 +18,7 @@
             </div>
             <div class="carousel-inner">
                 <div class="carousel-item active border border-dark">
-                    <img src=".\..\..\res\img\autumn-2.png" class="d-block w-100 " alt="...">
+                    <img src=".\..\..\res\img\img1.jpg" class="d-block w-100 " alt="...">
                     <div class="carousel-caption d-none d-md-block ">
                         <h4></h4>
                     </div>

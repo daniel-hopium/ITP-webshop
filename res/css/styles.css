@@ -2,16 +2,20 @@ html {
     height: 100%;
 }
 body {
-     background-color: #e6dad5; 
+     background-color: #d5dfe6; 
     
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-image: url('../img/background.png');
+    background-image: url('../img/background.jpg');
     background-repeat: no-repeat;
     background-position: center;
     background-attachment: fixed;
     
     
     
+}
+
+nav {
+    background-color: #016df0;
 }
 
 .nav-center {
@@ -22,7 +26,7 @@ body {
 }
 
 .site-font-color {
-    color: #896826;
+    color: #154b91;
 }
 
 .shadow {
@@ -34,18 +38,18 @@ body {
 }
 
 .footer {
-    background-color:  #a1705e ;
-    color: #cea58c;
+    background-color:  #016df0 ;
+    color: #8caace;
 }
 .bg-brown {
-    background-color:  #a66249 ;
+    background-color:  #016df0 ;
 }
 
 .btn-primary, .btn-outline-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited .acco{
-    background-color:  #a66249b5 !important;
+    background-color:  016df0 !important;
     border-width: 1px;
     border-color: rgb(62, 62, 62);
-    color: black;
+    color: rgb(255, 255, 255);
     
 }
 
@@ -54,7 +58,7 @@ body {
 }
 
 .card-bg {
-    background-color: #c1a29181;
+    background-color: #91a9c181;
     
 }
 
@@ -64,7 +68,7 @@ body {
 
 
 #hotelName {
-    color: #ffca5c;
+    color: #ffffff;
     
     font-size: 22px;
 }
