@@ -10,7 +10,7 @@
   <body class="d-flex  flex-column min-vh-100">
     <div class="text-center login site-font-color">
       <form method="post" action="login.php" style="max-width:350px;margin:auto">
-          <img  class="mt-4" src="https://icons.iconarchive.com/icons/graphicloads/food-drink/256/dish-2-icon.png"
+          <img  class="mt-4" src="https://icons.iconarchive.com/icons/iconka/business-finance/256/handshake-icon.png"
           height="72" alt="Logo">
           <h1 class=" h3 mb-3 ">Anmeldung</h1>
 
@@ -41,7 +41,7 @@
       if(isset($_SESSION['username']))
       {
 
-          echo "<script>location.href='home.php'</script>";
+          echo "<script>location.href='landing_page.php'</script>";
 
       } else {
       if (isset($_POST['emailOrUsername'])) {
@@ -70,7 +70,7 @@
             $username = ($username['username']);
 
             $_SESSION['username'] = $username;
-            echo "<script>location.href='redirect_page.php?type=login'</script>";
+            echo "<script>location.href='home.php?type=login'</script>";
           } else {
             echo "Falsches Passwort!";
           }

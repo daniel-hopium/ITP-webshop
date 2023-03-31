@@ -1,8 +1,8 @@
 <?php
 
-$host = "localhost:3325"; // Because of port changing
-$user = "webtech_user";
+$host = "localhost"; // Because of port changing
+$user = "webshop_user";
 $password = "admin";
-$database = "webtechdb";
+$database = "webshop";
 
 ?>
