@@ -5,7 +5,7 @@ body {
      background-color: #d5dfe6; 
     
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-image: url('../img/background.jpg');
+    background-image: none ;
     background-repeat: no-repeat;
     background-position: center;
     background-attachment: fixed;
@@ -26,7 +26,7 @@ nav {
 }
 
 .site-font-color {
-    color: #154b91;
+    color: #000000;
 }
 
 .shadow {
@@ -49,7 +49,7 @@ nav {
     background-color:  016df0 !important;
     border-width: 1px;
     border-color: rgb(62, 62, 62);
-    color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
     
 }
 
