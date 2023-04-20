@@ -64,7 +64,7 @@ $db = null;
 <script>
 // JavaScript functions for editing and deleting products
 function editProduct(productId) {
-  window.location.href = 'edit_product.php?id=' + productId;
+  window.location.href = 'product_edit.php?id=' + productId;
 }
 
 function deleteProduct(productId) {
@@ -82,7 +82,7 @@ function deleteProduct(productId) {
         }
       }
     };
-    xhr.open('DELETE', 'delete_product.php?id=' + productId);
+    xhr.open('DELETE', 'product_delete.php?id=' + productId);
     xhr.send();
   }
 }

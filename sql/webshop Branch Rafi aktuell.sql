@@ -226,28 +226,28 @@ CREATE TABLE `reservations` (
 --
 -- Dumping data for table `reservations`
 --
-
-INSERT INTO `reservations` (`id`, `userID`, `price`, `created`, `type`, `date_arrival`, `date_departure`, `menu`, `has_pets`, `availability`) VALUES
-(1, 20, 250, '2023-01-15 23:49:18', 'suite', '2023-01-19', '2023-01-20', 'breakfast', 'true', 'unavailable'),
-(2, NULL, 250, '2023-01-15 19:27:11', 'suite', NULL, NULL, NULL, NULL, 'available'),
-(3, NULL, 250, '2023-01-15 19:27:03', 'suite', NULL, NULL, NULL, NULL, 'available'),
-(4, 20, 100, '2023-01-15 23:49:33', 'single_room', '2023-01-26', '2023-01-27', 'fullBoard', 'false', 'unavailable'),
-(5, NULL, 100, '2023-01-15 19:23:18', 'single_room', NULL, NULL, NULL, NULL, 'available'),
-(6, NULL, 100, '2023-01-15 19:23:18', 'single_room', NULL, NULL, NULL, NULL, 'available'),
-(7, NULL, 100, '2023-01-15 19:23:18', 'single_room', NULL, NULL, NULL, NULL, 'available'),
-(8, NULL, 160, '2023-01-15 19:23:18', 'double_room', NULL, NULL, NULL, NULL, 'available'),
-(9, NULL, 160, '2023-01-15 19:23:18', 'double_room', NULL, NULL, NULL, NULL, 'available'),
-(10, NULL, 160, '2023-01-15 19:23:18', 'double_room', NULL, NULL, NULL, NULL, 'available'),
-(11, NULL, 160, '2023-01-15 19:23:18', 'double_room', NULL, NULL, NULL, NULL, 'available'),
-(12, NULL, 160, '2023-01-15 19:23:18', 'double_room', NULL, NULL, NULL, NULL, 'available'),
-(13, 20, 10, '2023-01-15 23:49:18', 'parking_open', '2023-01-19', '2023-01-20', NULL, NULL, 'unavailable'),
-(14, NULL, 10, '2023-01-15 19:23:18', 'parking_open', NULL, NULL, NULL, NULL, 'available'),
-(15, NULL, 10, '2023-01-15 19:23:18', 'parking_open', NULL, NULL, NULL, NULL, 'available'),
-(16, NULL, 10, '2023-01-15 00:00:00', 'parking_open', NULL, NULL, NULL, NULL, 'available'),
-(17, 20, 25, '2023-01-15 23:49:33', 'parking_roofed', '2023-01-26', '2023-01-27', NULL, NULL, 'unavailable'),
-(18, NULL, 25, '2023-01-15 19:27:03', 'parking_roofed', NULL, NULL, NULL, NULL, 'available'),
-(19, NULL, 25, '2023-01-15 00:00:00', 'parking_roofed', NULL, NULL, NULL, NULL, 'available'),
-(20, NULL, 25, '2023-01-15 00:00:00', 'parking_roofed', NULL, NULL, NULL, NULL, 'available');
+--
+--INSERT INTO `reservations` (`id`, `userID`, `price`, `created`, `type`, `date_arrival`, `date_departure`, `menu`, `has_pets`, `availability`) VALUES
+--(1, 20, 250, '2023-01-15 23:49:18', 'suite', '2023-01-19', '2023-01-20', 'breakfast', 'true', 'unavailable'),
+--(2, NULL, 250, '2023-01-15 19:27:11', 'suite', NULL, NULL, NULL, NULL, 'available'),
+--(3, NULL, 250, '2023-01-15 19:27:03', 'suite', NULL, NULL, NULL, NULL, 'available'),
+--(4, 20, 100, '2023-01-15 23:49:33', 'single_room', '2023-01-26', '2023-01-27', 'fullBoard', 'false', 'unavailable'),
+--(5, NULL, 100, '2023-01-15 19:23:18', 'single_room', NULL, NULL, NULL, NULL, 'available'),
+--(6, NULL, 100, '2023-01-15 19:23:18', 'single_room', NULL, NULL, NULL, NULL, 'available'),
+--(7, NULL, 100, '2023-01-15 19:23:18', 'single_room', NULL, NULL, NULL, NULL, 'available'),
+--(8, NULL, 160, '2023-01-15 19:23:18', 'double_room', NULL, NULL, NULL, NULL, 'available'),
+--(9, NULL, 160, '2023-01-15 19:23:18', 'double_room', NULL, NULL, NULL, NULL, 'available'),
+--(10, NULL, 160, '2023-01-15 19:23:18', 'double_room', NULL, NULL, NULL, NULL, 'available'),
+--(11, NULL, 160, '2023-01-15 19:23:18', 'double_room', NULL, NULL, NULL, NULL, 'available'),
+--(12, NULL, 160, '2023-01-15 19:23:18', 'double_room', NULL, NULL, NULL, NULL, 'available'),
+--(13, 20, 10, '2023-01-15 23:49:18', 'parking_open', '2023-01-19', '2023-01-20', NULL, NULL, 'unavailable'),
+--(14, NULL, 10, '2023-01-15 19:23:18', 'parking_open', NULL, NULL, NULL, NULL, 'available'),
+--(15, NULL, 10, '2023-01-15 19:23:18', 'parking_open', NULL, NULL, NULL, NULL, 'available'),
+--(16, NULL, 10, '2023-01-15 00:00:00', 'parking_open', NULL, NULL, NULL, NULL, 'available'),
+--(17, 20, 25, '2023-01-15 23:49:33', 'parking_roofed', '2023-01-26', '2023-01-27', NULL, NULL, 'unavailable'),
+--(18, NULL, 25, '2023-01-15 19:27:03', 'parking_roofed', NULL, NULL, NULL, NULL, 'available'),
+--(19, NULL, 25, '2023-01-15 00:00:00', 'parking_roofed', NULL, NULL, NULL, NULL, 'available'),
+--(20, NULL, 25, '2023-01-15 00:00:00', 'parking_roofed', NULL, NULL, NULL, NULL, 'available');
 
 -- --------------------------------------------------------
 

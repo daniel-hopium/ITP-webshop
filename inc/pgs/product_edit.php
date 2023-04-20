@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $stmt->execute();
 
   // Redirect back to the edit product page
-  header('Location: edit_product.php?id=' . $productId);
+  header('Location: product_edit.php?id=' . $productId);
   exit();
 }
 
@@ -54,7 +54,7 @@ $db_obj->close();
 
 <h1>Edit Product</h1>
 
-<form method="post" action="edit_product.php?id=<?php echo $productId; ?>">
+<form method="post" action="product_edit.php?id=<?php echo $productId; ?>">
   <div>
     <label for="name">Product Name:</label>
     <input type="text" name="name" value="<?php echo $product['name']; ?>" required>
