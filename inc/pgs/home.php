@@ -18,19 +18,19 @@
             </div>
             <div class="carousel-inner">
                 <div class="carousel-item active border border-dark">
-                    <img src=".\..\..\res\img\img1.jpg" class="d-block w-100 " alt="...">
+                    <img src=".\..\..\res\img/inprogress.jpg" class="d-block w-100 " alt="...">
                     <div class="carousel-caption d-none d-md-block ">
                         <h4></h4>
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img src=".\..\..\res\img\autumn-6.png" class="d-block w-100" alt="...">
+                    <img src=".\..\..\res\img/inprogress.jpg" class="d-block w-100" alt="...">
                     <div class="carousel-caption d-none d-md-block">
                     <h4 class=""></h4>
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img src=".\..\..\res\img\autumn-5.png" class="d-block w-100" alt="...">
+                    <img src=".\..\..\res\img/inprogress.jpg" class="d-block w-100" alt="...">
                     <div class="carousel-caption d-none d-md-block">
                     <h4></h4>
                     </div>
@@ -53,8 +53,8 @@
                 <h1 class="h1 text-center  ">NEUE FERNSEHER IM ANGEBOT</h1>
                 <img class="img-fluid rounded" alt="Image" src=".\..\..\res\img\new_product_01.jpg">
                 <div class="my-2 fs-5">
-                    <p>Neuer Fernseher. BRANDNEU</p>
-                    <p>4k HDTV HDR QUANTUM TECHNOLOGY. BUY NOW OR LOOSE</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt nobis aspernatur animi, distinctio architecto quam accusantium maxime asperiores suscipit mollitia dolor molestias, explicabo necessitatibus nemo cum similique nam perferendis iure.</p>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum soluta dolorum animi qui deserunt beatae odio consectetur saepe natus praesentium optio, blanditiis cumque unde eos ratione? Velit eaque repudiandae inventore.</p>
                     <p>ONLY 5999 BUCKS  </p>
                 </div>
             </div>
