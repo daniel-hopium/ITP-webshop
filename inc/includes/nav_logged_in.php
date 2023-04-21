@@ -14,7 +14,7 @@
             <img class="d-inline-block align top"
             src="https://icons.iconarchive.com/icons/iconka/business-finance/256/handshake-icon.png" width="30" height ="30">
         </a>
-        <a href='landing_page.php' class="navbar-brand mb-0 h1 mt-2" id="shopName" style="font-family:'Alex Brush'; font-size: 25px;">Nix Für Arme Shop</a>
+        <a href='home.php' class="navbar-brand mb-0 h1 mt-2" id="shopName" style="font-family:'Alex Brush'; font-size: 25px;">Nix Für Arme Shop</a>
         <button 
         type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" class="navbar-toggler" aria-controls="navbarNav"aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -30,14 +30,8 @@
                         Administration
                     </a>
                     <ul class='dropdown-menu' aria-labelledby='navbarDropdown'>
-
-                        <li><a href='news_upload.php' class='dropdown-item'>Beitragsverwaltung</a></li>
-                        <li><a href='reservation_overview.php' class='dropdown-item'>Reservierungsverwaltung</a></li>
-
-                        <li><a href='#.php' class='dropdown-item'>Newsverwaltung</a></li>
                         <li><a href='product_adminpage.php' class='dropdown-item'>Produktverwaltung</a></li>
                         <li><a href='product_upload.php' class='dropdown-item'>Produktupload</a></li>
-
                         <li><a href='user_overview.php' class='dropdown-item'>Userverwaltung</a></li>
                         <li><a href='contact_overview.php' class='dropdown-item'>Anfragenverwaltung</a></li>
                     </ul>
@@ -50,11 +44,12 @@
                 </li>
                 <li class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Reservierungen
+                        Produkt
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a href="my_reservations.php" class="dropdown-item">Meine Reservierungen</a></li>
-                        <li><a href="new_reservation.php" class="dropdown-item">Neue Reservierung</a></li>
+                    <li><a href="prod_categories.php" class="dropdown-item">Produktkategorien</a></li>
+                        <li><a href="prod_details.php" class="dropdown-item">Produktdetails</a></li>
+                        <li><a href="prod_display.php" class="dropdown-item">Produktdisplay</a></li>
                     </ul>
                 </li>
                 <li class="nav-item ">
