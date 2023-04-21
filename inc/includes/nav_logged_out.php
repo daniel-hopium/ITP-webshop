@@ -36,6 +36,11 @@
                     Login
                     </a>
                 </li> 
+                <li class="nav-item ">
+                    <a href="help.php" class="nav-link  <?php if($active_page == 'help.php') echo 'fw-bold active disabled'; ?>">
+                    Help
+                    </a>
+                </li> 
             </ul>        
         </div>   
     </div>
