@@ -74,7 +74,6 @@
   <?php
   include '../includes/footer.php';
   ?>
->>>>>>> 7c1b2fe2440fd7c880e86697646f27ad6fd96cc2
 
 </body>
 </html>
