@@ -14,9 +14,11 @@ $active_page = basename($_SERVER['SCRIPT_NAME']);
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a href="news.php" class="nav-link <?php if ($active_page == 'news.php') echo 'fw-bold active disabled'; ?>">
-                        News
+
+                <li class="nav-item" >
+                    <a href="news.php" class="nav-link <?php if($active_page == 'news.php') echo 'fw-bold active disabled'; ?>">
+                    News
+
                     </a>
                 </li>
                 <li class="nav-item">
@@ -33,6 +35,15 @@ $active_page = basename($_SERVER['SCRIPT_NAME']);
                     <a href="login.php" class="nav-link  <?php if ($active_page == 'login.php') echo 'fw-bold active disabled'; ?>">
                         Login
                     </a>
+                </li> 
+                <li class="nav-item ">
+                    <a href="help.php" class="nav-link  <?php if($active_page == 'help.php') echo 'fw-bold active disabled'; ?>">
+                    Help
+                    </a>
+                </li> 
+            </ul>        
+        </div>   
+    
                 </li>
             
             </ul>
@@ -42,6 +53,7 @@ $active_page = basename($_SERVER['SCRIPT_NAME']);
             </form>
             <div id="results-container"></div>
         </div>
+
     </div>
 </nav>
 

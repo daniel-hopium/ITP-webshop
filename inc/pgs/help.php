@@ -27,7 +27,6 @@
                 <p>Willkommen bei unserem Webshop! Wir möchten sicherstellen, dass Sie eine großartige Erfahrung machen, während Sie auf unserer Website einkaufen. Hier sind einige Tipps, die Ihnen dabei helfen können:</p>
                 <ul>
                     <li>Verwenden Sie die Navigation oben auf der Seite, um schnell zu der Kategorie zu gelangen, die Sie interessiert.</li>
-                    <li>Um ein Zimmer zu buchen, klicken Sie auf "Zimmerreservierung".</li>
                     <li>Wenn Sie neu sind, registrieren Sie sich, indem Sie auf "Registrieren" klicken. Wenn Sie bereits ein Konto haben, können Sie sich in der rechten oberen Ecke ab- oder anmelden.</li>
                     <li>Unser Kundensupport-Team ist immer bereit, Ihnen zu helfen. Wenn Sie Fragen oder Probleme haben, zögern Sie nicht, uns zu kontaktieren.</li>
                 </ul>
