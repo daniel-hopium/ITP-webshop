@@ -17,7 +17,7 @@
             id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item" >
-                    <a href="#" class="nav-link <?php if($active_page == 'news.php') echo 'fw-bold active disabled'; ?>">
+                    <a href="news.php" class="nav-link <?php if($active_page == 'news.php') echo 'fw-bold active disabled'; ?>">
                     News
                     </a>
                 </li>
