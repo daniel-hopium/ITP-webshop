@@ -2,9 +2,15 @@
 <!DOCTYPE html>
 <html lang="en">
 
+
+<?php
+        include '../includes/head.php';
+    ?> 
+
+
 <?php
 // Verbindung zur Datenbank herstellen
-require_once '../config/dbaccess_test.php';
+require_once('../../config/dbaccess_test.php');
 $connection = mysqli_connect($host, $user, $password, $database);
 if (!$connection) {
 	die("Verbindung zur Datenbank konnte nicht hergestellt werden.");

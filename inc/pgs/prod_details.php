@@ -8,6 +8,12 @@
 	<title>Elektronik-Webshop</title>
 	<!-- Bootstrap 5 CSS -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+
+
+	<?php
+        include '../includes/head.php';
+    ?> 
+
 	<style>
 		.card {
 			height: 100%;
@@ -56,6 +62,11 @@
 			</div>
 		</div>
 	</div>
+
+
+	<?php
+  include '../includes/footer.php';
+  ?>
 
 	<!-- Bootstrap 5 JS (optional) -->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
