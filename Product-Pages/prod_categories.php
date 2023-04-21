@@ -38,8 +38,8 @@
                     <img src="https://via.placeholder.com/400x300/2D2D2D/FFFFFF/?text=Beispielbild" class="card-img-top" alt="Computer">
                     <div class="card-body">
                         <h2 class="card-title text-center mb-3">Computer</h2>
-                        <p class="card-text">Entdecken Sie unsere Auswahl an Desktop-PCs, Laptops und Zubehör.</p>
-                        <a href="prod_display.php" class="btn btn-primary">Kategorie ansehen</a>
+                        <p class="card-text">Hier finden Sie eine große Auswahl an Desktop-PCs für Ihr Zuhause oder Büro, mit hoher Leistung und zuverlässiger Qualität.</p>
+                        <a href="prod_display.php?category_id=1" class="btn btn-primary">Kategorie ansehen</a>
                     </div>
                 </div>
             </div>
@@ -47,9 +47,9 @@
                 <div class="card h-100">
                     <img src="https://via.placeholder.com/400x300/2D2D2D/FFFFFF/?text=Beispielbild" class="card-img-top" alt="Smartphones">
                     <div class="card-body">
-                        <h2 class="card-title text-center mb-3">Smartphones</h2>
-                        <p class="card-text">Finden Sie Ihr perfektes Smartphone mit unseren Top-Marken und Modellen.</p>
-                        <a href="prod_display.php" class="btn btn-primary">Kategorie ansehen</a>
+                        <h2 class="card-title text-center mb-3">Laptop</h2>
+                        <p class="card-text">Entdecken Sie unsere breite Palette an leichten und tragbaren Laptops für unterwegs, mit langen Akkulaufzeiten und schnellen Prozessoren.</p>
+                        <a href="prod_display.php?category_id=2" class="btn btn-primary">Kategorie ansehen</a>
                     </div>
                 </div>
             </div>
@@ -57,9 +57,9 @@
                 <div class="card h-100">
                     <img src="https://via.placeholder.com/400x300/2D2D2D/FFFFFF/?text=Beispielbild" class="card-img-top" alt="Fernseher">
                     <div class="card-body">
-                        <h2 class="card-title text-center mb-3">Fernseher</h2>
-                        <p class="card-text">Erleben Sie TV-Unterhaltung in atemberaubender Qualität mit unseren Fernsehern.</p>
-                        <a href="prod_display.php" class="btn btn-primary">Kategorie ansehen</a>
+                        <h2 class="card-title text-center mb-3">Tablet</h2>
+                        <p class="card-text">Erleben Sie die Freiheit und Flexibilität unserer Tablets, mit kristallklaren Bildschirmen und schnellen Prozessoren.</p>
+                        <a href="prod_display.php?category_id=3" class="btn btn-primary">Kategorie ansehen</a>
                     </div>
                 </div>
             </div>
@@ -67,9 +67,9 @@
                 <div class="card h-100">
                     <img src="https://via.placeholder.com/400x300/2D2D2D/FFFFFF/?text=Beispielbild" class="card-img-top" alt="Konsolen">
                     <div class="card-body">
-                        <h2 class="card-title text-center mb-3">Konsolen</h2>
-                        <p class="card-text">Entdecken Sie die neuesten Spielekonsolen und das passende Zubehör.</p>
-                        <a href="prod_display.php" class="btn btn-primary">Kategorie ansehen</a>
+                        <h2 class="card-title text-center mb-3">Drucker</h2>
+                        <p class="card-text">Wählen Sie aus unseren hochwertigen Druckern für Zuhause oder Büro, die alle Ihre Anforderungen erfüllen.</p>
+                        <a href="prod_display.php?category_id=4" class="btn btn-primary">Kategorie ansehen</a>
                     </div>
                 </div>
             </div>
@@ -77,21 +77,21 @@
                 <div class="card h-100">
                     <img src="https://via.placeholder.com/400x300/2D2D2D/FFFFFF/?text=Beispielbild" class="card-img-top" alt="Netzwerk">
                     <div class="card-body">
-                        <h2 class="card-title text-center mb-3">Netzwerk</h2>
-                        <p class="card-text">Entdecken Sie unsere Auswahl an Netzwerkgeräten und Zubehör.</p>
+                        <h2 class="card-title text-center mb-3">Kopfhörer</h2>
+                        <p class="card-text">Tauchen Sie ein in Ihre Musik oder genießen Sie kristallklare Anrufe mit unseren hochwertigen Kopfhörern.</p>
                     </div>
                     <div class="card-footer d-flex justify-content-between align-items-center">
-                        <a href="prod_display.php" class="btn btn-primary">Kategorie ansehen</a>
+                        <a href="prod_display.php?category_id=5" class="btn btn-primary">Kategorie ansehen</a>
                     </div>
                 </div>
             </div>
             <div class="col mb-4">
                 <div class="card h-100">
-                    <a href="prod_display.php" class="stretched-link"></a>
+                    <a href="prod_display.php?category_id=6" class="stretched-link"></a>
                     <img src="https://via.placeholder.com/400x300/2D2D2D/FFFFFF/?text=Beispielbild" class="card-img-top" alt="Netzwerk">
                     <div class="card-body">
-                        <h2 class="card-title text-center mb-3">Zubehör</h2>
-                        <p class="card-text">Entdecken Sie unsere große Auswahl an Zubehör für alle Ihre elektronischen Geräte.</p>
+                        <h2 class="card-title text-center mb-3">Lautsprecher</h2>
+                        <p class="card-text">Erleben Sie eine beeindruckende Klangqualität mit unseren leistungsstarken und vielseitigen Lautsprechern für Zuhause oder unterwegs.</p>
                     </div>
                     <div class="card-footer d-flex justify-content-between align-items-center">
                         <p class="mb-0">Weitere Details anzeigen</p>
