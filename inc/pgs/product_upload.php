@@ -25,7 +25,7 @@
     
 </head>
 <body>
-    <form method="post" action="upload_product.php" enctype="multipart/form-data">
+    <form method="post" action="product_upload.php" enctype="multipart/form-data">
       <div>
         <label for="name">Product Name:</label>
         <input type="text" name="name" required>

@@ -32,6 +32,7 @@
                     <ul class='dropdown-menu' aria-labelledby='navbarDropdown'>
                         <li><a href='#.php' class='dropdown-item'>Newsverwaltung</a></li>
                         <li><a href='product_adminpage.php' class='dropdown-item'>Produktverwaltung</a></li>
+                        <li><a href='product_upload.php' class='dropdown-item'>Produktupload</a></li>
                         <li><a href='user_overview.php' class='dropdown-item'>Userverwaltung</a></li>
                         <li><a href='contact_overview.php' class='dropdown-item'>Anfragenverwaltung</a></li>
                     </ul>
