@@ -148,7 +148,7 @@
 		<?php
 		require_once('../../config/dbaccess.php');
 
-		$userID = $currentUser['id'];
+		// $userID = $currentUser['id']; hab ich auskommentiert, brauchen wir das? wirft einen error wenn man nicht eingeloggt ist
 		$db_obj = new mysqli($host, $user, $password, $database);
 
 		$sql = "SELECT * FROM blog_news ORDER BY ID DESC";

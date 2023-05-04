@@ -6,7 +6,7 @@
     <?php 
         include '../includes/head.php';
         require_once ('../../config/dbaccess.php');
-        if(!isset($_SESSION['username'])) header('Location: landing_page.php');
+        if(!isset($_SESSION['username'])) header('Location: home.php');
 
         $db_obj = new mysqli($host, $user, $password, $database);
 

@@ -4,7 +4,7 @@
     <title>Weiterleitung</title>
     
   <?php
-  include '../includes/head.php';
+  
 
   //checks the message and redirects dynamically
   if ($_GET['type'] == 'login'){
@@ -38,20 +38,21 @@
     $destination = "zur Userverwaltung weitergeleitet...";
     $destinationPage = "user_overview.php";
   }
-
   else if ($_GET['type'] == 'blogNews'){
     $text1 = "Blog erfolgreich gepostet";
     $text2 = "";
     $destination = "zur Startseite weitergeleitet...";
     $destinationPage = "home.php";
+
   }
 
-  header("refresh:5;url=$destinationPage");
+  header("refresh:6;url=$destinationPage");
   ?> 
   </head>
   <body class="d-flex  flex-column min-vh-100">
  
   <?php
+    include '../includes/head.php';
     include '../includes/redirect.php';
     include '../includes/footer.php';
   ?>
