@@ -107,7 +107,7 @@ if (!$connection) {
 	</div>
 
 	<?php
-	include '../inc/includes/footer.php';
+	include '../includes/footer.php';
 	?>
 
 	<!-- Bootstrap 5 JS (optional) -->
