@@ -15,5 +15,4 @@
         $currentUser =($currentUser->fetch_assoc());
         $role = $currentUser['role'];
 
-
 ?>

@@ -31,7 +31,6 @@
           <li class="list-group-item bg-transparent site-font-color">Mitglied von ÖHV und WKO</li>
           <li class="list-group-item bg-transparent site-font-color"></li>
         </ul>
-
         <ul class="list-group list-group-flush ">
           <li class="list-group-item bg-transparent site-font-color"></li>
           <li class="list-group-item bg-transparent ms-0 site-font-color"><h6>Berufsrecht:</h6></li>

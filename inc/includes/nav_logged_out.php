@@ -16,9 +16,8 @@ $active_page = basename($_SERVER['SCRIPT_NAME']);
             <ul class="navbar-nav">
 
                 <li class="nav-item" >
-                    <a href="news.php" class="nav-link <?php if($active_page == 'news.php') echo 'fw-bold active disabled'; ?>">
+                    <a href="newsBlog_user.php" class="nav-link <?php if($active_page == 'newsBlog_user.php') echo 'fw-bold active disabled'; ?>">
                     News
-
                     </a>
                 </li>
                 <li class="nav-item">
