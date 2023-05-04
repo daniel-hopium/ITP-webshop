@@ -8,6 +8,7 @@
     ?>
     
 </head>
+
 <body class="d-flex flex-column min-vh-100">
     <div class="container site-font-color">
         <div class="card card-bg shadow-2-strong card-registration mt-3 p-2 flex-column " style="border-radius: 15px; max-width: 600px;">
@@ -55,7 +56,6 @@
         if ($stmt->execute()) { echo "<script>location.href='redirect_page.php?type=contact'</script>"; } else { echo "Error"; }
             $stmt->close(); $db_obj->close();
     }
-
 
     include '../includes/footer.php';
     ?>
