@@ -27,6 +27,7 @@ include '../../config/check_if_admin.php';
                     <ul class='dropdown-menu' aria-labelledby='navbarDropdown'>
                         <li><a href='product_adminpage.php' class='dropdown-item'>Produktverwaltung</a></li>
                         <li><a href='product_upload.php' class='dropdown-item'>Produktupload</a></li>
+                        <li><a href='finance_overview.php' class='dropdown-item'>Finanzübersicht</a></li>
                         <li><a href='user_overview.php' class='dropdown-item'>Userverwaltung</a></li>
                         <li><a href='contact_overview.php' class='dropdown-item'>Anfragenverwaltung</a></li>
                     </ul>
@@ -41,6 +42,7 @@ include '../../config/check_if_admin.php';
                     <ul class='dropdown-menu' aria-labelledby='navbarDropdown'>
                         <li><a href='newsBlog.php' class='dropdown-item'>Post News Blog</a></li>
                         <li><a href='newsBlog_user.php' class='dropdown-item'>News Blog</a></li>
+                        
                     </ul>
                 </li>"
                 ?>
