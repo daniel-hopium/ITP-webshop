@@ -46,9 +46,9 @@ $active_page = basename($_SERVER['SCRIPT_NAME']);
                 </li>
             
             </ul>
-            <form class="d-flex ms-auto my-2 my-lg-0" id="search-form"">
+            <form class="d-flex ms-auto my-2 my-lg-0" id="search-form">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="search-input">
-                <button class="btn btn-outline-success btn btn-danger" type="submit">Search</button>
+                <button class="btn btn-outline-secondary btn btn-light" type="submit">Search</button>
             </form>
             <div id="results-container"></div>
         </div>
