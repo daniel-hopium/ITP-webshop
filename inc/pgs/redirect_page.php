@@ -46,7 +46,7 @@
     $destinationPage = "home.php";
   }
 
-  header("refresh:6;url=$destinationPage");
+  header("refresh:5;url=$destinationPage");
   ?> 
   </head>
   <body class="d-flex  flex-column min-vh-100">
