@@ -38,16 +38,16 @@
     $destination = "zur Userverwaltung weitergeleitet...";
     $destinationPage = "user_overview.php";
   }
-
-  header("refresh:5;url=$destinationPage");
   else if ($_GET['type'] == 'blogNews'){
     $text1 = "Blog erfolgreich gepostet";
     $text2 = "";
     $destination = "zur Startseite weitergeleitet...";
     $destinationPage = "home.php";
-  }
 
-  header("refresh:6;url=$destinationPage");
+  }
+  header("refresh:5;url=$destinationPage");
+
+ 
   ?> 
   </head>
   <body class="d-flex  flex-column min-vh-100">
