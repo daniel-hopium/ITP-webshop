@@ -79,6 +79,11 @@ include '../../config/check_if_admin.php';
                     </a>
                 </li>
                 <li class="nav-item ">
+                    <a href="shoppingcart.php" class="nav-link <?php if($active_page == 'shoppingcart.php') echo 'fw-bold active '; ?>">
+                    Shopping Cart
+                    </a>
+                </li>
+                <li class="nav-item ">
                     <a href="userProfile.php" class="nav-link  <?php if ($active_page == 'userProfile.php') echo 'fw-bold active '; ?>">
                         Mein Profil
                     </a>
