@@ -10,6 +10,7 @@
     }
 
     // Filters out role of current user
+    // if(isset($_SESSION['username']))
     $currentUser = $_SESSION['username'];
         $currentUser = mysqli_query($db_obj, "SELECT role, id FROM users WHERE username = '$currentUser' ");
         $currentUser =($currentUser->fetch_assoc());

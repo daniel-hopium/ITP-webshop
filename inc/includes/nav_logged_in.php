@@ -27,6 +27,7 @@ include '../../config/check_if_admin.php';
                     <ul class='dropdown-menu' aria-labelledby='navbarDropdown'>
                         <li><a href='product_adminpage.php' class='dropdown-item'>Produktverwaltung</a></li>
                         <li><a href='product_upload.php' class='dropdown-item'>Produktupload</a></li>
+                        <li><a href='finance_overview.php' class='dropdown-item'>Finanzübersicht</a></li>
                         <li><a href='user_overview.php' class='dropdown-item'>Userverwaltung</a></li>
                         <li><a href='contact_overview.php' class='dropdown-item'>Anfragenverwaltung</a></li>
                     </ul>
@@ -41,6 +42,7 @@ include '../../config/check_if_admin.php';
                     <ul class='dropdown-menu' aria-labelledby='navbarDropdown'>
                         <li><a href='newsBlog.php' class='dropdown-item'>Post News Blog</a></li>
                         <li><a href='newsBlog_user.php' class='dropdown-item'>News Blog</a></li>
+                        
                     </ul>
                 </li>"
                 ?>
@@ -77,11 +79,22 @@ include '../../config/check_if_admin.php';
                     </a>
                 </li>
                 <li class="nav-item ">
+                    <a href="shoppingcart.php" class="nav-link <?php if($active_page == 'shoppingcart.php') echo 'fw-bold active '; ?>">
+                    Shopping Cart
+                    </a>
+                </li>
+                <li class="nav-item ">
                     <a href="userProfile.php" class="nav-link  <?php if ($active_page == 'userProfile.php') echo 'fw-bold active '; ?>">
                         Mein Profil
                     </a>
                 </li>
+
         </div>
+        <form class="d-flex ms-auto my-2 my-lg-0" id="search-form"" method=" get" action="search.php">
+            <input class="form-control me-2" type="text" placeholder="Search" aria-label="Search" id="search-input">
+            <button class="btn btn-outline-success btn btn-danger" type="submit">Search</button>
+        </form>
+        <div id="results-container"></div>
     </div>
 </nav>
 </div>
