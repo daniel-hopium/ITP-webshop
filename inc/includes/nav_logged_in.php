@@ -90,9 +90,9 @@ include '../../config/check_if_admin.php';
                 </li>
 
         </div>
-        <form class="d-flex ms-auto my-2 my-lg-0" id="search-form"" method=" get" action="search.php">
+        <form class="d-flex ms-auto my-2 my-lg-0" id="search-form" method=" get" action="search.php">
             <input class="form-control me-2" type="text" placeholder="Search" aria-label="Search" id="search-input">
-            <button class="btn btn-outline-success btn btn-danger" type="submit">Search</button>
+            <button class="btn border border-dark btn btn-light shadow" type="submit">Search</button>
         </form>
         <div id="results-container"></div>
     </div>
