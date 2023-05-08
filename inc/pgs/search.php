@@ -83,18 +83,18 @@
                                     while ($row = mysqli_fetch_assoc($result)) {
                                         if ($row['source'] == 'blog_news') {
                                             echo "<div>
-                                <h3>News Blog</h3>
-                                <h3>" . $row['title'] . "</h3>
-                                <p>" . $row['content'] . "</p>
-                                <p>Created: " . $row['created'] . "</p>
-                                <p>Type: " . $row['type'] . "</p>
-                            </div>";
+                                    <h3>News Blog</h3>
+                                    <h3>" . $row['title'] . "</h3>
+                                    <p>" . $row['content'] . "</p>
+                                    <p>Created: " . $row['created'] . "</p>
+                                    <p>Type: " . $row['type'] . "</p>
+                                            </div>";
                                         } else if ($row['source'] == 'categories') {
                                             echo "<div>
-                                <h3>Categories</h3>
-                                <p>" . $row['category_name'] . "</p>
-                                <p>Type: " . $row['type'] . "</p>
-                                </div>";
+                                    <h3>Categories</h3>
+                                    <p>" . $row['category_name'] . "</p>
+                                    <p>Type: " . $row['type'] . "</p>
+                                            </div>";
                                         } else if ($row['source'] == 'contact_query') {
                                             echo "<div>
                                     <h3>Contact Query</h3>
@@ -104,7 +104,7 @@
                                     <p>Subject: " . $row['subject'] . "</p>
                                     <p>Message: " . $row['message'] . "</p>
                                     <p>Type: " . $row['type'] . "</p>
-                                </div>";
+                                            </div>";
                                         } else if ($row['source'] == 'news') {
                                             echo "<div>
                                     <h3>News</h3>
@@ -112,14 +112,14 @@
                                     <p>" . $row['content'] . "</p>
                                     <p>Created: " . $row['created'] . "</p>
                                     <p>Type: " . $row['type'] . "</p>
-                                </div>";
+                                            </div>";
                                         } else if ($row['source'] == 'products') {
                                             echo "<div>
                                     <h3>Products</h3>
                                     <h3>" . $row['title'] . "</h3>
                                     <p>" . $row['content'] . "</p>
                                     <p>Type: " . $row['type'] . "</p>
-                                </div>";
+                                            </div>";
                                         } else if ($row['source'] == 'users') {
                                             echo "<div>
                                     <h3>Users</h3>
@@ -128,7 +128,7 @@
                                     <p>Username: " . $row['username'] . "</p>
                                     <p>Email: " . $row['useremail'] . "</p>
                                     <p>Type: " . $row['type'] . "</p>
-                                </div>";
+                                            </div>";
                                         }
                                     }
                                 } else {
