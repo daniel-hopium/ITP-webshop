@@ -21,7 +21,7 @@ if (!$connection) {
 
 
 $category_name = "All Products";
-
+$category_id = "";
 
 ?>
 <head>
@@ -87,9 +87,11 @@ $category_name = "All Products";
 		<div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-4">
 			<?php
 			// Überprüfen, ob eine Kategorie-ID als Parameter übergeben wurde
-			$category_id = $_GET['category_id'];
+			if (isset($_GET['category_id'])) {
+				$category_id = $_GET['category_id'];
+			}
 			if (isset($_GET['category_id']) && $category_id >= 1  && $category_id <= 15) {
-				
+				$category_id = $_GET['category_id'];
 
 				// SQL-Abfrage zum Abrufen der Produkte aus der Datenbank
 				
