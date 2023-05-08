@@ -85,11 +85,11 @@ include '../../config/check_if_admin.php';
                 </li>
 
         </div>
-        <form class="d-flex ms-auto my-2 my-lg-0" id="search-form"" method=" get" action="search.php">
-            <input class="form-control me-2" type="text" placeholder="Search" aria-label="Search" id="search-input">
-            <button class="btn btn-outline-success btn btn-danger" type="submit">Search</button>
+        <form class="d-flex ms-auto my-2 my-lg-0" method="post" action="search.php">
+            <input class="form-control me-2" type="text" name="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success btn btn-danger" type="submit" name="submit-search">Search</button>
         </form>
-        <div id="results-container"></div>
-    </div>
+        <div id="results-container">
+        </div>
 </nav>
 </div>
