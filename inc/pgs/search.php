@@ -15,10 +15,19 @@
         main {
             flex: 1;
         }
+
+        .card-container {
+            display: flex;
+            justify-content: center;
+        }
+
+        .card {
+            min-height: 600px;
+        }
     </style>
 </head>
 
-<body>
+<body class="d-flex flex-column min-vh-100">
     <?php
     // Database connection
     $host = "localhost";
@@ -35,22 +44,24 @@
     ?>
 
     <main>
-        <div class="alert alert-primary" role="alert">
-            <h1>Search page</h1>
-        </div>
+        <div class="container site-font-color">
+            <div class="row mt-4 card-container">
+                <div class="card card-bg shadow-2-strong card-registration mt-3 p-2 flex-column " style="border-radius: 15px; max-width: 600px;">
+                    <div>
+                        <h1 style="text-align: center">Search page</h1>
+                        <br>
+                        <div id="results-container" style="margin-left: 20px;">
+                            <?php
+                            if (isset($_POST['submit-search'])) {
+                                $search = mysqli_real_escape_string($conn, $_POST['search']);
 
-        <div id="results-container" style="margin-left: 20px;">
-            <?php
-            if (isset($_POST['submit-search'])) {
-                $search = mysqli_real_escape_string($conn, $_POST['search']);
+                                // Redirect to "newsBlog_user.php" page if search query matches "news blog"
+                                if (strtolower($search) == "news blog") {
+                                    header("Location: newsBlog_user.php");
+                                    exit();
+                                }
 
-                // Redirect to "newsBlog_user.php" page if search query matches "news blog"
-                if (strtolower($search) == "news blog") {
-                    header("Location: newsBlog_user.php");
-                    exit();
-                }
-
-                $sql = "(SELECT created, title, content, NULL as category_name, NULL as contact_name, NULL as email, NULL as subject, NULL as message, NULL as name, NULL as surname, NULL as username, NULL as useremail, 'news blog' as type, 'blog_news' as source FROM blog_news WHERE created LIKE '%$search%' OR title LIKE '%$search%' OR content LIKE '%$search%')
+                                $sql = "(SELECT created, title, content, NULL as category_name, NULL as contact_name, NULL as email, NULL as subject, NULL as message, NULL as name, NULL as surname, NULL as username, NULL as useremail, 'news blog' as type, 'blog_news' as source FROM blog_news WHERE created LIKE '%$search%' OR title LIKE '%$search%' OR content LIKE '%$search%')
         UNION 
         (SELECT NULL as created, NULL as title, NULL as content, name AS category_name, NULL as contact_name, NULL as email, NULL as subject, NULL as message, NULL as name, NULL as surname, NULL as username, NULL as useremail, 'categories' as type, 'categories' as source FROM categories WHERE name LIKE '%$search%')
         UNION 
@@ -65,27 +76,27 @@
 
 
 
-                $result = mysqli_query($conn, $sql);
-                $queryResults = mysqli_num_rows($result);
+                                $result = mysqli_query($conn, $sql);
+                                $queryResults = mysqli_num_rows($result);
 
-                if ($queryResults > 0) {
-                    while ($row = mysqli_fetch_assoc($result)) {
-                        if ($row['source'] == 'blog_news') {
-                            echo "<div>
+                                if ($queryResults > 0) {
+                                    while ($row = mysqli_fetch_assoc($result)) {
+                                        if ($row['source'] == 'blog_news') {
+                                            echo "<div>
                                 <h3>News Blog</h3>
                                 <h3>" . $row['title'] . "</h3>
                                 <p>" . $row['content'] . "</p>
                                 <p>Created: " . $row['created'] . "</p>
                                 <p>Type: " . $row['type'] . "</p>
                             </div>";
-                        } else if ($row['source'] == 'categories') {
-                            echo "<div>
+                                        } else if ($row['source'] == 'categories') {
+                                            echo "<div>
                                 <h3>Categories</h3>
                                 <p>" . $row['category_name'] . "</p>
                                 <p>Type: " . $row['type'] . "</p>
                                 </div>";
-                        } else if ($row['source'] == 'contact_query') {
-                            echo "<div>
+                                        } else if ($row['source'] == 'contact_query') {
+                                            echo "<div>
                                     <h3>Contact Query</h3>
                                     <p>Created: " . $row['created'] . "</p>
                                     <p>Name: " . $row['contact_name'] . "</p>
@@ -94,23 +105,23 @@
                                     <p>Message: " . $row['message'] . "</p>
                                     <p>Type: " . $row['type'] . "</p>
                                 </div>";
-                        } else if ($row['source'] == 'news') {
-                            echo "<div>
+                                        } else if ($row['source'] == 'news') {
+                                            echo "<div>
                                     <h3>News</h3>
                                     <h3>" . $row['title'] . "</h3>
                                     <p>" . $row['content'] . "</p>
                                     <p>Created: " . $row['created'] . "</p>
                                     <p>Type: " . $row['type'] . "</p>
                                 </div>";
-                        } else if ($row['source'] == 'products') {
-                            echo "<div>
+                                        } else if ($row['source'] == 'products') {
+                                            echo "<div>
                                     <h3>Products</h3>
                                     <h3>" . $row['title'] . "</h3>
                                     <p>" . $row['content'] . "</p>
                                     <p>Type: " . $row['type'] . "</p>
                                 </div>";
-                        } else if ($row['source'] == 'users') {
-                            echo "<div>
+                                        } else if ($row['source'] == 'users') {
+                                            echo "<div>
                                     <h3>Users</h3>
                                     <p>Name: " . $row['name'] . "</p>
                                     <p>Surname: " . $row['surname'] . "</p>
@@ -118,16 +129,20 @@
                                     <p>Email: " . $row['useremail'] . "</p>
                                     <p>Type: " . $row['type'] . "</p>
                                 </div>";
-                        }
-                    }
-                } else {
-                    echo "There are no results matching your search!";
-                }
-            }
-            ?>
-        </div>
+                                        }
+                                    }
+                                } else {
+                                    echo "There are no results matching your search!";
+                                }
+                            }
+                            ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
     </main>
-
+    <br>
+    <br>
     <?php include '../includes/footer.php'; ?>
 </body>
 
