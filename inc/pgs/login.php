@@ -65,11 +65,12 @@
           $hashvalue = ($hashvalue['password']);
 
           if (password_verify($typedPassword, $hashvalue)) {
-            $username = mysqli_query($db_obj, "SELECT username FROM users WHERE useremail =  '$emailOrUsername' OR username =  '$emailOrUsername'");
-            $username = ($username->fetch_assoc());
-            $username = ($username['username']);
-
-            $_SESSION['username'] = $username;
+            $user = mysqli_query($db_obj, "SELECT id, username FROM users WHERE useremail = '$emailOrUsername' OR username = '$emailOrUsername'");
+            $user = $user->fetch_assoc();
+          
+            $_SESSION['user_id'] = $user['id'];
+            $_SESSION['username'] = $user['username'];
+          
             echo "<script>location.href='home.php?type=login'</script>";
           } else {
             echo "Falsches Passwort!";

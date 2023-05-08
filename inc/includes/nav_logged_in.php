@@ -64,7 +64,6 @@ include '../../config/check_if_admin.php';
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li><a href="prod_categories.php" class="dropdown-item">Produktkategorien</a></li>
-                        <li><a href="prod_details.php" class="dropdown-item">Produktdetails</a></li>
                         <li><a href="prod_display.php" class="dropdown-item">Produktdisplay</a></li>
                     </ul>
                 </li>
@@ -79,15 +78,20 @@ include '../../config/check_if_admin.php';
                     </a>
                 </li>
                 <li class="nav-item ">
+                    <a href="shoppingcart.php" class="nav-link <?php if($active_page == 'shoppingcart.php') echo 'fw-bold active '; ?>">
+                    Shopping Cart
+                    </a>
+                </li>
+                <li class="nav-item ">
                     <a href="userProfile.php" class="nav-link  <?php if ($active_page == 'userProfile.php') echo 'fw-bold active '; ?>">
                         Mein Profil
                     </a>
                 </li>
 
         </div>
-        <form class="d-flex ms-auto my-2 my-lg-0" method="post" action="search.php">
-            <input class="form-control me-2" type="text" name="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success btn btn-danger" type="submit" name="submit-search">Search</button>
+        <form class="d-flex ms-auto my-2 my-lg-0" id="search-form"" method=" get" action="search.php">
+            <input class="form-control me-2" type="text" placeholder="Search" aria-label="Search" id="search-input">
+            <button class="btn btn-outline-success btn btn-danger" type="submit">Search</button>
         </form>
         <div id="results-container">
         </div>
