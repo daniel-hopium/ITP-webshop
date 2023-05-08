@@ -64,7 +64,6 @@ include '../../config/check_if_admin.php';
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li><a href="prod_categories.php" class="dropdown-item">Produktkategorien</a></li>
-                        <li><a href="prod_details.php" class="dropdown-item">Produktdetails</a></li>
                         <li><a href="prod_display.php" class="dropdown-item">Produktdisplay</a></li>
                     </ul>
                 </li>

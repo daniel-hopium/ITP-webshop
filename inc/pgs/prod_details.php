@@ -53,6 +53,7 @@ $conn->close();
 </head>
 
 <body>
+<form method="post" action="addtocart.php">
 	<div class="container py-4">
 		<h1 class="text-center mb-4"><?php echo htmlspecialchars($product['name']); ?></h1>
 		<div class="row">
@@ -74,12 +75,23 @@ $conn->close();
 						</ul>
 						<h2 class="card-title mt-5 mb-4">Preis</h2>
 						<p class="card-text display-4"><?php echo number_format($product['price'], 2, ',', '.'); ?> €</p>
-						<a href="#" class="btn btn-primary">In den Warenkorb</a>
+						
+						
+							<div class="input-group mb-3">
+								<label class="input-group-text" for="quantity">Quantity:</label>
+								<input type="number" class="form-control" id="quantity" name="quantity" min="1" value="1">
+							</div>
+							<input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
+							<input type="hidden" name="product_id" value="<?php echo $product['id']; ?>">
+
+							<button type="submit" class="btn btn-primary">In den Warenkorb</button>
+						
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+	</form>
 
 
 	<?php
