@@ -27,6 +27,7 @@ if (isset($_POST['quantity'])) {
     $query = "UPDATE shoppingcart SET quantity=$quantity WHERE user_id=$user_id AND product_id=$id";
     mysqli_query($connection, $query);
   }
+  echo "<script>location.href='shoppingcart.php'</script>";
 }
 
 

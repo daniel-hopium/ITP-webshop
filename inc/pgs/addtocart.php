@@ -33,7 +33,7 @@ if (isset($_POST["product_id"]) && isset($_POST["quantity"])) {
   var_dump($_SESSION);
   
   if (mysqli_query($connection, $query)) {
-    echo "<script>location.href='home.php?type=login'</script>";
+    echo "<script>location.href='prod_display.php'</script>";
     
     exit();
   } else {
