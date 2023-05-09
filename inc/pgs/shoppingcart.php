@@ -59,10 +59,15 @@ if (mysqli_num_rows($result) > 0) {
   // Close the table
   $order_summary .= "</tbody></table></form>";
 
-  // Display the order summary and total
-  echo "<h2>Shopping Cart</h2>";
-  echo $order_summary;
-  echo "<p><strong>Total: " . $order_total . " €</strong></p>";
+// Display the order summary and total
+echo "<h2>Shopping Cart</h2>";
+echo $order_summary;
+echo "<p><strong>Total: " . $order_total . " €</strong></p>";
+
+// Add the checkout button
+echo "<form action='checkout.php' method='post'>";
+echo "<input type='submit' value='Checkout'>";
+echo "</form>";
 } else {
   // If the cart is empty, display a message
   echo "<p>Your cart is empty. Please add some products.</p>";
