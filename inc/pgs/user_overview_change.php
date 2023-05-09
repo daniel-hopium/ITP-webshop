@@ -1,12 +1,15 @@
 <!doctype html>
 <html lang="en">
-  <head>
+
+<head>
     <title>Userbearbeitung</title>
 
-  <?php
+    <?php
    include '../includes/head.php';
-   if(!isset($_SESSION['username'])  || ($_SESSION['username'] != 'admin')) header('Location: home.php');
-   require_once ('../../config/dbaccess.php');
+    if(!isset($_SESSION['username'])  || ($_SESSION['username'] != 'admin')) {
+        header('Location: home.php');
+    }
+    require_once('../../config/dbaccess.php');
 
     $customerID = $_GET['user'];
  
@@ -24,18 +27,23 @@
     $old_useremail = $result['useremail'];
     $birthdate = $result['birth_date'];
     $has_newsletter = $result['has_newsletter'];
-    ?> 
-  </head>
-  <body class="d-flex flex-column min-vh-100">
+    ?>
+</head>
+
+<body class="d-flex flex-column min-vh-100">
     <div class="container site-font-color">
-        <form class="card card-bg  shadow-2-strong card-registration mt-3 p-2" style="border-radius: 15px;"  action="" method="post">
+        <form class="card card-bg  shadow-2-strong card-registration mt-3 p-2" style="border-radius: 15px;" action=""
+            method="post">
             <div class="container ">
                 <div>
                     <h1 class="h3 mt-4">User Bearbeitung</h1>
                 </div>
                 <div class=" form-floating form-label select-label shadow col-md-3 ">
-                    <select name="formOfAdress" id="floatingSelect" class="form-select" >
-                        <option selected value='<?php echo $formOfAdress ?>'><?php echo $formOfAdress ?></option>
+                    <select name="formOfAdress" id="floatingSelect" class="form-select">
+                        <option selected
+                            value='<?php echo $formOfAdress ?>'>
+                            <?php echo $formOfAdress ?>
+                        </option>
                         <option label="Herr" value="Herr">Herr</option>
                         <option label="Frau" value="Frau">Frau</option>
                         <option label="Divers" value="Divers">Frau</option>
@@ -44,64 +52,78 @@
                 </div>
                 <div class="row">
                     <div class="form-floating col-md-6">
-                        <input type="text" class="form-control mb-3 shadow" name="name" id="name" value="<?php echo $name ?>" required> 
+                        <input type="text" class="form-control mb-3 shadow" name="name" id="name"
+                            value="<?php echo $name ?>" required>
                         <label class="ms-2" for="floatingSurname">Vorname</label>
                     </div>
                     <div class="form-floating col-md-6">
-                        <input type="text" class="form-control mb-3 shadow" name="surname" id="surname" value="<?php echo $surname ?>" required>
-                        <label class="ms-2"for="floatingName">Nachname</label>
+                        <input type="text" class="form-control mb-3 shadow" name="surname" id="surname"
+                            value="<?php echo $surname ?>" required>
+                        <label class="ms-2" for="floatingName">Nachname</label>
                     </div>
                 </div>
-                
+
                 <div class="row">
                     <div class="form-floating col-md-6">
-                        <input type="email" class="form-control mb-3 shadow" name="email" id="email" value="<?php echo $old_useremail ?>" required>
+                        <input type="email" class="form-control mb-3 shadow" name="email" id="email"
+                            value="<?php echo $old_useremail ?>"
+                            required>
                         <label class="ms-2" for="email">Email</label>
                     </div>
-                    
+
                 </div>
                 <div class="row">
 
                     <div class="form-floating col-md-6">
-                            <input type="text" minlength="4"class="form-control mb-3 shadow" name="username" id="username" value="<?php echo $old_username ?>" required>
-                            <label class="ms-2" for="username">Username</label>
-                        </div>
+                        <input type="text" minlength="4" class="form-control mb-3 shadow" name="username" id="username"
+                            value="<?php echo $old_username ?>"
+                            required>
+                        <label class="ms-2" for="username">Username</label>
+                    </div>
                     <div class="form-floating col-md-6">
-                        <input type="date" class="form-control mb-3 shadow" name="birthdate" id="birthdate" min="01-01-1930" value="<?php echo $birthdate ?>">
+                        <input type="date" class="form-control mb-3 shadow" name="birthdate" id="birthdate"
+                            min="01-01-1930"
+                            value="<?php echo $birthdate ?>">
                         <label class="ms-2" for="birthdate">Geburtsdatum</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-floating col-md-6">
-                        <input type="text" minlength="8" class="form-control mb-3 shadow" name="password" id="password"  >
+                        <input type="text" minlength="8" class="form-control mb-3 shadow" name="password" id="password">
                         <label class="ms-2" for="password">Passwort</label>
                     </div>
                     <div class=" form-floating form-label select-label  col-md-6">
-                    <select name="status" id="status" class="form-select" >
-                        <option selected value='<?php echo $status ?>'><?php echo $status ?></option>
-                        <option label="Aktiv" value="active">Aktiv</option>
-                        <option label="Inaktiv" value="inactive">Inaktiv</option>
-                    </select>
-                    <label  class="ms-2" for="status">Status</label>
+                        <select name="status" id="status" class="form-select">
+                            <option selected
+                                value='<?php echo $status ?>'>
+                                <?php echo $status ?>
+                            </option>
+                            <option label="Aktiv" value="active">Aktiv</option>
+                            <option label="Inaktiv" value="inactive">Inaktiv</option>
+                        </select>
+                        <label class="ms-2" for="status">Status</label>
                     </div>
-                    
+
                 </div>
                 <div class=" form-floating form-label select-label  col-md-3">
-                    <select name="newsletter" id="newsletter" class="form-select" >
-                        <option selected value='<?php echo $has_newsletter ?>'><?php echo $has_newsletter ?></option>
+                    <select name="newsletter" id="newsletter" class="form-select">
+                        <option selected
+                            value='<?php echo $has_newsletter ?>'>
+                            <?php echo $has_newsletter ?>
+                        </option>
                         <option label="Nein" value="false">Nein</option>
                         <option label="Ja" value="true">Ja</option>
                     </select>
-                    <label  class="" for="newsletter">Newsletter</label>
-                    </div>
-                 
-                    <button class="btn btn-primary btn-light shadow" type="submit">Änderungen speichern</button>
+                    <label class="" for="newsletter">Newsletter</label>
                 </div>
-            </div>    
-        </form>
+
+                <button class="btn btn-primary btn-light shadow" type="submit">Änderungen speichern</button>
+            </div>
     </div>
-  
-<?php
+    </form>
+    </div>
+
+    <?php
 
 
 if (isset($_POST["status"]) && !empty($_POST["status"])
@@ -111,8 +133,7 @@ if (isset($_POST["status"]) && !empty($_POST["status"])
     && isset($_POST["username"]) && !empty($_POST["username"])
     && isset($_POST["email"]) && !empty($_POST["email"])
     && isset($_POST["birthdate"]) && !empty($_POST["birthdate"])
-    && isset($_POST["newsletter"]) && !empty($_POST["newsletter"])) 
-{
+    && isset($_POST["newsletter"]) && !empty($_POST["newsletter"])) {
 
     //create $db_obj, create sql statement, prepare it and bind the variables to it
     $db_obj = new mysqli($host, $user, $password, $database);
@@ -134,13 +155,11 @@ if (isset($_POST["status"]) && !empty($_POST["status"])
     $has_newsletter = $_POST["newsletter"];
 
 
-    if (empty($_POST["password"])) 
-    {
+    if (empty($_POST["password"])) {
         
         $password = $result['password'];
         
-    } else 
-    {
+    } else {
         $password = password_hash($_POST["password"], PASSWORD_DEFAULT);
     }
 
@@ -148,16 +167,12 @@ if (isset($_POST["status"]) && !empty($_POST["status"])
     $duplicateUsername = mysqli_query($db_obj, "SELECT * FROM users WHERE username = '$username'");
     if ((mysqli_num_rows($duplicateEmail) > 0) && $email != $old_useremail) {
         echo "Email schon registriert!";
-    } else if ((mysqli_num_rows($duplicateUsername) > 0) && $username != $old_username) 
-    {
+    } elseif ((mysqli_num_rows($duplicateUsername) > 0) && $username != $old_username) {
         echo "Username schon registriert!";
-    } else 
-    {
-        if ($stmt->execute()) 
-        {
+    } else {
+        if ($stmt->execute()) {
             echo "<script>location.href='redirect_page.php?type=userchange'</script>";
-        } else 
-        {
+        } else {
             echo "Error";
         }
         $stmt->close();
@@ -166,7 +181,8 @@ if (isset($_POST["status"]) && !empty($_POST["status"])
 }
 "</div>";
 
- include '../includes/footer.php';
-?>
- </body>
+    include '../includes/footer.php';
+    ?>
+</body>
+
 </html>

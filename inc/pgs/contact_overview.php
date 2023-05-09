@@ -1,38 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <title>Anfragenübersicht</title>
 
     <?php
         include '../includes/head.php';
-        if(!isset($_SESSION['username'])  || ($_SESSION['username'] != 'admin')) header('Location: home.php');
+    if(!isset($_SESSION['username'])  || ($_SESSION['username'] != 'admin')) {
+        header('Location: home.php');
+    }
     ?>
-    
+
 </head>
+
 <body class="d-flex flex-column min-vh-100">
-    <div class = "container site-font-color " >
+    <div class="container site-font-color ">
         <h1 class="h1 mt-5 text-center">Anfragenübersicht:</h1>
 
-        <?php 
-        require_once ('../../config/dbaccess.php');
+        <?php
+        require_once('../../config/dbaccess.php');
 
-        $userID = $currentUser['id'];
-        $db_obj = new mysqli($host, $user, $password, $database);
+    $userID = $currentUser['id'];
+    $db_obj = new mysqli($host, $user, $password, $database);
                     
-        $sql =  "SELECT * FROM contact_query ORDER BY ID DESC";
-        $result = $db_obj->query($sql);
+    $sql =  "SELECT * FROM contact_query ORDER BY ID DESC";
+    $result = $db_obj->query($sql);
 
-        while ($row = $result->fetch_assoc()) 
-        {
+    while ($row = $result->fetch_assoc()) {
 
-            $field1name = $row["id"];
-            $field2name = $row["created"];
-            $field3name = $row["name"];
-            $field4name = $row["email"];
-            $field5name = $row["subject"]; 
-            $field6name = $row["message"];
+        $field1name = $row["id"];
+        $field2name = $row["created"];
+        $field3name = $row["name"];
+        $field4name = $row["email"];
+        $field5name = $row["subject"];
+        $field6name = $row["message"];
 
-            echo "
+        echo "
             <div class='accordion-item '>
                 <h2 class='accordion-header' id='panelsStayOpen-headingOne'>
                     <button class='accordion-button collapsed ' type='button' data-bs-toggle='collapse' data-bs-target='#panelsStayOpen-collapseOne' aria-expanded='false' aria-controls='panelsStayOpen-collapseOne'>
@@ -47,12 +50,12 @@
                     </div>
                 </div>
             </div>";
-        }
+    }
     ?>
     </div>
 
     <?php
     include '../includes/footer.php';
-    ?>  
+    ?>
 </body>
 </html>

@@ -46,7 +46,8 @@
     <main>
         <div class="container site-font-color">
             <div class="row mt-4 card-container">
-                <div class="card card-bg shadow-2-strong card-registration mt-3 p-2 flex-column " style="border-radius: 15px; max-width: 600px;">
+                <div class="card card-bg shadow-2-strong card-registration mt-3 p-2 flex-column "
+                    style="border-radius: 15px; max-width: 600px;">
                     <div>
                         <h1 style="text-align: center">Search page</h1>
                         <br>
@@ -91,13 +92,13 @@
                                     <p>Created: " . $row['created'] . "</p>
                                     <p>Type: " . $row['type'] . "</p>
                                             </div>";
-                                        } else if ($row['source'] == 'categories') {
+                                        } elseif ($row['source'] == 'categories') {
                                             echo "<div>
                                     <h3>Categories</h3>
                                     <p>" . $row['category_name'] . "</p>
                                     <p>Type: " . $row['type'] . "</p>
                                             </div>";
-                                        } else if ($row['source'] == 'contact_query') {
+                                        } elseif ($row['source'] == 'contact_query') {
                                             echo "<div>
                                     <h3>Contact Query</h3>
                                     <p>Created: " . $row['created'] . "</p>
@@ -107,7 +108,7 @@
                                     <p>Message: " . $row['message'] . "</p>
                                     <p>Type: " . $row['type'] . "</p>
                                             </div>";
-                                        } else if ($row['source'] == 'news') {
+                                        } elseif ($row['source'] == 'news') {
                                             echo "<div>
                                     <h3>News</h3>
                                     <h3>" . $row['title'] . "</h3>
@@ -115,31 +116,31 @@
                                     <p>Created: " . $row['created'] . "</p>
                                     <p>Type: " . $row['type'] . "</p>
                                             </div>";
-                                        } else if ($row['source'] == 'products') {
-                                          //$id = $row['created'];
+                                        } elseif ($row['source'] == 'products') {
+                                            //$id = $row['created'];
                                             echo "<div>
                                     <h3>Products</h3>";
                                                 
-                                                echo '<div class="col mb-4">';
-                                                echo '<div class="card h-100">';
-                                                echo '<img src="https://via.placeholder.com/400x300/2D2D2D/FFFFFF/?text=' . $row['title'] . '" class="card-img-top" alt="' . $row['title'] . '">';
-                                                echo '<div class="card-body">';
-                                                echo '<h2 class="card-title text-center mb-3">' . $row['title'] . '</h2>';
-                                                echo '<p class="card-text">' . $row['content'] . '</p>';
-                                                echo '<form method="post" action="addtocart.php">';
-                                                echo '<a href="prod_details.php?id=' . @$row['created'] . '" class="btn btn-primary ms-auto">Details ansehen</a>';
-                                                echo '<div class="input-group mb-3">';
-                                                echo '<label class="input-group-text" for="quantity-' . $row['created'] . '">Quantity:</label>';
-                                                echo '<input type="number" class="form-control" id="quantity-' . $row['created'] . '" name="quantity" min="1" value="1">';
-                                                echo '</div>';
-                                                echo '<input type="hidden" name="product_id" value="' . $row['created'] . '">';
-                                                echo '<button type="submit" class="btn btn-primary">Add to Cart</button>';
-                                                echo '</form>';
-                                                echo '<span class="text-end">€ ' . number_format($row['category_name'], 2, ',', '.') . '</span>';
-                                                echo '</div></div></div>';
+                                            echo '<div class="col mb-4">';
+                                            echo '<div class="card h-100">';
+                                            echo '<img src="https://via.placeholder.com/400x300/2D2D2D/FFFFFF/?text=' . $row['title'] . '" class="card-img-top" alt="' . $row['title'] . '">';
+                                            echo '<div class="card-body">';
+                                            echo '<h2 class="card-title text-center mb-3">' . $row['title'] . '</h2>';
+                                            echo '<p class="card-text">' . $row['content'] . '</p>';
+                                            echo '<form method="post" action="addtocart.php">';
+                                            echo '<a href="prod_details.php?id=' . @$row['created'] . '" class="btn btn-primary ms-auto">Details ansehen</a>';
+                                            echo '<div class="input-group mb-3">';
+                                            echo '<label class="input-group-text" for="quantity-' . $row['created'] . '">Quantity:</label>';
+                                            echo '<input type="number" class="form-control" id="quantity-' . $row['created'] . '" name="quantity" min="1" value="1">';
+                                            echo '</div>';
+                                            echo '<input type="hidden" name="product_id" value="' . $row['created'] . '">';
+                                            echo '<button type="submit" class="btn btn-primary">Add to Cart</button>';
+                                            echo '</form>';
+                                            echo '<span class="text-end">€ ' . number_format($row['category_name'], 2, ',', '.') . '</span>';
+                                            echo '</div></div></div>';
                                             
 
-                                        } else if ($row['source'] == 'users') {
+                                        } elseif ($row['source'] == 'users') {
                                             echo "<div>
                                     <h3>Users</h3>
                                     <p>Name: " . $row['name'] . "</p>
@@ -154,7 +155,7 @@
                                     echo "There are no results matching your search!";
                                 }
                             }
-                            ?>
+    ?>
                         </div>
                     </div>
                 </div>

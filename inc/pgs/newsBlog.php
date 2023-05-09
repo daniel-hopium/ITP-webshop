@@ -2,57 +2,58 @@
 <html lang="en">
 
 <head>
-	<title>News Blog</title>
+    <title>News Blog</title>
 
-	<?php
-	include '../includes/head.php';
-	?>
+    <?php
+    include '../includes/head.php';
+    ?>
 
-	<style>
-		body {
-			display: flex;
-			flex-direction: column;
-			min-height: 100vh;
-		}
-		main {
-			flex: 1;
-		}
-	</style>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        main {
+            flex: 1;
+        }
+    </style>
 </head>
 
 <body>
-	<header class="bg-light py-3">
-		<div class="container">
-			<h1>News Blog</h1>
-		</div>
-	</header>
+    <header class="bg-light py-3">
+        <div class="container">
+            <h1>News Blog</h1>
+        </div>
+    </header>
 
-	<main class="container my-4">
-		<form id="add-article-form" method="post" action="newsBlog.php" enctype="multipart/form-data">
-			<div class="mb-3">
-				<label for="title" class="form-label">Title:</label>
-				<input type="text" id="title" name="title" class="form-control">
-			</div>
+    <main class="container my-4">
+        <form id="add-article-form" method="post" action="newsBlog.php" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="title" class="form-label">Title:</label>
+                <input type="text" id="title" name="title" class="form-control">
+            </div>
 
-			<div class="mb-3">
-				<label for="content" class="form-label">Content:</label>
-				<textarea id="content" name="content" class="form-control"></textarea>
-			</div>
+            <div class="mb-3">
+                <label for="content" class="form-label">Content:</label>
+                <textarea id="content" name="content" class="form-control"></textarea>
+            </div>
 
-			<div>
-				<label for="image">Product Image:</label>
-				<input type="file" name="image" accept="image/*" required>
-			</div>
-			<br>
-			<br>
+            <div>
+                <label for="image">Product Image:</label>
+                <input type="file" name="image" accept="image/*" required>
+            </div>
+            <br>
+            <br>
 
-			<button type="submit" name="submit" class="btn btn-primary">Submit</button>
-		</form>
+            <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+        </form>
 
-		<div id="articles-container"></div>
-	</main>
+        <div id="articles-container"></div>
+    </main>
 
-	<?php
+    <?php
 
 if (isset($_POST['submit'])) {
 
@@ -133,7 +134,7 @@ if (isset($_POST['submit'])) {
     $db_obj->close();
 }
 
-?>
+    ?>
 
 
 </body>

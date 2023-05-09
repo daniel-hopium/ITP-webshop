@@ -146,43 +146,48 @@
 	</header>
 	<main>
 		<?php
-		require_once('../../config/dbaccess.php');
+        require_once('../../config/dbaccess.php');
 
-		// $userID = $currentUser['id']; hab ich auskommentiert, brauchen wir das? wirft einen error wenn man nicht eingeloggt ist
-		$db_obj = new mysqli($host, $user, $password, $database);
+	// $userID = $currentUser['id']; hab ich auskommentiert, brauchen wir das? wirft einen error wenn man nicht eingeloggt ist
+	$db_obj = new mysqli($host, $user, $password, $database);
 
-		$sql = "SELECT * FROM blog_news ORDER BY ID DESC";
-		$result = $db_obj->query($sql);
+	$sql = "SELECT * FROM blog_news ORDER BY ID DESC";
+	$result = $db_obj->query($sql);
 
-		while ($row = $result->fetch_assoc()) {
-			$field1name = $row["created"];
-			$field2name = $row["title"];
-			$field3name = $row["content"];
-			$imageData = base64_encode($row["image"]);
-		?>
-			<div class="blog-post">
-				<h2><?php echo $field2name; ?></h2>
-				<div class="blog-post-meta"><?php echo $field1name; ?></div>
-				<img src="data:image/png;base64,<?php echo $imageData; ?>" alt="Image" style="max-width: 100%; height: auto;">
-				<br>
-				<br>
-				<p><?php echo $field3name; ?></p>
-				<a href="#" class="read-more">Read More</a>
-				<div class="full-post">
-					<div class="full-post-inner">
-						<h2><?php echo $field2name; ?></h2>
-						<div class="blog-post-meta"><?php echo $field1name; ?></div>
-						<img src="data:image/png;base64,<?php echo $imageData; ?>" alt="Image" style="max-width: 100%; height: auto;">
-						<br>
-						<br>
-						<p><?php echo $field3name; ?></p>
-						<button class="back-button">Back</button>
+	while ($row = $result->fetch_assoc()) {
+	    $field1name = $row["created"];
+	    $field2name = $row["title"];
+	    $field3name = $row["content"];
+	    $imageData = base64_encode($row["image"]);
+	    ?>
+		<div class="blog-post">
+			<h2><?php echo $field2name; ?></h2>
+			<div class="blog-post-meta"><?php echo $field1name; ?>
+			</div>
+			<img src="data:image/png;base64,<?php echo $imageData; ?>"
+				alt="Image" style="max-width: 100%; height: auto;">
+			<br>
+			<br>
+			<p><?php echo $field3name; ?></p>
+			<a href="#" class="read-more">Read More</a>
+			<div class="full-post">
+				<div class="full-post-inner">
+					<h2><?php echo $field2name; ?></h2>
+					<div class="blog-post-meta">
+						<?php echo $field1name; ?>
 					</div>
+					<img src="data:image/png;base64,<?php echo $imageData; ?>"
+						alt="Image" style="max-width: 100%; height: auto;">
+					<br>
+					<br>
+					<p><?php echo $field3name; ?></p>
+					<button class="back-button">Back</button>
 				</div>
 			</div>
+		</div>
 		<?php
-		}
-		?>
+	}
+	?>
 	</main>
 
 	<?php include '../includes/footer.php'; ?>

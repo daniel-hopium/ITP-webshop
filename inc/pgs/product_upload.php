@@ -1,62 +1,66 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <title>Upload Products</title>
+  <title>Upload Products</title>
 
-    <?php 
+  <?php
         include '../includes/head.php';
-        require_once('../../config/dbaccess.php');
+  require_once('../../config/dbaccess.php');
       
-        if(!isset($_SESSION['username'])) header('Location: landing_page.php');
+  if(!isset($_SESSION['username'])) {
+      header('Location: landing_page.php');
+  }
 
-        $db_obj = new mysqli($host, $user, $password, $database);
+  $db_obj = new mysqli($host, $user, $password, $database);
        
 
-        $currentUser = $_SESSION['username'];
-        $currentUser = mysqli_query($db_obj, "SELECT * FROM users WHERE username = '$currentUser' ");
-        $currentUser =($currentUser->fetch_assoc());
-        $sql = 'SELECT * FROM categories';
-        $result = $db_obj->query($sql);
-        $categories = array();
-        while ($row = $result->fetch_assoc()) {
-            $categories[] = $row;
-        }
-    ?>
-    
-</head>
-<body>
-    <form method="post" action="product_upload.php" enctype="multipart/form-data">
-      <div>
-        <label for="name">Product Name:</label>
-        <input type="text" name="name" required>
-      </div>
-      <div>
-        <label for="description">Product Description:</label>
-        <textarea name="description" required></textarea>
-      </div>
-      <div>
-        <label for="price">Price:</label>
-        <input type="number" name="price" step="0.01" required>
-      </div>
-      <div>
-        <label for="category_id">Category:</label>
-        <select name="category_id" required>
-          <option value="">-- Select a Category --</option>
-          <?php
-          foreach ($categories as $category) {
-            echo '<option value="' . $category['id'] . '">' . $category['name'] . '</option>';
-          }
-          ?>
-        </select>
-      </div>
-      <div>
-        <label for="image">Product Image:</label>
-        <input type="file" name="image" accept="image/*" required>
-      </div>
-      <input type="submit" value="Upload">
-    </form>
+  $currentUser = $_SESSION['username'];
+  $currentUser = mysqli_query($db_obj, "SELECT * FROM users WHERE username = '$currentUser' ");
+  $currentUser =($currentUser->fetch_assoc());
+  $sql = 'SELECT * FROM categories';
+  $result = $db_obj->query($sql);
+  $categories = array();
+  while ($row = $result->fetch_assoc()) {
+      $categories[] = $row;
+  }
+  ?>
 
-    <?php
+</head>
+
+<body>
+  <form method="post" action="product_upload.php" enctype="multipart/form-data">
+    <div>
+      <label for="name">Product Name:</label>
+      <input type="text" name="name" required>
+    </div>
+    <div>
+      <label for="description">Product Description:</label>
+      <textarea name="description" required></textarea>
+    </div>
+    <div>
+      <label for="price">Price:</label>
+      <input type="number" name="price" step="0.01" required>
+    </div>
+    <div>
+      <label for="category_id">Category:</label>
+      <select name="category_id" required>
+        <option value="">-- Select a Category --</option>
+        <?php
+        foreach ($categories as $category) {
+            echo '<option value="' . $category['id'] . '">' . $category['name'] . '</option>';
+        }
+  ?>
+      </select>
+    </div>
+    <div>
+      <label for="image">Product Image:</label>
+      <input type="file" name="image" accept="image/*" required>
+    </div>
+    <input type="submit" value="Upload">
+  </form>
+
+  <?php
     // Process the form data and insert the product into the database
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $sellerId = $currentUser['seller_id'];
@@ -84,16 +88,17 @@
             } else {
                 echo '<p>There was an error uploading the product image.</p>';
             }
-            } else {
+        } else {
             echo '<p>Please select a product image to upload.</p>';
-            }
-            }
+        }
+    }
             
           
             
-            // Close the database connection
-            $db_obj->close();
-            ?>
-            
-            </body>
-            </html>
+    // Close the database connection
+    $db_obj->close();
+  ?>
+
+</body>
+
+</html>
