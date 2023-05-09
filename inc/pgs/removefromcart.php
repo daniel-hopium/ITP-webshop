@@ -25,7 +25,7 @@ if (isset($_GET['id'])) {
   $query = "DELETE FROM shoppingcart WHERE user_id = $user_id AND product_id = $product_id";
   mysqli_query($connection, $query);
 }
-echo "<script>location.href='home.php?type=login'</script>";
+echo "<script>location.href='shoppingcart.php'</script>";
 // Redirect to the shopping cart page
 exit();
 
