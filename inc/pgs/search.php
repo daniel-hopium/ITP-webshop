@@ -61,7 +61,9 @@
                                     exit();
                                 }
 
-                                $sql = "(SELECT created, title, content, NULL as category_name, NULL as contact_name, NULL as email, NULL as subject, NULL as message, NULL as name, NULL as surname, NULL as username, NULL as useremail, 'news blog' as type, 'blog_news' as source FROM blog_news WHERE created LIKE '%$search%' OR title LIKE '%$search%' OR content LIKE '%$search%')
+                                $sql = "(SELECT created, title, content, NULL as category_name, NULL as contact_name, 
+                                NULL as email, NULL as subject, NULL as message, NULL as name, NULL as surname, NULL as username, NULL as useremail, 
+                                'news blog' as type, 'blog_news' as source FROM blog_news WHERE created LIKE '%$search%' OR title LIKE '%$search%' OR content LIKE '%$search%')
         UNION 
         (SELECT NULL as created, NULL as title, NULL as content, name AS category_name, NULL as contact_name, NULL as email, NULL as subject, NULL as message, NULL as name, NULL as surname, NULL as username, NULL as useremail, 'categories' as type, 'categories' as source FROM categories WHERE name LIKE '%$search%')
         UNION 
@@ -69,7 +71,7 @@
         UNION
         (SELECT created, title, text as content, NULL as category_name, NULL as contact_name, NULL as email, NULL as subject, NULL as message, NULL as name, NULL as surname, NULL as username, NULL as useremail, 'news' as type, 'news' as source FROM news WHERE created LIKE '%$search%' OR title LIKE '%$search%' OR text LIKE '%$search%')
         UNION
-        (SELECT NULL as created, name as title, description as content, NULL as category_name, NULL as contact_name, NULL as email, NULL as subject, NULL as message, NULL as name, NULL as surname, NULL as username, NULL as useremail, 'products' as type, 'products' as source FROM products WHERE name LIKE '%$search%' OR description LIKE '%$search%')
+        (SELECT id as created, name as title, description as content, price as category_name, NULL as contact_name, NULL as email, NULL as subject, NULL as message, NULL as name, NULL as surname, NULL as username, NULL as useremail, 'products' as type, 'products' as source FROM products WHERE name LIKE '%$search%' OR description LIKE '%$search%')
         UNION
         (SELECT NULL as created, NULL as title, NULL as content, NULL as category_name, NULL as contact_name, NULL as email, NULL as subject, NULL as message, name, surname, username, useremail, 'users' as type, 'users' as source FROM users WHERE name LIKE '%$search%' OR surname LIKE '%$search%' OR username LIKE '%$search%' OR useremail LIKE '%$search%')";
 
@@ -114,12 +116,29 @@
                                     <p>Type: " . $row['type'] . "</p>
                                             </div>";
                                         } else if ($row['source'] == 'products') {
+                                          //$id = $row['created'];
                                             echo "<div>
-                                    <h3>Products</h3>
-                                    <h3>" . $row['title'] . "</h3>
-                                    <p>" . $row['content'] . "</p>
-                                    <p>Type: " . $row['type'] . "</p>
-                                            </div>";
+                                    <h3>Products</h3>";
+                                                
+                                                echo '<div class="col mb-4">';
+                                                echo '<div class="card h-100">';
+                                                echo '<img src="https://via.placeholder.com/400x300/2D2D2D/FFFFFF/?text=' . $row['title'] . '" class="card-img-top" alt="' . $row['title'] . '">';
+                                                echo '<div class="card-body">';
+                                                echo '<h2 class="card-title text-center mb-3">' . $row['title'] . '</h2>';
+                                                echo '<p class="card-text">' . $row['content'] . '</p>';
+                                                echo '<form method="post" action="addtocart.php">';
+                                                echo '<a href="prod_details.php?id=' . @$row['created'] . '" class="btn btn-primary ms-auto">Details ansehen</a>';
+                                                echo '<div class="input-group mb-3">';
+                                                echo '<label class="input-group-text" for="quantity-' . $row['created'] . '">Quantity:</label>';
+                                                echo '<input type="number" class="form-control" id="quantity-' . $row['created'] . '" name="quantity" min="1" value="1">';
+                                                echo '</div>';
+                                                echo '<input type="hidden" name="product_id" value="' . $row['created'] . '">';
+                                                echo '<button type="submit" class="btn btn-primary">Add to Cart</button>';
+                                                echo '</form>';
+                                                echo '<span class="text-end">€ ' . number_format($row['category_name'], 2, ',', '.') . '</span>';
+                                                echo '</div></div></div>';
+                                            
+
                                         } else if ($row['source'] == 'users') {
                                             echo "<div>
                                     <h3>Users</h3>
