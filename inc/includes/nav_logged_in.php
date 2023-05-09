@@ -7,8 +7,8 @@ include '../../config/check_if_admin.php';
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href='https://fonts.googleapis.com/css?family=Alex Brush' rel='stylesheet'>
 
-<nav class="navbar sticky-top navbar-expand-sm navbar-dark ">
-    <div class="container">
+<nav class="navbar sticky-top navbar-expand-sm navbar-dark  ">
+    <div class="container ">
         <a href='#' class="navbar-brand mb-0 h1">
             <img class="d-inline-block align top"
                 src="https://icons.iconarchive.com/icons/iconka/business-finance/256/handshake-icon.png" width="30"
@@ -79,32 +79,24 @@ include '../../config/check_if_admin.php';
                     </ul>
                 </li>
                 <li class="nav-item ">
-                    <a href="faq.php" class="nav-link <?php if ($active_page == 'faq.php') {
-                        echo 'fw-bold active ';
-                    } ?>">
-                        FAQ
-                    </a>
-                </li>
-                <li class="nav-item ">
                     <a href="logout.php" class="nav-link  <?php if ($active_page == 'logout.php') {
                         echo 'fw-bold active ';
                     } ?>">
                         Abmelden
                     </a>
                 </li>
-                <li class="nav-item ">
-                    <a href="shoppingcart.php" class="nav-link <?php if ($active_page == 'shoppingcart.php') {
-                        echo 'fw-bold active ';
-                    } ?>">
-                        Shopping Cart
-                    </a>
-                </li>
-                <li class="nav-item ">
-                    <a href="userProfile.php" class="nav-link  <?php if ($active_page == 'userProfile.php') {
-                        echo 'fw-bold active ';
-                    } ?>">
-                        Mein Profil
-                    </a>
+                <li>
+                    <div class="d-inline-flex position-relative">
+                        <a href="shoppingcart.php">
+                            <span
+                                class="  badge position-absolute mt-1 start-100 translate-middle shadow p-1 border border-dark bg-danger rounded-circle"
+                                id="shopping-cart-amount">
+
+                            </span>
+                            <img class="" src=" ../../res/img/shopping-cart.png" alt="Avatar"
+                                style="width: 45px; height: 45px;">
+                        </a>
+                    </div>
                 </li>
 
         </div>
@@ -112,6 +104,9 @@ include '../../config/check_if_admin.php';
             <input class="form-control me-2" type="text" name="search" placeholder="Search" aria-label="Search">
             <button class="btn btn btn-light" type="submit" name="submit-search">Search</button>
         </form>
-        <div id="results-container"></div>
+        <a href="userProfile.php">
+            <img class="rounded shadow-4 float-end" src="../../res/img/profile-picture.png" alt="Avatar"
+                style="width: 50px; height: 50px;">
+        </a>
 </nav>
 </div>
