@@ -8,6 +8,7 @@
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"
   integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
 <link href=".\..\..\res\css\styles.css" rel="stylesheet" type="text/css">
+<script src="https://kit.fontawesome.com/261fbd987c.js" crossorigin="anonymous"></script>
 
 <?php
 // Session start

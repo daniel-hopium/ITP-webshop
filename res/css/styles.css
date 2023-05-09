@@ -15,6 +15,20 @@ nav {
   background-color: #016df0;
 }
 
+#nav-primary {
+  background-color: #016df0;
+  padding-top: 0.2rem;
+  padding-bottom: 0.1rem;
+  font-size: 1rem;
+}
+
+#nav-secondary {
+  background-color: #0357bc62 !important;
+  padding-top: 0.01rem;
+  padding-bottom: 0.01rem;
+  font-size: 0.75rem;
+}
+
 .nav-center {
   justify-content: center !important;
 }

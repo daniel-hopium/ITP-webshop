@@ -36,6 +36,9 @@ if (isset($_POST['quantity'])) {
 $order_summary = "<form method='post'><table><thead><tr><th>Name</th><th>Quantity</th><th>Price</th><th>Total Price</th><th>Remove</th></tr></thead><tbody>";
 $order_total = 0;
 
+echo "<div class='container'>";
+
+
 // Check if the cart is empty
 if (mysqli_num_rows($result) > 0) {
     // Retrieve the products in the cart from the database
@@ -72,6 +75,8 @@ if (mysqli_num_rows($result) > 0) {
     // If the cart is empty, display a message
     echo "<p>Your cart is empty. Please add some products.</p>";
 }
+
+echo "</div >";
 
 // Close the database connection
 mysqli_close($connection);
