@@ -68,7 +68,7 @@ if (mysqli_num_rows($result) > 0) {
     echo "<p><strong>Total: " . $order_total . " €</strong></p>";
 
     // Add the checkout button
-    echo "<form action='checkout.php' method='post'>";
+    echo "<form action='../pgs/payment.php' method='post'>";
     echo "<input type='submit' value='Checkout'>";
     echo "</form>";
 } else {
