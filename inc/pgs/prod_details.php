@@ -17,6 +17,7 @@ $product = $result->fetch_assoc();
 $stmt->close();
 $conn->close();
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -70,17 +71,19 @@ $conn->close();
 							<p class="card-text">
 								<?php echo htmlspecialchars($product['description']); ?>
 							</p>
-							<h2 class="card-title mt-5 mb-4">Details</h2>
-							<!-- Fügen Sie die Produktdetails entsprechend der Datenbankstruktur hinzu -->
-							<ul class="list-group list-group-flush">
-								<li class="list-group-item">Prozessor: Intel Core i7-11700K</li>
-								<li class="list-group-item">Grafikkarte: NVIDIA GeForce RTX 3080</li>
-								<li class="list-group-item">RAM: 16 GB DDR4</li>
-								<li class="list-group-item">Festplatte: 1 TB SSD</li>
+							
 							</ul>
 							<h2 class="card-title mt-5 mb-4">Preis</h2>
 							<p class="card-text display-4">
-								<?php echo number_format($product['price'], 2, ',', '.'); ?>
+								<?php
+                                // Retrieve the discount value from the same table
+                                $discount = $product['Discount'];
+                                
+                                // Calculate the discounted price
+                                $discountedPrice = $product['price'] - ($product['price'] * $discount / 100);
+                                
+                                echo number_format($discountedPrice, 2, ',', '.');
+                                ?>
 								€
 							</p>
 
@@ -106,7 +109,7 @@ $conn->close();
 
 
 	<?php
-  include '../includes/footer.php';
+    include '../includes/footer.php';
 ?>
 
 	<!-- Bootstrap 5 JS (optional) -->
