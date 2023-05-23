@@ -155,10 +155,11 @@
                     <span class="sr-only"></span>
                 </button>
             </div>
+
         </div>
+    </div>
 
-
-        <?php
+    <?php
  include '../includes/footer.php';
     ?>
 
