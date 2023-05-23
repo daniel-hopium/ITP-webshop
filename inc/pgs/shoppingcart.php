@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<?php
-include '../includes/head.php';
+    <?php
+    include '../includes/head.php';
     require_once('../../config/dbaccess.php');
-?>
+    ?>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shopping Cart</title>
@@ -18,11 +19,12 @@ include '../includes/head.php';
         }
     </style>
 </head>
+
 <body class="d-flex flex-column min-vh-100">
     <?php
     // Start the session
     // Connect to the database
-   
+
     $connection = new mysqli($host, $user, $password, $database);
 
     // Retrieve the items in the cart from the database
@@ -64,18 +66,18 @@ include '../includes/head.php';
             $discounted_price = $row["price"] - ($row["price"] * $discount / 100);
             $total_price = $discounted_price * $row["quantity"];
 
-        // Add the product information to the order summary
-        $order_summary .= "<tr>";
-        $order_summary .= "<td>" . $row["name"] . "</td>";
-        $order_summary .= "<td><input type='number' name='quantity[" . $row["id"] . "]' value='" . $row["quantity"] . "' min='1' max='100' onchange='this.form.submit()' required></td>";
-        $order_summary .= "<td>" . $row["price"] . " €</td>";
-        $order_summary .= "<td>" . $total_price . " €</td>";
-        $order_summary .= "<td><a href='removefromcart.php?id=" . $row["id"] . "'>Remove</a></td>";
-        $order_summary .= "</tr>";
-  
-        // Add the total price to the order total
-        $order_total += $total_price;
-    }
+            // Add the product information to the order summary
+            $order_summary .= "<tr>";
+            $order_summary .= "<td>" . $row["name"] . "</td>";
+            $order_summary .= "<td><input type='number' name='quantity[" . $row["id"] . "]' value='" . $row["quantity"] . "' min='1' max='100' onchange='this.form.submit()' required></td>";
+            $order_summary .= "<td>" . $row["price"] . " €</td>";
+            $order_summary .= "<td>" . $total_price . " €</td>";
+            $order_summary .= "<td><a href='removefromcart.php?id=" . $row["id"] . "'>Remove</a></td>";
+            $order_summary .= "</tr>";
+
+            // Add the total price to the order total
+            $order_total += $total_price;
+        }
 
         // Close the table
         $order_summary .= "</tbody></table></form>";
@@ -88,14 +90,20 @@ include '../includes/head.php';
         echo $order_summary;
         echo "<p class='mt-3'><strong>Total: " . $order_total_formatted . " €</strong></p>";
 
-    // Add the checkout button
-    echo "<form action='../pgs/payment.php' method='post'>";
-    echo "<input type='submit' value='Checkout'>";
-    echo "</form>";
-} else {
-    // If the cart is empty, display a message
-    echo "<p>Your cart is empty. Please add some products.</p>";
-}
+        // Add the checkout button
+        echo "<form action='../pgs/payment.php' method='post'>";
+        echo "<input type='submit' value='Checkout'>";
+        echo "</form>";
+
+        // Add the simulate checkout button
+        echo "<form action='bestell_sim.php' method='post'>";
+        echo "<input type='hidden' name='user_id' value='" . $_SESSION["user_id"] . "'>";
+        echo "<input type='submit' value='Simulate Checkout'>";
+        echo "</form>";
+    } else {
+        // If the cart is empty, display a message
+        echo "<p>Your cart is empty. Please add some products.</p>";
+    }
 
     echo "</div>";
 
@@ -109,4 +117,5 @@ include '../includes/head.php';
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
