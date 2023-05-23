@@ -28,7 +28,7 @@
       </div>
 
       <div class="mt-3 d-grid shadow">
-        <button type="submit" class="btn btn-lg btn-primary btn-block">
+        <button type="submit" class="btn btn-lg secondary-bg-color btn-block secondary-color">
           <h1 class="h4">Anmelden</h1>
         </button>
       </div>
