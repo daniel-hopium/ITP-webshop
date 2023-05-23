@@ -73,6 +73,9 @@
                                 echo "<p>Produkt: " . $row["name"] . "</p>";
                                 echo "<p>Preis: " . $row["price"] . "</p>";
                                 echo "<p>Status: " . $row["status"] . "</p>";
+                                if ($row["status"] == "pending" || $row["status"] == "processing") {
+                                    echo "<button id='cancelButton-{$row["id"]}' class='btn btn-danger mb-1'>Bestellung Stornieren</button>";
+                                }
                                 // progress bar
                                 echo "<div class='progress'>";
                                 echo "<div id='progress-{$row["id"]}' class='progress-bar progress-bar-striped progress-bar-animated bg-" . getProgressBarColor($row["status"]) . "' role='progressbar' style='width: " . getStatusPercentage($row["status"]) . "%' aria-valuenow='" . getStatusPercentage($row["status"]) . "' aria-valuemin='0' aria-valuemax='100'></div>";
@@ -159,6 +162,23 @@
             selectedOrderId = $(this).data("id");
             console.log(selectedOrderId);
         });
+
+        $("button[id^='cancelButton']").click(function() {
+            var id = $(this).attr('id').split('-')[1];
+            $.ajax({
+                url: 'update_status.php',
+                type: 'POST',
+                data: {
+                    id: id,
+                    status: "cancelled"
+                },
+                success: function(response) {
+                    console.log(`Order cancellation: ${response}`);
+                    location.reload();
+                }
+            });
+        });
+
 
         document.getElementById("statusButton").addEventListener("click", () => {
             if (selectedOrderId !== null) {

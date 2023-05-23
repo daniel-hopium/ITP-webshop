@@ -100,6 +100,7 @@
         echo "<input type='hidden' name='user_id' value='" . $_SESSION["user_id"] . "'>";
         echo "<input type='submit' value='Simulate Checkout'>";
         echo "</form>";
+        
     } else {
         // If the cart is empty, display a message
         echo "<p>Your cart is empty. Please add some products.</p>";
