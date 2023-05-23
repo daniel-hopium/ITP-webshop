@@ -54,7 +54,7 @@ if (mysqli_num_rows($result) > 0) {
         $order_summary .= "<td>" . $total_price . " €</td>";
         $order_summary .= "<td><a href='removefromcart.php?id=" . $row["id"] . "'>Remove</a></td>";
         $order_summary .= "</tr>";
-  
+
         // Add the total price to the order total
         $order_total += $total_price;
     }
@@ -67,10 +67,18 @@ if (mysqli_num_rows($result) > 0) {
     echo $order_summary;
     echo "<p><strong>Total: " . $order_total . " €</strong></p>";
 
-    // Add the checkout button
+    // checkout button
     echo "<form action='../pgs/payment.php' method='post'>";
     echo "<input type='submit' value='Checkout'>";
     echo "</form>";
+
+    // !!!! Hier Zweiter Knopf
+    // simulate checkout button
+    echo "<form action='bestell_sim.php' method='post'>";
+    echo "<input type='hidden' name='user_id' value='" . $_SESSION["user_id"] . "'>";
+    echo "<input type='submit' value='Simulate Checkout'>";
+    echo "</form>";
+
 } else {
     // If the cart is empty, display a message
     echo "<p>Your cart is empty. Please add some products.</p>";
