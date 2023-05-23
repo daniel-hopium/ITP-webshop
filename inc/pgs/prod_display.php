@@ -95,15 +95,20 @@ while ($row = mysqli_fetch_assoc($result)) {
 
             // SQL-Abfrage zum Abrufen der Produkte aus der Datenbank
                 
-            $sql = "SELECT id, name, description, price FROM products WHERE category_id = $category_id";
+            $sql = "SELECT id, name, description, price,Discount FROM products WHERE category_id = $category_id";
             $result = mysqli_query($connection, $sql);
-
             while ($row = mysqli_fetch_assoc($result)) {
                 $id = $row['id'];
                 $name = $row['name'];
                 $description = $row['description'];
                 $price = $row['price'];
-                    
+                
+                // Retrieve the discount value from the same table
+                $discount = $row['Discount'];
+                
+                // Calculate the discounted price
+                $discountedPrice = $price - ($price * $discount / 100);
+            
                 echo '<div class="col mb-4">';
                 echo '<div class="card h-100">';
                 echo '<img src="https://via.placeholder.com/400x300/2D2D2D/FFFFFF/?text=' . $name . '" class="card-img-top" alt="' . $name . '">';
@@ -119,7 +124,7 @@ while ($row = mysqli_fetch_assoc($result)) {
                 echo '<input type="hidden" name="product_id" value="' . $id . '">';
                 echo '<button type="submit" class="btn btn-primary">Add to Cart</button>';
                 echo '</form>';
-                echo '<span class="text-end">€ ' . number_format($price, 2, ',', '.') . '</span>';
+                echo '<span class="text-end">€ ' . number_format($discountedPrice, 2, ',', '.') . '</span>'; // Display the discounted price
                 echo '</div></div></div>';
             }
                 
@@ -128,7 +133,7 @@ while ($row = mysqli_fetch_assoc($result)) {
             // Keine Kategorie-ID übergeben, alle Produkte anzeigen
             // SQL-Abfrage zum Abrufen der Produkte aus der Datenbank
                 
-            $sql = "SELECT id,name, description, price FROM products";
+            $sql = "SELECT id,name, description, price,Discount FROM products";
             $result = mysqli_query($connection, $sql);
 
             // Schleife zum Anzeigen der Produkte
@@ -137,7 +142,13 @@ while ($row = mysqli_fetch_assoc($result)) {
                 $name = $row['name'];
                 $description = $row['description'];
                 $price = $row['price'];
-
+                
+                // Retrieve the discount value from the same table
+                $discount = $row['Discount'];
+                
+                // Calculate the discounted price
+                $discountedPrice = $price - ($price * $discount / 100);
+            
                 echo '<div class="col mb-4">';
                 echo '<div class="card h-100">';
                 echo '<img src="https://via.placeholder.com/400x300/2D2D2D/FFFFFF/?text=' . $name . '" class="card-img-top" alt="' . $name . '">';
@@ -153,7 +164,7 @@ while ($row = mysqli_fetch_assoc($result)) {
                 echo '<input type="hidden" name="product_id" value="' . $id . '">';
                 echo '<button type="submit" class="btn btn-primary">Add to Cart</button>';
                 echo '</form>';
-                echo '<span class="text-end">€ ' . number_format($price, 2, ',', '.') . '</span>';
+                echo '<span class="text-end">€ ' . number_format($discountedPrice, 2, ',', '.') . '</span>'; // Display the discounted price
                 echo '</div></div></div>';
             }
         }

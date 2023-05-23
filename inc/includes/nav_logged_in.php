@@ -76,7 +76,7 @@ include '../../config/check_shoppingcart_amount.php';
 
             <ul class="navbar-nav">
 
-                <?php if ($role == 'administrator') {
+                <?php if ($role == 'administrator' ) {
                     echo "
                 <li class='nav-item dropdown'>
                     <a href='' class='nav-link dropdown-toggle' id='navbarDropdown1' role='button' data-bs-toggle='dropdown' aria-expanded='false'>
@@ -89,6 +89,20 @@ include '../../config/check_shoppingcart_amount.php';
                         <li><a href='finance_overview_seller.php' class='dropdown-item'>Verkaufsübersicht</a></li>
                         <li><a href='user_overview.php' class='dropdown-item'>Userverwaltung</a></li>
                         <li><a href='contact_overview.php' class='dropdown-item'>Anfragenverwaltung</a></li>
+                    </ul>
+                </li>";
+                }
+?>
+<?php if ($role == 'seller') {
+                    echo "
+                <li class='nav-item dropdown'>
+                    <a href='' class='nav-link dropdown-toggle' id='navbarDropdown1' role='button' data-bs-toggle='dropdown' aria-expanded='false'>
+                        Administration
+                    </a>
+                    <ul class='dropdown-menu' aria-labelledby='navbarDropdown1'>
+                        <li><a href='product_sellerpage.php' class='dropdown-item'>Produktverwaltung</a></li>
+                        <li><a href='product_upload.php' class='dropdown-item'>Produktupload</a></li>
+                        <li><a href='finance_overview.php' class='dropdown-item'>Finanzübersicht</a></li>
                     </ul>
                 </li>";
                 }
