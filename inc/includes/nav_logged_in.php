@@ -1,6 +1,7 @@
 <?php
 $active_page = basename($_SERVER['SCRIPT_NAME']);
 include '../../config/check_if_admin.php';
+include '../../config/check_shoppingcart_amount.php';
 ?>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -47,10 +48,18 @@ include '../../config/check_if_admin.php';
                     <div class="container">
                         <div class=" d-inline-flex position-relative ">
                             <a href="shoppingcart.php">
-                                <span
-                                    class="  badge position-absolute mt-1 start-100 translate-middle shadow p-1 border border-dark bg-danger rounded-circle"
-                                    id="shopping-cart-amount">1
-                                </span>
+                                <?php
+                                if ($currentShoppingcartAmount != 0) {
+                                    echo '
+                                    <span
+                                        class="  badge position-absolute mt-2 start-100 translate-middle shadow p-1 border border-dark bg-danger rounded-circle"
+                                        id="shopping-cart-amount">';
+                                    echo $currentShoppingcartAmount;
+                                    echo '
+                                    </span>
+                                '                                ;
+                                }
+?>
                                 <img class="" src=" ../../res/img/shopping-cart.png" alt="Avatar"
                                     style="width: 30px; height: 30px;">
                             </a>
@@ -67,7 +76,7 @@ include '../../config/check_if_admin.php';
 
             <ul class="navbar-nav">
 
-                <?php if ($role == 'administrator') {
+                <?php if ($role == 'administrator' ) {
                     echo "
                 <li class='nav-item dropdown'>
                     <a href='' class='nav-link dropdown-toggle' id='navbarDropdown1' role='button' data-bs-toggle='dropdown' aria-expanded='false'>
@@ -77,8 +86,23 @@ include '../../config/check_if_admin.php';
                         <li><a href='product_adminpage.php' class='dropdown-item'>Produktverwaltung</a></li>
                         <li><a href='product_upload.php' class='dropdown-item'>Produktupload</a></li>
                         <li><a href='finance_overview.php' class='dropdown-item'>Finanzübersicht</a></li>
+                        <li><a href='finance_overview_seller.php' class='dropdown-item'>Verkaufsübersicht</a></li>
                         <li><a href='user_overview.php' class='dropdown-item'>Userverwaltung</a></li>
                         <li><a href='contact_overview.php' class='dropdown-item'>Anfragenverwaltung</a></li>
+                    </ul>
+                </li>";
+                }
+?>
+<?php if ($role == 'seller') {
+                    echo "
+                <li class='nav-item dropdown'>
+                    <a href='' class='nav-link dropdown-toggle' id='navbarDropdown1' role='button' data-bs-toggle='dropdown' aria-expanded='false'>
+                        Administration
+                    </a>
+                    <ul class='dropdown-menu' aria-labelledby='navbarDropdown1'>
+                        <li><a href='product_sellerpage.php' class='dropdown-item'>Produktverwaltung</a></li>
+                        <li><a href='product_upload.php' class='dropdown-item'>Produktupload</a></li>
+                        <li><a href='finance_overview.php' class='dropdown-item'>Finanzübersicht</a></li>
                     </ul>
                 </li>";
                 }
