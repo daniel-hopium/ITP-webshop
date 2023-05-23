@@ -66,12 +66,20 @@
             $discounted_price = $row["price"] - ($row["price"] * $discount / 100);
             $total_price = $discounted_price * $row["quantity"];
 
+            // Format the prices to two decimal places
+            $discounted_price_formatted = number_format($discounted_price, 2);
+            $total_price_formatted = number_format($total_price, 2);
+
+            // Determine the discount text to display
+            $discount_text = ($discount > 0) ? $discount . "%" : "<span >0%</span>";
+
             // Add the product information to the order summary
             $order_summary .= "<tr>";
             $order_summary .= "<td>" . $row["name"] . "</td>";
             $order_summary .= "<td><input type='number' name='quantity[" . $row["id"] . "]' value='" . $row["quantity"] . "' min='1' max='100' onchange='this.form.submit()' required></td>";
             $order_summary .= "<td>" . $row["price"] . " €</td>";
-            $order_summary .= "<td>" . $total_price . " €</td>";
+            $order_summary .= "<td class='discount'>" . $discount_text . "</td>";
+            $order_summary .= "<td>" . $total_price_formatted . " €</td>";
             $order_summary .= "<td><a href='removefromcart.php?id=" . $row["id"] . "'>Remove</a></td>";
             $order_summary .= "</tr>";
 

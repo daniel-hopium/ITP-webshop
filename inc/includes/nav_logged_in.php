@@ -23,36 +23,36 @@ include '../../config/check_shoppingcart_amount.php';
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav align-items-center ">
-                <li class="nav-item col-12">
-                    <div class="input-group">
+            <ul class="navbar-nav align-items-center col-9">
+                <li class="nav-item ">
+                    <div class="input-group ">
                         <form class="d-flex col-12" method="post" action="search.php">
                             <input id="search-input" type="text" class="form-control form-control-sm" name="search"
                                 placeholder="Search" aria-describedby="search-button" />
-                            <button id="search-button" name="submit-search" type="submit"
-                                class="btn btn-primary btn-sm">
+                            <button id="search-button" name="submit-search" type="submit" class="btn bg-light btn-sm">
                                 <i class="fas fa-search"></i>
                             </button>
                         </form>
                     </div>
                 </li>
+            </ul>
+            <ul class="navbar-nav align-items-center  ms-auto">
                 <li class="nav-item ">
-                    <div class="container">
+                    <div class="container ">
                         <a href="userProfile.php" class="">
-                            <img class="rounded  float-end" src="../../res/img/profile-picture.png" alt="Avatar"
-                                style="width: 30px; height: 30px;">
+                            <i class="fa-solid fa-user fa-xl " style="color: #ffffff;"></i>
                     </div>
                 </li>
 
                 <li class="nav-item">
                     <div class="container">
-                        <div class=" d-inline-flex position-relative ">
+                        <div class=" position-relative ">
                             <a href="shoppingcart.php">
                                 <?php
                                 if ($currentShoppingcartAmount != 0) {
                                     echo '
                                     <span
-                                        class="  badge position-absolute mt-2 start-100 translate-middle shadow p-1 border border-dark bg-danger rounded-circle"
+                                        class="  badge position-absolute mt-1 start-100 translate-middle shadow p-1 border border-dark tertiary-bg-color rounded-circle"
                                         id="shopping-cart-amount">';
                                     echo $currentShoppingcartAmount;
                                     echo '
@@ -60,8 +60,7 @@ include '../../config/check_shoppingcart_amount.php';
                                 '                                ;
                                 }
 ?>
-                                <img class="" src=" ../../res/img/shopping-cart.png" alt="Avatar"
-                                    style="width: 30px; height: 30px;">
+                                <i class="fa-solid fa-cart-shopping fa-xl" style="color: #ffffff;"></i>
                             </a>
                         </div>
                     </div>
@@ -76,7 +75,7 @@ include '../../config/check_shoppingcart_amount.php';
 
             <ul class="navbar-nav">
 
-                <?php if ($role == 'administrator' ) {
+                <?php if ($role == 'administrator') {
                     echo "
                 <li class='nav-item dropdown'>
                     <a href='' class='nav-link dropdown-toggle' id='navbarDropdown1' role='button' data-bs-toggle='dropdown' aria-expanded='false'>
@@ -93,7 +92,7 @@ include '../../config/check_shoppingcart_amount.php';
                 </li>";
                 }
 ?>
-<?php if ($role == 'seller') {
+                <?php if ($role == 'seller') {
                     echo "
                 <li class='nav-item dropdown'>
                     <a href='' class='nav-link dropdown-toggle' id='navbarDropdown1' role='button' data-bs-toggle='dropdown' aria-expanded='false'>
