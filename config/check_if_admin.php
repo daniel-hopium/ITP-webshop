@@ -14,4 +14,4 @@ if ($db_obj->connect_error) {
 $currentUser = $_SESSION['username'];
 $currentUser = mysqli_query($db_obj, "SELECT role, id FROM users WHERE username = '$currentUser' ");
 $currentUser =($currentUser->fetch_assoc());
-$role = $currentUser['role'];
+$role = @$currentUser['role'];
