@@ -1,3 +1,59 @@
+<?php
+function getBadgeColor($status)
+{
+    switch ($status) {
+        case "pending":
+            return "primary";
+        case "processing":
+            return "warning";
+        case "shipped":
+            return "info";
+        case "delivered":
+            return "success";
+        case "cancelled":
+            return "danger";
+        default:
+            return "secondary";
+    }
+}
+
+function getStatusPercentage($status)
+{
+    switch ($status) {
+        case "pending":
+            return 25;
+        case "processing":
+            return 50;
+        case "shipped":
+            return 75;
+        case "delivered":
+            return 100;
+        case "cancelled":
+            return 100;
+        default:
+            return 0;
+    }
+}
+
+function getProgressBarColor($status)
+{
+    switch ($status) {
+        case "pending":
+            return "primary";
+        case "processing":
+            return "warning";
+        case "shipped":
+            return "info";
+        case "delivered":
+            return "success";
+        case "cancelled":
+            return "danger";
+        default:
+            return "secondary";
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +61,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bestellübersicht</title>
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-promise/4.2.8/es6-promise.auto.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-control-geocoder/1.13.1/Control.Geocoder.js"></script>
+
+    <!-- Einbinden von Bootstrap CSS und JS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"></script>
+
+    <!-- Einbinden von Leaflet CSS und JS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
+
 
     <!-- Wichtig!!! PROGRESS BAR -->
     <style>
@@ -16,12 +90,12 @@
         .progress-bar.animated {
             animation: progress-bar-stripes 2s linear infinite;
         }
-    </style>
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        #map {
+            height: 400px;
+            width: 100%;
+        }
+    </style>
 
     <?php
     include '../includes/head.php';
@@ -76,6 +150,9 @@
                                 if ($row["status"] == "pending" || $row["status"] == "processing") {
                                     echo "<button id='cancelButton-{$row["id"]}' class='btn btn-danger mb-1'>Bestellung Stornieren</button>";
                                 }
+                                if ($row["status"] == "shipped" || $row["status"] == "delivered") {
+                                    echo "<button id='mapButton-{$row["id"]}' class='btn btn-success mb-1'>Auf Karte anzeigen</button>";
+                                }
                                 // progress bar
                                 echo "<div class='progress'>";
                                 echo "<div id='progress-{$row["id"]}' class='progress-bar progress-bar-striped progress-bar-animated bg-" . getProgressBarColor($row["status"]) . "' role='progressbar' style='width: " . getStatusPercentage($row["status"]) . "%' aria-valuenow='" . getStatusPercentage($row["status"]) . "' aria-valuemin='0' aria-valuemax='100'></div>";
@@ -91,59 +168,6 @@
 
                         $conn->close();
 
-                        function getBadgeColor($status)
-                        {
-                            switch ($status) {
-                                case "pending":
-                                    return "primary";
-                                case "processing":
-                                    return "warning";
-                                case "shipped":
-                                    return "info";
-                                case "delivered":
-                                    return "success";
-                                case "cancelled":
-                                    return "danger";
-                                default:
-                                    return "secondary";
-                            }
-                        }
-
-                        function getStatusPercentage($status)
-                        {
-                            switch ($status) {
-                                case "pending":
-                                    return 25;
-                                case "processing":
-                                    return 50;
-                                case "shipped":
-                                    return 75;
-                                case "delivered":
-                                    return 100;
-                                case "cancelled":
-                                    return 100;
-                                default:
-                                    return 0;
-                            }
-                        }
-
-                        function getProgressBarColor($status)
-                        {
-                            switch ($status) {
-                                case "pending":
-                                    return "primary";
-                                case "processing":
-                                    return "warning";
-                                case "shipped":
-                                    return "info";
-                                case "delivered":
-                                    return "success";
-                                case "cancelled":
-                                    return "danger";
-                                default:
-                                    return "secondary";
-                            }
-                        }
 
                         ?>
                     </tbody>
@@ -152,64 +176,117 @@
         </div>
     </div>
 
-    <script>
-        const statuses = ["pending", "processing", "shipped", "delivered", "cancelled"];
-        let currentStatus = 0;
+    <div class="modal fade" id="mapModal" tabindex="-1" aria-labelledby="mapModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="mapModalLabel">Karte anzeigen</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="map"></div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-        let selectedOrderId = null;
+</body>
+<script>
+    const statuses = ["pending", "processing", "shipped", "delivered", "cancelled"];
+    let currentStatus = 0;
 
-        $("table tr").click(function() {
-            selectedOrderId = $(this).data("id");
-            console.log(selectedOrderId);
-        });
+    let selectedOrderId = null;
 
-        $("button[id^='cancelButton']").click(function() {
-            var id = $(this).attr('id').split('-')[1];
-            $.ajax({
-                url: 'update_status.php',
-                type: 'POST',
-                data: {
-                    id: id,
-                    status: "cancelled"
-                },
-                success: function(response) {
-                    console.log(`Order cancellation: ${response}`);
-                    location.reload();
-                }
-            });
-        });
+    $("table tr").click(function() {
+        selectedOrderId = $(this).data("id");
+        console.log(selectedOrderId);
+    });
 
-
-        document.getElementById("statusButton").addEventListener("click", () => {
-            if (selectedOrderId !== null) {
-                setInterval(updateStatus, 10000);
-            } else {
-                alert("Please select an order first.");
+    $("button[id^='cancelButton']").click(function() {
+        var id = $(this).attr('id').split('-')[1];
+        $.ajax({
+            url: 'update_status.php',
+            type: 'POST',
+            data: {
+                id: id,
+                status: "cancelled"
+            },
+            success: function(response) {
+                console.log(`Order cancellation: ${response}`);
+                location.reload();
             }
         });
+    });
 
-        function updateStatus() {
-            $.ajax({
-                url: 'update_status.php',
-                type: 'POST',
-                data: {
-                    id: selectedOrderId,
-                    status: statuses[currentStatus]
-                },
-                success: function(response) {
-                    console.log(`Status update: ${response}`);
-                    currentStatus++;
-                    if (currentStatus >= statuses.length) {
-                        currentStatus = 0;
-                    }
-                }
-            });
+
+    document.getElementById("statusButton").addEventListener("click", () => {
+        if (selectedOrderId !== null) {
+            setInterval(updateStatus, 10000);
+        } else {
+            alert("Please select an order first.");
         }
-    </script>
+    });
 
-    <?php
-    include '../includes/footer.php';
-    ?>
-</body>
+    function updateStatus() {
+        $.ajax({
+            url: 'update_status.php',
+            type: 'POST',
+            data: {
+                id: selectedOrderId,
+                status: statuses[currentStatus]
+            },
+            success: function(response) {
+                console.log(`Status update: ${response}`);
+                currentStatus++;
+                if (currentStatus >= statuses.length) {
+                    currentStatus = 0;
+                }
+            }
+        });
+    }
+    let map;
+    let geocoder = L.Control.Geocoder.nominatim();
+
+    $("button[id^='mapButton']").click(function() {
+        $('#mapModal').modal('show');
+    });
+
+    $('#mapModal').on('shown.bs.modal', function() {
+        var mapHeight = $('#mapModal .modal-body').height();
+
+        if (map != undefined) {
+            map.remove();
+        }
+
+        map = L.map('map').setView([48.2082, 16.3738], 13);
+
+        $('#map').height(mapHeight);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+        }).addTo(map);
+        map.invalidateSize();
+
+        // Punkt A
+        var addressA = "Höchstädtpl. 6, 1200 Wien";
+        geocoder.geocode(addressA, function(results) {
+            var latLng = results[0].center;
+            var markerA = L.marker(latLng).addTo(map);
+            markerA.bindPopup('Punkt A: ' + addressA).openPopup();
+        });
+
+        // Punkt B
+        var addressB = "Siccardsburggasse 27, 1100 Wien";
+        geocoder.geocode(addressB, function(results) {
+            var latLng = results[0].center;
+            var markerB = L.marker(latLng).addTo(map);
+            markerB.bindPopup('Punkt B: ' + addressB).openPopup();
+        });
+    });
+</script>
+
+<?php
+include '../includes/footer.php';
+?>
+
 
 </html>
