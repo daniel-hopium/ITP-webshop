@@ -17,7 +17,38 @@
 <body class="d-flex flex-column min-vh-100">
 
   <div class="container site-font-color text-center">
-    
+    <?php
+  // Assuming you have established a database connection
+  $conn = new mysqli($host, $user, $password, $database);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Fetch data from the 'new_orders' table
+$sql = "SELECT * FROM new_orders ORDER BY order_date DESC";
+
+$result = $conn->query($sql);
+
+// Initialize an empty array to store the fetched orders
+$orders = [];
+
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $order = [
+            'id' => $row['id'],
+            'customer_name' => $row['buyer_name'],
+            'order_date' => $row['order_date'],
+            'status' => $row['status']
+        ];
+        $orders[] = $order;
+    }
+}
+
+// Close the database connection
+$conn->close();
+?>
 
     <h1 class="h1 my-5">Bestellübersicht</h1>
         <table class="table">
@@ -33,26 +64,7 @@
             <tbody>
                 <?php
                 // Assuming you have an array of orders, replace this with your actual data source
-                $orders = [
-                    [
-                        'id' => 1,
-                        'customer_name' => 'John Doe',
-                        'order_date' => '2023-06-01',
-                        'status' => 'Pending'
-                    ],
-                    [
-                        'id' => 2,
-                        'customer_name' => 'Jane Smith',
-                        'order_date' => '2023-06-05',
-                        'status' => 'Processing'
-                    ],
-                    [
-                        'id' => 3,
-                        'customer_name' => 'Robert Johnson',
-                        'order_date' => '2023-06-10',
-                        'status' => 'Delivered'
-                    ]
-                ];
+                
                 
                 foreach ($orders as $order) {
                     echo '<tr>';
@@ -63,6 +75,7 @@
                     echo '<td><a href="order_overview_details.php?id=' . $order['id'] . '" class="btn btn-dark secondary-bg-color ">View Details</a></td>';
                     echo '</tr>';
                 }
+                
                 ?>
             </tbody>
         </table>
