@@ -14,6 +14,65 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
+
+<?php 
+$conn = new mysqli($host, $user, $password, $database);
+
+if ($conn->connect_error) {
+    die("Verbindung zur Datenbank fehlgeschlagen: " . $conn->connect_error);
+}
+
+// Monatliche Verkäufe der letzten 12 Monate abrufen
+$monthlySalesQuery = "SELECT DATE_FORMAT(order_date, '%Y-%m') AS month, SUM(total_price) AS total_sales
+                     FROM new_orders
+                     WHERE order_date >= DATE_SUB(CURDATE(), INTERVAL 12 MONTH)
+                     GROUP BY DATE_FORMAT(order_date, '%Y-%m')";
+
+$monthlySalesResult = $conn->query($monthlySalesQuery);
+$monthlySalesData = array();
+
+while ($row = $monthlySalesResult->fetch_assoc()) {
+    $month = date('F', strtotime($row['month'])); // Convert month number to month name
+    $monthlySalesData['labels'][] = $month;
+    $monthlySalesData['datasets'][0]['data'][] = $row['total_sales'];
+}
+
+// Tägliche Verkäufe der letzten 30 Tage abrufen
+$dailySalesQuery = "SELECT DATE(order_date) AS day, SUM(total_price) AS total_sales
+                   FROM new_orders
+                   WHERE order_date >= DATE_SUB(CURDATE(), INTERVAL 30 DAY)
+                   GROUP BY DATE(order_date)";
+
+$dailySalesResult = $conn->query($dailySalesQuery);
+$dailySalesData = array();
+
+while ($row = $dailySalesResult->fetch_assoc()) {
+    $day = date('F j', strtotime($row['day'])); // Convert date to month name and day
+    $dailySalesData['labels'][] = $day;
+    $dailySalesData['datasets'][0]['data'][] = $row['total_sales'];
+}
+
+// Tägliche Verkäufe der letzten 30 Tage abrufen
+$dailySalesQueryYear = "SELECT DATE(order_date) AS day, SUM(total_price) AS total_sales
+                       FROM new_orders
+                       WHERE order_date >= DATE_SUB(CURDATE(), INTERVAL 365 DAY)
+                       GROUP BY DATE(order_date)
+                       ORDER BY DATE(order_date)";
+
+$dailySalesResultYear = $conn->query($dailySalesQueryYear);
+$dailySalesDataYear = array();
+$cumulativeSum = 0;
+
+while ($row = $dailySalesResultYear->fetch_assoc()) {
+    $day = date('F j', strtotime($row['day'])); // Convert date to month name and day
+    $cumulativeSum += $row['total_sales'];
+    $dailySalesDataYear['labels'][] = $day;
+    $dailySalesDataYear['datasets'][0]['data'][] = $cumulativeSum;
+}
+?>
+
+
+
 <body class="d-flex flex-column min-vh-100">
 
   <div class="container site-font-color text-center">
@@ -22,25 +81,29 @@
 
 
 
-    <h1 class="h3 text-start">Monatliche Verkäufe</h1>
+    <h1 class="h3 text-start">Monatliche Verkäufe der letzten 12 Monate</h1>
     <div>
       <canvas id="monthly-sales-chart" style="height: 400px; width: 100%;"></canvas>
     </div>
 
-    <h1 class="h3 text-start mt-4">Täglich Verkäufe im Jänner</h1>
+    <h1 class="h3 text-start mt-4">Tägliche Verkäufe der letzten 30 Tage</h1>
     <div>
       <canvas id="myChart2" style="height: 400px; width: 100%;"></canvas>
+    </div>
+
+    <h1 class="h3 text-start mt-4">Kumulative Verkäufe der letzten 365 Tage</h1>
+    <div>
+      <canvas id="myChart3" style="height: 400px; width: 100%;"></canvas>
     </div>
 
     <script>
       // Data for the chart
       const data = {
-        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October',
-          'November', 'December'
-        ],
+        labels: <?= json_encode($monthlySalesData['labels']) ?>
+        ,
         datasets: [{
           label: 'Sales',
-          data: [500, 700, 1000, 800, 1200, 1500, 1700, 1900, 1800, 1500, 1000, 700],
+          data: <?= json_encode($monthlySalesData['datasets'][0]['data']) ?>,
           backgroundColor: 'rgba(54, 162, 235, 0.5)',
           borderColor: 'rgb(54, 162, 235)',
           borderWidth: 1
@@ -71,7 +134,7 @@
 
 
     <script>
-      console.log("test");
+      
       document.addEventListener('DOMContentLoaded', function() {
         // Your chart code goes here
         // Get a reference to the canvas element
@@ -79,16 +142,10 @@
         console.log(ctx1);
         // Define the dataset for the line chart
         var data = {
-          labels: ['Jan 1', 'Jan 2', 'Jan 3', 'Jan 4', 'Jan 5', 'Jan 6', 'Jan 7', 'Jan 8', 'Jan 9', 'Jan 10',
-            'Jan 11', 'Jan 12', 'Jan 13', 'Jan 14', 'Jan 15', 'Jan 16', 'Jan 17', 'Jan 18', 'Jan 19', 'Jan 20',
-            'Jan 21', 'Jan 22', 'Jan 23', 'Jan 24', 'Jan 25', 'Jan 26', 'Jan 27', 'Jan 28', 'Jan 29', 'Jan 30',
-            'Jan 31'
-          ],
+          labels: <?= json_encode($dailySalesData['labels']) ?>,
           datasets: [{
             label: 'Daily Sales',
-            data: [200, 300, 500, 400, 600, 700, 900, 800, 1000, 1200, 1500, 1300, 1400, 1700, 2000, 1900,
-              2200, 2500, 2300, 2400, 2600, 2800, 3000, 2800, 3200, 3500, 3400, 3600, 3800, 4000, 3800
-            ],
+            data: <?= json_encode($dailySalesData['datasets'][0]['data']) ?>,
             backgroundColor: 'rgb(54, 162, 235, 1)',
             borderColor: 'rgb(54, 162, 235, 1)',
             borderWidth: 1
@@ -115,353 +172,80 @@
       });
     </script>
 
+<script>
+      
+      document.addEventListener('DOMContentLoaded', function() {
+        // Your chart code goes here
+        // Get a reference to the canvas element
+        var ctx1 = document.getElementById('myChart3').getContext('2d');
+        console.log(ctx1);
+        // Define the dataset for the line chart
+        var data = {
+          labels: <?= json_encode($dailySalesDataYear['labels']) ?>,
+          datasets: [{
+            label: 'Daily Sales',
+            data: <?= json_encode($dailySalesDataYear['datasets'][0]['data']) ?>,
+            backgroundColor: 'rgb(54, 162, 235, 1)',
+            borderColor: 'rgb(54, 162, 235, 1)',
+            borderWidth: 1
+          }]
+        };
+
+        // Define the options for the line chart
+        var options = {
+          scales: {
+            yAxes: [{
+              ticks: {
+                beginAtZero: true
+              }
+            }]
+          }
+        };
+
+        // Create a new line chart instance
+        var myChart2 = new Chart(ctx1, {
+          type: 'line',
+          data: data,
+          options: options
+        });
+      });
+    </script>
+
+<?php
+// Retrieve $dailySalesDataYear from the database or wherever it is stored
+
+// Prepare the data
+$labels = array_keys($dailySalesDataYear);
+$datasets = [];
+
+// Iterate over each month
+foreach ($dailySalesDataYear as $monthData) {
+    $salesData = [];
+
+    // Iterate over each day
+    foreach ($labels as $day) {
+        $sales = $monthData[$day] ?? 0;
+        $salesData[] = $sales;
+    }
+
+    // Create a dataset array
+    $dataset = [
+        'label' => reset($monthData), // Use the month name as the label
+        'data' => $salesData,
+        'fill' => false
+    ];
+
+    $datasets[] = $dataset;
+}
+?>
 
 
 
 
-    <h1 class="h3 text-start mt-4">Tägliche Verkäufe Jahresübersicht</h1>
-    <div class="table-responsive p-0" id="table">
 
-      <table class="table table-striped table-hover ">
-        <thead>
-          <tr>
-            <th>Day</th>
-            <th>January</th>
-            <th>February</th>
-            <th>March</th>
-            <th>April</th>
-            <th>May</th>
-            <th>June</th>
-            <th>July</th>
-            <th>August</th>
-            <th>September</th>
-            <th>October</th>
-            <th>November</th>
-            <th>December</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>1</td>
-            <td>$100</td>
-            <td>$110</td>
-            <td>$120</td>
-            <td>$130</td>
-            <td>$140</td>
-            <td>$150</td>
-            <td>$160</td>
-            <td>$170</td>
-            <td>$180</td>
-            <td>$190</td>
-            <td>$200</td>
-            <td>$210</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>$120</td>
-            <td>$120</td>
-            <td>$130</td>
-            <td>$140</td>
-            <td>$150</td>
-            <td>$160</td>
-            <td>$170</td>
-            <td>$180</td>
-            <td>$190</td>
-            <td>$200</td>
-            <td>$210</td>
-            <td>$220</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>$130</td>
-            <td>$130</td>
-            <td>$130</td>
-            <td>$140</td>
-            <td>$150</td>
-            <td>$160</td>
-            <td>$170</td>
-            <td>$180</td>
-            <td>$190</td>
-            <td>$200</td>
-            <td>$210</td>
-            <td>$220</td>
-          </tr>
-          <tr>
-            <td>4</td>
-            <td>$130</td>
-            <td>$130</td>
-            <td>$130</td>
-            <td>$140</td>
-            <td>$150</td>
-            <td>$160</td>
-            <td>$170</td>
-            <td>$180</td>
-            <td>$190</td>
-            <td>$200</td>
-            <td>$210</td>
-            <td>$220</td>
-          </tr>
-          <tr>
-            <td>5</td>
-            <td>$130</td>
-            <td>$130</td>
-            <td>$130</td>
-            <td>$140</td>
-            <td>$150</td>
-            <td>$160</td>
-            <td>$170</td>
-            <td>$180</td>
-            <td>$190</td>
-            <td>$200</td>
-            <td>$210</td>
-            <td>$220</td>
-          </tr>
-          <tr>
-            <td>6</td>
-            <td>$130</td>
-            <td>$130</td>
-            <td>$130</td>
-            <td>$140</td>
-            <td>$150</td>
-            <td>$160</td>
-            <td>$170</td>
-            <td>$180</td>
-            <td>$190</td>
-            <td>$200</td>
-            <td>$210</td>
-            <td>$220</td>
-          </tr>
-          <tr>
-            <td>7</td>
-            <td>$130</td>
-            <td>$130</td>
-            <td>$130</td>
-            <td>$140</td>
-            <td>$150</td>
-            <td>$160</td>
-            <td>$170</td>
-            <td>$180</td>
-            <td>$190</td>
-            <td>$200</td>
-            <td>$210</td>
-            <td>$220</td>
-          </tr>
-          <tr>
-            <td>8</td>
-            <td>$130</td>
-            <td>$130</td>
-            <td>$130</td>
-            <td>$140</td>
-            <td>$150</td>
-            <td>$160</td>
-            <td>$170</td>
-            <td>$180</td>
-            <td>$190</td>
-            <td>$200</td>
-            <td>$210</td>
-            <td>$220</td>
-          </tr>
-          <tr>
-            <td>9</td>
-            <td>$130</td>
-            <td>$130</td>
-            <td>$130</td>
-            <td>$140</td>
-            <td>$150</td>
-            <td>$160</td>
-            <td>$170</td>
-            <td>$180</td>
-            <td>$190</td>
-            <td>$200</td>
-            <td>$210</td>
-            <td>$220</td>
-          </tr>
-          <tr>
-            <td>10</td>
-            <td>$130</td>
-            <td>$130</td>
-            <td>$130</td>
-            <td>$140</td>
-            <td>$150</td>
-            <td>$160</td>
-            <td>$170</td>
-            <td>$180</td>
-            <td>$190</td>
-            <td>$200</td>
-            <td>$210</td>
-            <td>$220</td>
-          </tr>
-          <tr>
-            <td>11</td>
-            <td>$130</td>
-            <td>$130</td>
-            <td>$130</td>
-            <td>$140</td>
-            <td>$150</td>
-            <td>$160</td>
-            <td>$170</td>
-            <td>$180</td>
-            <td>$190</td>
-            <td>$200</td>
-            <td>$210</td>
-            <td>$220</td>
-          </tr>
-          <tr>
-            <td>12</td>
-            <td>$130</td>
-            <td>$130</td>
-            <td>$130</td>
-            <td>$140</td>
-            <td>$150</td>
-            <td>$160</td>
-            <td>$170</td>
-            <td>$180</td>
-            <td>$190</td>
-            <td>$200</td>
-            <td>$210</td>
-            <td>$220</td>
-          </tr>
-          <tr>
-            <td>13</td>
-            <td>$130</td>
-            <td>$130</td>
-            <td>$130</td>
-            <td>$140</td>
-            <td>$150</td>
-            <td>$160</td>
-            <td>$170</td>
-            <td>$180</td>
-            <td>$190</td>
-            <td>$200</td>
-            <td>$210</td>
-            <td>$220</td>
-          </tr>
-          <tr>
-            <td>14</td>
-            <td>$130</td>
-            <td>$130</td>
-            <td>$130</td>
-            <td>$140</td>
-            <td>$150</td>
-            <td>$160</td>
-            <td>$170</td>
-            <td>$180</td>
-            <td>$190</td>
-            <td>$200</td>
-            <td>$210</td>
-            <td>$220</td>
-          </tr>
-          <tr>
-            <td>15</td>
-            <td>$130</td>
-            <td>$130</td>
-            <td>$130</td>
-            <td>$140</td>
-            <td>$150</td>
-            <td>$160</td>
-            <td>$170</td>
-            <td>$180</td>
-            <td>$190</td>
-            <td>$200</td>
-            <td>$210</td>
-            <td>$220</td>
-          </tr>
-          <tr>
-            <td>16</td>
-            <td>$130</td>
-            <td>$130</td>
-            <td>$130</td>
-            <td>$140</td>
-            <td>$150</td>
-            <td>$160</td>
-            <td>$170</td>
-            <td>$180</td>
-            <td>$190</td>
-            <td>$200</td>
-            <td>$210</td>
-            <td>$220</td>
-          </tr>
-          <tr>
-            <td>17</td>
-            <td>$130</td>
-            <td>$130</td>
-            <td>$130</td>
-            <td>$140</td>
-            <td>$150</td>
-            <td>$160</td>
-            <td>$170</td>
-            <td>$180</td>
-            <td>$190</td>
-            <td>$200</td>
-            <td>$210</td>
-            <td>$220</td>
-          </tr>
-          <tr>
-            <td>18</td>
-            <td>$130</td>
-            <td>$130</td>
-            <td>$130</td>
-            <td>$140</td>
-            <td>$150</td>
-            <td>$160</td>
-            <td>$170</td>
-            <td>$180</td>
-            <td>$190</td>
-            <td>$200</td>
-            <td>$210</td>
-            <td>$220</td>
-          </tr>
-          <tr>
-            <td>19</td>
-            <td>$130</td>
-            <td>$130</td>
-            <td>$130</td>
-            <td>$140</td>
-            <td>$150</td>
-            <td>$160</td>
-            <td>$170</td>
-            <td>$180</td>
-            <td>$190</td>
-            <td>$200</td>
-            <td>$210</td>
-            <td>$220</td>
-          </tr>
-          <tr>
-            <td>20</td>
-            <td>$130</td>
-            <td>$130</td>
-            <td>$130</td>
-            <td>$140</td>
-            <td>$150</td>
-            <td>$160</td>
-            <td>$170</td>
-            <td>$180</td>
-            <td>$190</td>
-            <td>$200</td>
-            <td>$210</td>
-            <td>$220</td>
-          </tr>
-          <tr>
-            <td>21</td>
-            <td>$130</td>
-            <td>$130</td>
-            <td>$130</td>
-            <td>$140</td>
-            <td>$150</td>
-            <td>$160</td>
-            <td>$170</td>
-            <td>$180</td>
-            <td>$190</td>
-            <td>$200</td>
-            <td>$210</td>
-            <td>$220</td>
-          </tr>
 
-          <!-- add more rows for each day of the month -->
-        </tbody>
-      </table>
 
-    </div>
+
 
   </div>
 
