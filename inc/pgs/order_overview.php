@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>Finanzübersicht</title>
+  <title>Bestellübersicht</title>
 
   <?php
         include '../includes/head.php';
@@ -19,13 +19,14 @@
   <div class="container site-font-color text-center">
     
 
-    <h1>Bestellübersicht</h1>
+    <h1 class="h1 my-5">Bestellübersicht</h1>
         <table class="table">
             <thead>
                 <tr>
                     <th>Order ID</th>
                     <th>Customer Name</th>
                     <th>Order Date</th>
+                    <th>Status</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -36,17 +37,20 @@
                     [
                         'id' => 1,
                         'customer_name' => 'John Doe',
-                        'order_date' => '2023-06-01'
+                        'order_date' => '2023-06-01',
+                        'status' => 'Pending'
                     ],
                     [
                         'id' => 2,
                         'customer_name' => 'Jane Smith',
-                        'order_date' => '2023-06-05'
+                        'order_date' => '2023-06-05',
+                        'status' => 'Processing'
                     ],
                     [
                         'id' => 3,
                         'customer_name' => 'Robert Johnson',
-                        'order_date' => '2023-06-10'
+                        'order_date' => '2023-06-10',
+                        'status' => 'Delivered'
                     ]
                 ];
                 
@@ -55,7 +59,8 @@
                     echo '<td>' . $order['id'] . '</td>';
                     echo '<td>' . $order['customer_name'] . '</td>';
                     echo '<td>' . $order['order_date'] . '</td>';
-                    echo '<td><a href="order_overview_details.php?id=' . $order['id'] . '" class="btn btn-primary">View Details</a></td>';
+                    echo '<td>' . $order['status'] . '</td>';
+                    echo '<td><a href="order_overview_details.php?id=' . $order['id'] . '" class="btn btn-dark secondary-bg-color ">View Details</a></td>';
                     echo '</tr>';
                 }
                 ?>
