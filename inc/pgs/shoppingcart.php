@@ -98,11 +98,6 @@
         echo $order_summary;
         echo "<p class='mt-3'><strong>Total: " . $order_total_formatted . " €</strong></p>";
 
-        // Add the checkout button
-        echo "<form action='../pgs/payment.php' method='post'>";
-        echo "<input type='submit' value='Checkout'>";
-        echo "</form>";
-
         // Add the simulate checkout button
         echo "<form action='bestell_sim.php' method='post'>";
         echo "<input type='hidden' name='user_id' value='" . $_SESSION["user_id"] . "'>";
