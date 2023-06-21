@@ -12,6 +12,12 @@ if ($db_obj->connect_error) {
 // Filters out role of current user
 // if(isset($_SESSION['username']))
 
-$currentShoppingcartAmount = mysqli_query($db_obj, "SELECT * FROM shoppingcart");
-$currentShoppingcartAmount = mysqli_num_rows($currentShoppingcartAmount);
+$query = "SELECT SUM(quantity) AS totalQuantity FROM shoppingcart";
+$result = mysqli_query($db_obj, $query);
 
+if ($result) {
+    $row = mysqli_fetch_assoc($result);
+    $totalQuantity = $row['totalQuantity'];
+
+    $currentShoppingcartAmount = $totalQuantity;
+}

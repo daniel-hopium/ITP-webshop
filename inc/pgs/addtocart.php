@@ -28,16 +28,37 @@ if (isset($_POST["product_id"]) && isset($_POST["quantity"])) {
     $product_id = intval($_POST["product_id"]);
     $quantity = intval($_POST["quantity"]);
 
-    // Insert the product into the shopping cart table
-    $query = "INSERT INTO shoppingcart (user_id, product_id, quantity) VALUES ('$user_id', '$product_id', '$quantity')";
-    
-  
-    if (mysqli_query($connection, $query)) {
-        echo "<script>location.href='prod_display.php'</script>";
-    
-        exit();
+    // Check if the product already exists in the shopping cart for the user
+    $query = "SELECT * FROM shoppingcart WHERE user_id = '$user_id' AND product_id = '$product_id'";
+    $result = mysqli_query($connection, $query);
+
+    if (mysqli_num_rows($result) > 0) {
+        // Product already exists in the shopping cart, update the quantity
+        $row = mysqli_fetch_assoc($result);
+        $existingQuantity = intval($row['quantity']);
+        $newQuantity = $existingQuantity + $quantity;
+
+        $updateQuery = "UPDATE shoppingcart SET quantity = '$newQuantity' WHERE user_id = '$user_id' AND product_id = '$product_id'";
+
+        if (mysqli_query($connection, $updateQuery)) {
+            echo "<script>location.href='prod_display.php'</script>";
+            exit();
+        } else {
+            // Display an error message
+            echo "Error: " . mysqli_error($connection);
+        }
     } else {
-        // Display an error message
-        echo "Error: " . mysqli_error($connection);
+        // Product does not exist in the shopping cart, insert a new entry
+        $insertQuery = "INSERT INTO shoppingcart (user_id, product_id, quantity) VALUES ('$user_id', '$product_id', '$quantity')";
+
+        if (mysqli_query($connection, $insertQuery)) {
+            echo "<script>location.href='prod_display.php'</script>";
+            exit();
+        } else {
+            // Display an error message
+            echo "Error: " . mysqli_error($connection);
+        }
     }
 }
+
+
