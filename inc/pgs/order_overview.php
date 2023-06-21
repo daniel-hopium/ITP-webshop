@@ -11,7 +11,6 @@
   }
   require_once('../../config/dbaccess.php');
   ?>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body class="d-flex flex-column min-vh-100">
@@ -27,7 +26,8 @@ if ($conn->connect_error) {
 }
 
 // Fetch data from the 'new_orders' table
-$sql = "SELECT * FROM new_orders ORDER BY order_date DESC";
+$sql = "SELECT * FROM new_orders GROUP BY orderid ORDER BY order_date DESC";
+
 
 $result = $conn->query($sql);
 
@@ -37,7 +37,7 @@ $orders = [];
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         $order = [
-            'id' => $row['id'],
+            'id' => $row['orderid'],
             'customer_name' => $row['buyer_name'],
             'order_date' => $row['order_date'],
             'status' => $row['status']
@@ -79,11 +79,6 @@ $conn->close();
                 ?>
             </tbody>
         </table>
-
-
-
-
-
 
   </div>
 

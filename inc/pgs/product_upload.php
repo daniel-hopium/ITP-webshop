@@ -9,7 +9,7 @@
   require_once('../../config/dbaccess.php');
       
   if(!isset($_SESSION['username'])) {
-      header('Location: landing_page.php');
+      header('Location: home.php');
   }
 
   $db_obj = new mysqli($host, $user, $password, $database);
@@ -99,6 +99,10 @@
     $db_obj->close();
   ?>
 
+
+<?php 
+include '../includes/footer.php';
+?>
 </body>
 
 </html>

@@ -7,14 +7,13 @@ include '../includes/head.php';
         require_once('../../config/dbaccess.php');
 
         if (!isset($_SESSION['username'])) {
-          header('Location: landing_page.php');
+          header('Location: home.php');
           exit();
         }
         ?>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Edit Product</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
 </head>
 
 <body class="d-flex flex-column min-vh-100">
@@ -105,7 +104,9 @@ include '../includes/head.php';
     </div>
   </div>
 
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <?php 
+include '../includes/footer.php';
+?>
 </body>
 
 </html>

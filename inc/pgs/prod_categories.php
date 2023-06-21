@@ -3,17 +3,10 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Elektronik-Webshop</title>
-    <!-- Bootstrap 5 CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
-
-
     <?php
         include '../includes/head.php';
     ?>
-
 
     <style>
         .card {
@@ -36,7 +29,7 @@
     </style>
 </head>
 
-<body>
+<body class="d-flex flex-column min-vh-100">
     <div class="container py-4">
         <h1 class="text-center mb-4">Willkommen im Elektronik-Webshop</h1>
         <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-4">
@@ -119,13 +112,10 @@
             </div>
         </div>
     </div>
-    <!-- Bootstrap 5 JS (optional) -->
-
     <?php
   include '../includes/footer.php';
     ?>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

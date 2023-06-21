@@ -8,6 +8,7 @@ include '../../config/check_shoppingcart_amount.php';
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href='https://fonts.googleapis.com/css?family=Alex Brush' rel='stylesheet'>
 
+
 <nav class="navbar sticky-top navbar-expand-sm navbar-dark  " id="nav-primary">
 
     <div class="container ">
@@ -24,7 +25,7 @@ include '../../config/check_shoppingcart_amount.php';
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav align-items-center col-9">
-                <li class="nav-item ">
+                <li class="nav-item col-12 ">
                     <div class="input-group ">
                         <form class="d-flex col-12" method="post" action="search.php">
                             <input id="search-input" type="text" class="form-control form-control-sm" name="search"
@@ -71,8 +72,6 @@ include '../../config/check_shoppingcart_amount.php';
 
 <nav id="nav-secondary" class="navbar  navbar-expand-sm navbar-dark  ">
     <div class="container ">
-        <ul class="navbar-nav">
-
             <ul class="navbar-nav">
 
                 <?php if ($role == 'administrator') {
@@ -111,7 +110,7 @@ include '../../config/check_shoppingcart_amount.php';
                 <?php if ($role == 'administrator') {
                     echo "
                     <li class='nav-item dropdown'>
-                        <a href='#' class='nav-link dropdown-toggle' id='navbarDropdown2' role='button' data-bs-toggle='dropdown' aria-expanded='false'>
+                        <a href='' class='nav-link dropdown-toggle' id='navbarDropdown2' role='button' data-bs-toggle='dropdown' aria-expanded='false'>
                             News
                         </a>
                         <ul class='dropdown-menu' aria-labelledby='navbarDropdown2'>
@@ -126,7 +125,7 @@ include '../../config/check_shoppingcart_amount.php';
                 <?php if ($role == 'customer' || $role == 'seller') {
                     echo "
                     <li class='nav-item dropdown'>
-                        <a href='#' class='nav-link dropdown-toggle' id='navbarDropdown3' role='button' data-bs-toggle='dropdown' aria-expanded='false'>
+                        <a href='' class='nav-link dropdown-toggle' id='navbarDropdown3' role='button' data-bs-toggle='dropdown' aria-expanded='false'>
                             News
                         </a>
                         <ul class='dropdown-menu' aria-labelledby='navbarDropdown3'>
@@ -137,7 +136,7 @@ include '../../config/check_shoppingcart_amount.php';
 ?>
 
                 <li class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown4" role="button"
+                    <a href="" class="nav-link dropdown-toggle" id="navbarDropdown4" role="button"
                         data-bs-toggle="dropdown" aria-expanded="false">
                         Produkt
                     </a>
@@ -153,6 +152,7 @@ include '../../config/check_shoppingcart_amount.php';
                         Abmelden
                     </a>
                 </li>
+                
             </ul>
     </div>
 </nav>

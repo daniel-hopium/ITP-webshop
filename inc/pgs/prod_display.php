@@ -27,8 +27,7 @@ $category_id = "";
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<title>Elektronik-Webshop</title>
-	<!-- Bootstrap 5 CSS -->
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+
 	<style>
 		.card {
 			height: 100%;
@@ -180,8 +179,6 @@ while ($row = mysqli_fetch_assoc($result)) {
     include '../includes/footer.php';
 ?>
 
-	<!-- Bootstrap 5 JS (optional) -->
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

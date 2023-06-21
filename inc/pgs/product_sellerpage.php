@@ -8,13 +8,13 @@
     require_once('../../config/dbaccess.php');
 
     if (!isset($_SESSION['username'])) {
-        header('Location: landing_page.php');
+        header('Location: home.php');
     }
     ?>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Panel</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
     <style>
         .sortable {
             cursor: pointer;
@@ -219,6 +219,10 @@ function sortTable(column) {
     
         </script>
     </div>
+
+    <?php 
+include '../includes/footer.php';
+?>
 </body>
 
 </html>
