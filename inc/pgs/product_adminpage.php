@@ -8,7 +8,7 @@ include '../includes/head.php';
 require_once('../../config/dbaccess.php');
 
 if (!isset($_SESSION['username'])) {
-  header('Location: landing_page.php');
+  header('Location: home.php');
 }
 ?>
 <meta charset="UTF-8">
@@ -23,7 +23,7 @@ if (!isset($_SESSION['username'])) {
 </head>
 
 <body class="d-flex flex-column min-vh-100">
-  <div class="container">
+  <div class="container my-4">
     <?php
 
     // Create a new mysqli object
@@ -86,7 +86,7 @@ if (!isset($_SESSION['username'])) {
 
      
        // Display the products in a table
-       echo '<table class="table">';
+       echo '<table class="table table-striped">';
        echo '<thead><tr><th>Name</th><th>Description</th><th><a href="#" class="sortable" onclick="sortTable(2)">Price</a></th><th>Discount</th><th>Stock</th><th>Category</th><th>Action</th></tr></thead>';
        echo '<tbody>';
        foreach ($products as $product) {
@@ -104,7 +104,8 @@ if (!isset($_SESSION['username'])) {
        echo '</table>';
     } else {
       // Display a list of all the sellers
-      echo '<ul class="list-group">';
+      echo '<h1 class="h2"> Current Seller List:</h1>
+      <ul class="list-group">';
       foreach ($sellers as $seller) {
         echo '<li class="list-group-item"><a href="?seller_id=' . $seller['id'] . '">' . $seller['name'] . '</a></li>';
       }
@@ -128,7 +129,6 @@ if (!isset($_SESSION['username'])) {
     ?>
   </div>
 
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <script>
     // JavaScript functions for editing and deleting products
     function editProduct(productId) {

@@ -76,7 +76,7 @@ while ($row = $dailySalesResultYear->fetch_assoc()) {
 <body class="d-flex flex-column min-vh-100">
 
   <div class="container site-font-color text-center">
-    <h1 class="h1 my-5">Finanzübersicht:</h1>
+    <h1 class="h1 my-5">Vollständige Finanzübersicht :</h1>
 
 
 

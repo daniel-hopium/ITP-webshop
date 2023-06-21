@@ -17,7 +17,7 @@ include '../includes/head.php';
 </head>
 
 <body class="d-flex flex-column min-vh-100">
-  <div class="container">
+  <div class="container my-4">
     <div class="row justify-content-center">
       <div class="col-md-6">
         <?php
@@ -97,7 +97,7 @@ include '../includes/head.php';
             <input type="number" class="form-control" name="Stock" step="1" value="<?php echo $product['Stock']; ?>">
           </div>
           <div class="text-center">
-            <input type="submit" class="btn btn-primary" value="Save">
+            <input type="submit" class="btn btn-primary m-4 col-4" value="Save">
           </div>
         </form>
       </div>

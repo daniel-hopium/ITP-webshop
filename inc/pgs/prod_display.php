@@ -51,6 +51,7 @@ $category_id = "";
 </head>
 
 <body>
+<div class="container py-4">
 	<form action="" method="get" class="mb-4">
 		<label for="category_id" class="form-label">Select a category:</label>
 		<select id="category_id" name="category_id" class="form-select">
@@ -79,7 +80,7 @@ while ($row = mysqli_fetch_assoc($result)) {
 		<button type="submit" class="btn btn-primary mt-2">Filter</button>
 	</form>
 
-	<div class="container py-4">
+	
 		<h1 class="text-center mb-4"><?php echo $category_name; ?>
 		</h1>
 

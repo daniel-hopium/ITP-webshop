@@ -29,6 +29,8 @@
 </head>
 
 <body>
+  <div class="container mx-auto m-4">
+    <h1 class="mb-2">Produkt Upload</h1>
   <form method="post" action="product_upload.php" enctype="multipart/form-data">
     <div>
       <label for="name">Product Name:</label>
@@ -99,7 +101,7 @@
     $db_obj->close();
   ?>
 
-
+</div>
 <?php 
 include '../includes/footer.php';
 ?>
