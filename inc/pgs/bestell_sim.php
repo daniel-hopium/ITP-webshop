@@ -61,22 +61,10 @@ function getNextFreeOrderID($connection) {
     } else {
         return $max_orderid + 1;
     }
+
+
+    
 }
+echo "<script>location.href='redirect_page.php?type=order_success'</script>";
 ?>
 
-<div id="timer">5</div>
-
-<script>
-    let timeLeft = 5;
-    const timerDisplay = document.getElementById("timer");
-
-    const timerInterval = setInterval(() => {
-        timeLeft--;
-        timerDisplay.textContent = timeLeft;
-
-        if (timeLeft === 0) {
-            clearInterval(timerInterval);
-            window.location.href = "order_status.php";
-        }
-    }, 1000);
-</script>
