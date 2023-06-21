@@ -59,7 +59,7 @@
               <label for="image" class="form-label">Product Image:</label>
               <input type="file" name="image" accept="image/*" class="form-control" required>
             </div>
-            <button type="submit" class="btn btn-primary">Upload</button>
+            <button type="submit" class="btn secondary-bg-color btn-block secondary-color">Upload</button>
           </form>
         </div>
       </div>

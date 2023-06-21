@@ -41,7 +41,7 @@
                         <h2 class="card-title text-center mb-3">Computer</h2>
                         <p class="card-text">Hier finden Sie eine große Auswahl an Desktop-PCs für Ihr Zuhause oder
                             Büro, mit hoher Leistung und zuverlässiger Qualität.</p>
-                        <a href="prod_display.php?category_id=1" class="btn btn-primary">Kategorie ansehen</a>
+                        <a href="prod_display.php?category_id=1" class="btn secondary-bg-color btn-block secondary-color">Kategorie ansehen</a>
                     </div>
                 </div>
             </div>
@@ -53,7 +53,7 @@
                         <h2 class="card-title text-center mb-3">Laptop</h2>
                         <p class="card-text">Entdecken Sie unsere breite Palette an leichten und tragbaren Laptops für
                             unterwegs, mit langen Akkulaufzeiten und schnellen Prozessoren.</p>
-                        <a href="prod_display.php?category_id=2" class="btn btn-primary">Kategorie ansehen</a>
+                        <a href="prod_display.php?category_id=2" class="btn secondary-bg-color btn-block secondary-color">Kategorie ansehen</a>
                     </div>
                 </div>
             </div>
@@ -65,7 +65,7 @@
                         <h2 class="card-title text-center mb-3">Tablet</h2>
                         <p class="card-text">Erleben Sie die Freiheit und Flexibilität unserer Tablets, mit
                             kristallklaren Bildschirmen und schnellen Prozessoren.</p>
-                        <a href="prod_display.php?category_id=3" class="btn btn-primary">Kategorie ansehen</a>
+                        <a href="prod_display.php?category_id=3" class="btn secondary-bg-color btn-block secondary-color">Kategorie ansehen</a>
                     </div>
                 </div>
             </div>
@@ -77,7 +77,7 @@
                         <h2 class="card-title text-center mb-3">Drucker</h2>
                         <p class="card-text">Wählen Sie aus unseren hochwertigen Druckern für Zuhause oder Büro, die
                             alle Ihre Anforderungen erfüllen.</p>
-                        <a href="prod_display.php?category_id=4" class="btn btn-primary">Kategorie ansehen</a>
+                        <a href="prod_display.php?category_id=4" class="btn secondary-bg-color btn-block secondary-color">Kategorie ansehen</a>
                     </div>
                 </div>
             </div>
@@ -91,7 +91,7 @@
                             unseren hochwertigen Kopfhörern.</p>
                     </div>
                     <div class="card-footer d-flex justify-content-between align-items-center">
-                        <a href="prod_display.php?category_id=5" class="btn btn-primary">Kategorie ansehen</a>
+                        <a href="prod_display.php?category_id=5" class="btn secondary-bg-color btn-block secondary-color">Kategorie ansehen</a>
                     </div>
                 </div>
             </div>

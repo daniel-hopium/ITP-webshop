@@ -57,15 +57,19 @@ $active_page = basename($_SERVER['SCRIPT_NAME']);
                 </li>
             </ul>
         </div>
-
         </li>
-
-        </ul>
-        <form class="d-flex ms-auto my-2 my-lg-0" method="post" action="search.php">
-            <input class="form-control me-2" type="text" name="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn btn-light" type="submit" name="submit-search">Search</button>
-        </form>
-        <div id="results-container"></div>
+        <ul class="navbar-nav  col-6">
+                <li class="nav-item  ">
+                    <div class="input-group ">
+                        <form class="d-flex col-12" method="post" action="search.php">
+                            <input id="search-input" type="text" class="form-control form-control-sm" name="search" placeholder="Search" aria-describedby="search-button" />
+                            <button id="search-button" name="submit-search" type="submit" class="btn bg-light btn-sm">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </form>
+                    </div>
+                </li>
+            </ul>
     </div>
 </nav>
 

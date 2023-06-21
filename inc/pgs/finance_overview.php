@@ -76,22 +76,22 @@ while ($row = $dailySalesResultYear->fetch_assoc()) {
 <body class="d-flex flex-column min-vh-100">
 
   <div class="container site-font-color text-center">
-    <h1 class="h1 my-5">Vollständige Finanzübersicht:</h1>
+    <h1 class="h1 my-5 primary-color">Vollständige Finanzübersicht:</h1>
 
 
 
 
-    <h1 class="h3 text-start">Monatliche Verkäufe der letzten 12 Monate</h1>
+    <h1 class="h3 text-start primary-color">Monatliche Verkäufe der letzten 12 Monate</h1>
     <div>
       <canvas id="monthly-sales-chart" style="height: 400px; width: 100%;"></canvas>
     </div>
 
-    <h1 class="h3 text-start mt-4">Tägliche Verkäufe der letzten 30 Tage</h1>
+    <h1 class="h3 text-start mt-4 primary-color">Tägliche Verkäufe der letzten 30 Tage</h1>
     <div>
       <canvas id="myChart2" style="height: 400px; width: 100%;"></canvas>
     </div>
 
-    <h1 class="h3 text-start mt-4">Kumulative Verkäufe der letzten 365 Tage</h1>
+    <h1 class="h3 text-start mt-4 primary-color">Kumulative Verkäufe der letzten 365 Tage</h1>
     <div>
       <canvas id="myChart3" style="height: 400px; width: 100%;"></canvas>
     </div>
@@ -104,8 +104,8 @@ while ($row = $dailySalesResultYear->fetch_assoc()) {
         datasets: [{
           label: 'Monthly Sales',
           data: <?= json_encode($monthlySalesData['datasets'][0]['data']) ?>,
-          backgroundColor: 'rgba(54, 162, 235, 0.5)',
-          borderColor: 'rgb(54, 162, 235)',
+          backgroundColor: '#0d3359b5',
+          borderColor: '#0d3359',
           borderWidth: 1
         }]
       };
@@ -146,8 +146,8 @@ while ($row = $dailySalesResultYear->fetch_assoc()) {
           datasets: [{
             label: 'Daily Sales',
             data: <?= json_encode($dailySalesData['datasets'][0]['data']) ?>,
-            backgroundColor: 'rgb(54, 162, 235, 1)',
-            borderColor: 'rgb(54, 162, 235, 1)',
+            backgroundColor: '#0d3359b5',
+            borderColor: '#0d3359',
             borderWidth: 1
           }]
         };
@@ -185,8 +185,8 @@ while ($row = $dailySalesResultYear->fetch_assoc()) {
           datasets: [{
             label: 'Daily Sales',
             data: <?= json_encode($dailySalesDataYear['datasets'][0]['data']) ?>,
-            backgroundColor: 'rgb(54, 162, 235, 1)',
-            borderColor: 'rgb(54, 162, 235, 1)',
+            backgroundColor: '#0d3359b5',
+            borderColor: '#0d3359',
             borderWidth: 1
           }]
         };

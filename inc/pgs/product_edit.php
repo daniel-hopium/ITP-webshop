@@ -96,7 +96,7 @@ if (!isset($_SESSION['username'])) {
             <input type="number" class="form-control" name="Stock" step="1" value="<?php echo $product['Stock']; ?>">
           </div>
           <div class="text-center">
-            <input type="submit" class="btn btn-primary m-4 col-4" value="Save">
+            <input type="submit" class="btn secondary-bg-color btn-block secondary-color m-4 col-4" value="Save">
           </div>
         </form>
       </div>

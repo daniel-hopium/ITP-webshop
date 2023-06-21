@@ -95,7 +95,7 @@ $conn->close();
 							<input type="hidden" name="product_id"
 								value="<?php echo $product['id']; ?>">
 
-							<button type="submit" class="btn btn-primary">In den Warenkorb</button>
+							<button type="submit" class="btn secondary-bg-color btn-block secondary-color">In den Warenkorb</button>
 
 						</div>
 					</div>
