@@ -30,7 +30,7 @@ if (isset($_POST["product_id"]) && isset($_POST["quantity"])) {
 
     // Insert the product into the shopping cart table
     $query = "INSERT INTO shoppingcart (user_id, product_id, quantity) VALUES ('$user_id', '$product_id', '$quantity')";
-    var_dump($_SESSION);
+    
   
     if (mysqli_query($connection, $query)) {
         echo "<script>location.href='prod_display.php'</script>";

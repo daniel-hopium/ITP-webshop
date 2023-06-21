@@ -25,11 +25,6 @@
 <body class="d-flex flex-column min-vh-100">
     <div class="container">
         <?php
-        // Check if the user is logged in and is an admin
-
-        // Connect to the database
-
-
         // Create a new mysqli object
         $db_obj = new mysqli($host, $user, $password, $database);
 
@@ -38,6 +33,7 @@
             echo 'Failed to connect to MySQL: ' . $db_obj->connect_error;
             exit();
         }
+
         // Get all the categories
         $sql = 'SELECT * FROM categories';
         $stmt = $db_obj->prepare($sql);
@@ -100,6 +96,7 @@
             echo 'Error executing query: ' . $stmt->error;
         }
 
+        // Function to get the category name based on the category ID
         function getCategoryName($categoryId)
         {
             global $categories;
@@ -114,115 +111,112 @@
         // Close the database connection
         $db_obj->close();
         ?>
-
-        <script>
-            // JavaScript functions for editing and deleting products
-            function editProduct(productId) {
-                window.location.href = 'product_edit.php?id=' + productId;
-            }
-
-            function deleteProduct(productId) {
-                if (confirm('Are you sure you want to delete this product?')) {
-                    // Make an AJAX request to delete the product
-                    var xhr = new XMLHttpRequest();
-                    xhr.onreadystatechange = function() {
-                        if (xhr.readyState === XMLHttpRequest.DONE) {
-                            if (xhr.status === 200) {
-                                alert('Product deleted successfully.');
-                                // Refresh the page to show the updated product list
-                                location.reload();
-                            } else {
-                                alert('Error: ' + xhr.status);
-                            }
-                        }
-                    };
-                    xhr.open('DELETE', 'product_delete.php?id=' + productId);
-                    xhr.send();
-                }
-            }
-
-            // Function to change the selected category
-            function changeCategory() {
-                var selectedCategoryId = document.getElementById('category-select').value;
-                var currentUrl = window.location.href;
-                var baseUrl = currentUrl.split('?')[0];
-                var sellerId = getUrlParameter('seller_id');
-                var newUrl = baseUrl + '?seller_id=' + sellerId;
-                if (selectedCategoryId) {
-                    newUrl += '&category_id=' + selectedCategoryId;
-                }
-                window.location.href = newUrl;
-            }
-
-            // Function to get the value of a URL parameter
-            function getUrlParameter(name) {
-                name = name.replace(/[\[\]]/g, '\\$&');
-                var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)');
-                var results = regex.exec(window.location.href);
-                if (!results) return null;
-                if (!results[2]) return '';
-                return decodeURIComponent(results[2].replace(/\+/g, ' '));
-            }
-
-            // Function to sort the table by the specified column
- // Function to sort the table by the specified column
-function sortTable(column) {
-    var table, rows, switching, i, x, y, shouldSwitch;
-    table = document.querySelector('.table');
-    switching = true;
-
-    // Get the current sorting direction for the column
-    var sortDirection = table.getAttribute('data-sort-direction');
-    if (!sortDirection || sortDirection === 'desc') {
-        sortDirection = 'asc';
-    } else {
-        sortDirection = 'desc';
-    }
-
-    // Set the sorting direction in the table attribute
-    table.setAttribute('data-sort-direction', sortDirection);
-
-    while (switching) {
-        switching = false;
-        rows = table.getElementsByTagName('tr');
-
-        // Loop through all table rows except the header
-        for (i = 1; i < (rows.length - 1); i++) {
-            shouldSwitch = false;
-
-            // Get the two elements to compare: current row and the next row
-            x = rows[i].getElementsByTagName('td')[column];
-            y = rows[i + 1].getElementsByTagName('td')[column];
-
-            // Check if the two elements should switch places based on the sorting direction
-            if (sortDirection === 'asc') {
-                if (parseFloat(x.innerText) > parseFloat(y.innerText)) {
-                    shouldSwitch = true;
-                    break;
-                }
-            } else if (sortDirection === 'desc') {
-                if (parseFloat(x.innerText) < parseFloat(y.innerText)) {
-                    shouldSwitch = true;
-                    break;
-                }
-            }
-        }
-
-        if (shouldSwitch) {
-            // Swap the rows and set the switching flag to true
-            rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-            switching = true;
-        }
-    }
-}
-
-    
-        </script>
     </div>
 
+    <script>
+        // JavaScript functions for editing and deleting products
+        function editProduct(productId) {
+            window.location.href = 'product_edit.php?id=' + productId;
+        }
+
+        function deleteProduct(productId) {
+            if (confirm('Are you sure you want to delete this product?')) {
+                // Make an AJAX request to delete the product
+                var xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === XMLHttpRequest.DONE) {
+                        if (xhr.status === 200) {
+                            alert('Product deleted successfully.');
+                            // Refresh the page to show the updated product list
+                            location.reload();
+                        } else {
+                            alert('Error: ' + xhr.status);
+                        }
+                    }
+                };
+                xhr.open('DELETE', 'product_delete.php?id=' + productId);
+                xhr.send();
+            }
+        }
+
+        // Function to change the selected category
+        function changeCategory() {
+            var selectedCategoryId = document.getElementById('category-select').value;
+            var currentUrl = window.location.href;
+            var baseUrl = currentUrl.split('?')[0];
+            var sellerId = getUrlParameter('seller_id');
+            var newUrl = baseUrl + '?seller_id=' + sellerId;
+            if (selectedCategoryId) {
+                newUrl += '&category_id=' + selectedCategoryId;
+            }
+            window.location.href = newUrl;
+        }
+
+        // Function to get the value of a URL parameter
+        function getUrlParameter(name) {
+            name = name.replace(/[\[\]]/g, '\\$&');
+            var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)');
+            var results = regex.exec(window.location.href);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, ' '));
+        }
+
+        // Function to sort the table by the specified column
+        function sortTable(column) {
+            var table, rows, switching, i, x, y, shouldSwitch;
+            table = document.querySelector('.table');
+            switching = true;
+
+            // Get the current sorting direction for the column
+            var sortDirection = table.getAttribute('data-sort-direction');
+            if (!sortDirection || sortDirection === 'desc') {
+                sortDirection = 'asc';
+            } else {
+                sortDirection = 'desc';
+            }
+
+            // Set the sorting direction in the table attribute
+            table.setAttribute('data-sort-direction', sortDirection);
+
+            while (switching) {
+                switching = false;
+                rows = table.getElementsByTagName('tr');
+
+                // Loop through all table rows except the header
+                for (i = 1; i < rows.length - 1; i++) {
+                    shouldSwitch = false;
+
+                    // Get the two elements to compare: current row and the next row
+                    x = rows[i].getElementsByTagName('td')[column];
+                    y = rows[i + 1].getElementsByTagName('td')[column];
+
+                    // Check if the two elements should switch places based on the sorting direction
+                    if (sortDirection === 'asc') {
+                        if (parseFloat(x.innerText) > parseFloat(y.innerText)) {
+                            shouldSwitch = true;
+                            break;
+                        }
+                    } else if (sortDirection === 'desc') {
+                        if (parseFloat(x.innerText) < parseFloat(y.innerText)) {
+                            shouldSwitch = true;
+                            break;
+                        }
+                    }
+                }
+
+                if (shouldSwitch) {
+                    // Swap the rows and set the switching flag to true
+                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                    switching = true;
+                }
+            }
+        }
+    </script>
+
     <?php 
-include '../includes/footer.php';
-?>
+        include '../includes/footer.php';
+    ?>
 </body>
 
 </html>
