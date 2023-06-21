@@ -1,22 +1,23 @@
+<?php
+include '../includes/head.php';
+require_once('../../config/dbaccess.php');
+
+if (!isset($_SESSION['username'])) {
+  header('Location: home.php');
+  exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-<?php
-include '../includes/head.php';
-        require_once('../../config/dbaccess.php');
-
-        if (!isset($_SESSION['username'])) {
-          header('Location: home.php');
-          exit();
-        }
-        ?>
-
   <title>Edit Product</title>
-
 </head>
 
 <body class="d-flex flex-column min-vh-100">
+ 
+
   <div class="container my-4">
     <div class="row justify-content-center">
       <div class="col-md-6">
@@ -24,8 +25,6 @@ include '../includes/head.php';
         // Check if the user is logged in and is an admin
 
         // Connect to the database
-        
-
         // Create a new mysqli object
         $db_obj = new mysqli($host, $user, $password, $database);
 
@@ -104,9 +103,7 @@ include '../includes/head.php';
     </div>
   </div>
 
-  <?php 
-include '../includes/footer.php';
-?>
+  <?php include '../includes/footer.php'; ?>
 </body>
 
 </html>

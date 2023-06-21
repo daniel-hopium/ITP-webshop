@@ -2,30 +2,29 @@
 <html lang="en">
 
 <head>
-<?php
-// Connect to the database
-include '../includes/head.php';
-require_once('../../config/dbaccess.php');
+  <?php
+  // Connect to the database
+  include '../includes/head.php';
+  require_once('../../config/dbaccess.php');
 
-if (!isset($_SESSION['username'])) {
-  header('Location: home.php');
-}
-?>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Admin Panel</title>
-
-<style>
-  .sortable {
-    cursor: pointer;
+  if (!isset($_SESSION['username'])) {
+    header('Location: home.php');
   }
-</style>
+  ?>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel</title>
+
+  <style>
+    .sortable {
+      cursor: pointer;
+    }
+  </style>
 </head>
 
 <body class="d-flex flex-column min-vh-100">
   <div class="container my-4">
     <?php
-
     // Create a new mysqli object
     $db_obj = new mysqli($host, $user, $password, $database);
 
@@ -84,27 +83,26 @@ if (!isset($_SESSION['username'])) {
       $result = $stmt->get_result();
       $products = $result->fetch_all(MYSQLI_ASSOC);
 
-     
-       // Display the products in a table
-       echo '<table class="table table-striped">';
-       echo '<thead><tr><th>Name</th><th>Description</th><th><a href="#" class="sortable" onclick="sortTable(2)">Price</a></th><th>Discount</th><th>Stock</th><th>Category</th><th>Action</th></tr></thead>';
-       echo '<tbody>';
-       foreach ($products as $product) {
-           echo '<tr>';
-           echo '<td>' . $product['name'] . '</td>';
-           echo '<td>' . $product['description'] . '</td>';
-           echo '<td>' . $product['price'] . '</td>';
-           echo '<td>' . $product['Discount'] . '</td>';
-           echo '<td>' . $product['Stock'] . '</td>';
-           echo '<td>' . getCategoryName($product['category_id']) . '</td>';
-           echo '<td><div class="btn-group" role="group" aria-label="Product Actions"><a href="#" onclick="editProduct(' . $product['id'] . ')" class="btn btn-primary">Edit</a><a href="#" onclick="deleteProduct(' . $product['id'] . ')" class="btn btn-danger">Delete</a></div></td>';
-           echo '</tr>';
-       }
-       echo '</tbody>';
-       echo '</table>';
+      // Display the products in a table
+      echo '<table class="table table-striped">';
+      echo '<thead><tr><th>Name</th><th>Description</th><th><a href="#" class="sortable" onclick="sortTable(2)">Price</a></th><th>Discount</th><th>Stock</th><th>Category</th><th>Action</th></tr></thead>';
+      echo '<tbody>';
+      foreach ($products as $product) {
+        echo '<tr>';
+        echo '<td>' . $product['name'] . '</td>';
+        echo '<td>' . $product['description'] . '</td>';
+        echo '<td>' . $product['price'] . '</td>';
+        echo '<td>' . $product['Discount'] . '</td>';
+        echo '<td>' . $product['Stock'] . '</td>';
+        echo '<td>' . getCategoryName($product['category_id']) . '</td>';
+        echo '<td><div class="btn-group" role="group" aria-label="Product Actions"><a href="#" onclick="editProduct(' . $product['id'] . ')" class="btn btn-primary">Edit</a><a href="#" onclick="deleteProduct(' . $product['id'] . ')" class="btn btn-danger">Delete</a></div></td>';
+        echo '</tr>';
+      }
+      echo '</tbody>';
+      echo '</table>';
     } else {
       // Display a list of all the sellers
-      echo '<h1 class="h2"> Current Seller List:</h1>
+      echo '<h1 class="h2">Current Seller List:</h1>
       <ul class="list-group">';
       foreach ($sellers as $seller) {
         echo '<li class="list-group-item"><a href="?seller_id=' . $seller['id'] . '">' . $seller['name'] . '</a></li>';
@@ -177,60 +175,61 @@ if (!isset($_SESSION['username'])) {
       if (!results[2]) return '';
       return decodeURIComponent(results[2].replace(/\+/g, ' '));
     }
+
     // Function to sort the table by the specified column
-function sortTable(column) {
-    var table, rows, switching, i, x, y, shouldSwitch;
-    table = document.querySelector('.table');
-    switching = true;
+    function sortTable(column) {
+      var table, rows, switching, i, x, y, shouldSwitch;
+      table = document.querySelector('.table');
+      switching = true;
 
-    // Get the current sorting direction for the column
-    var sortDirection = table.getAttribute('data-sort-direction');
-    if (!sortDirection || sortDirection === 'desc') {
+      // Get the current sorting direction for the column
+      var sortDirection = table.getAttribute('data-sort-direction');
+      if (!sortDirection || sortDirection === 'desc') {
         sortDirection = 'asc';
-    } else {
+      } else {
         sortDirection = 'desc';
-    }
+      }
 
-    // Set the sorting direction in the table attribute
-    table.setAttribute('data-sort-direction', sortDirection);
+      // Set the sorting direction in the table attribute
+      table.setAttribute('data-sort-direction', sortDirection);
 
-    while (switching) {
+      while (switching) {
         switching = false;
         rows = table.getElementsByTagName('tr');
 
         // Loop through all table rows except the header
-        for (i = 1; i < (rows.length - 1); i++) {
-            shouldSwitch = false;
+        for (i = 1; i < rows.length - 1; i++) {
+          shouldSwitch = false;
 
-            // Get the two elements to compare: current row and the next row
-            x = rows[i].getElementsByTagName('td')[column];
-            y = rows[i + 1].getElementsByTagName('td')[column];
+          // Get the two elements to compare: current row and the next row
+          x = rows[i].getElementsByTagName('td')[column];
+          y = rows[i + 1].getElementsByTagName('td')[column];
 
-            // Check if the two elements should switch places based on the sorting direction
-            if (sortDirection === 'asc') {
-                if (parseFloat(x.innerText) > parseFloat(y.innerText)) {
-                    shouldSwitch = true;
-                    break;
-                }
-            } else if (sortDirection === 'desc') {
-                if (parseFloat(x.innerText) < parseFloat(y.innerText)) {
-                    shouldSwitch = true;
-                    break;
-                }
+          // Check if the two elements should switch places based on the sorting direction
+          if (sortDirection === 'asc') {
+            if (parseFloat(x.innerText) > parseFloat(y.innerText)) {
+              shouldSwitch = true;
+              break;
             }
+          } else if (sortDirection === 'desc') {
+            if (parseFloat(x.innerText) < parseFloat(y.innerText)) {
+              shouldSwitch = true;
+              break;
+            }
+          }
         }
 
         if (shouldSwitch) {
-            // Swap the rows and set the switching flag to true
-            rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-            switching = true;
+          // Swap the rows and set the switching flag to true
+          rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+          switching = true;
         }
+      }
     }
-}
   </script>
-<?php 
-include '../includes/footer.php';
-?>
+  <?php 
+  include '../includes/footer.php';
+  ?>
 </body>
 
 </html>
