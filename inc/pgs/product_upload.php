@@ -25,7 +25,7 @@
   ?>
 </head>
 
-<body>
+<body class="d-flex flex-column min-vh-100">
   <div class="container-fluid">
     <div class="row">
       <div class="col">
@@ -107,7 +107,7 @@
   ?>
 
  </div>
- 
+
 <?php
         include '../includes/footer.php';
         ?>
