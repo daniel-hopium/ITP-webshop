@@ -168,29 +168,29 @@
         <?php
         require_once('../../config/dbaccess.php');
 
-	// $userID = $currentUser['id']; hab ich auskommentiert, brauchen wir das? wirft einen error wenn man nicht eingeloggt ist
 	$db_obj = new mysqli($host, $user, $password, $database);
 
 	$sql = "SELECT * FROM blog_news ORDER BY ID DESC";
 	$result = $db_obj->query($sql);
 
 	while ($row = $result->fetch_assoc()) {
-	    $field1name = $row["created"];
-	    $field2name = $row["title"];
-	    $field3name = $row["content"];
-	    $imageData = base64_encode($row["image"]);
-	    ?>
+		$id = $row["id"]; // Fetch the ID from the database
+		$field1name = $row["created"];
+		$field2name = $row["title"];
+		$field3name = $row["content"];
+		$imageData = base64_encode($row["image"]);
+	?>
         <div class="blog-post">
             <h2><?php echo $field2name; ?></h2>
-            <div class="blog-post-meta"><?php echo $field1name; ?>
-            </div>
+            <div class="blog-post-meta"><?php echo $field1name; ?></div>
             <img src="data:image/png;base64,<?php echo $imageData; ?>" alt="Image"
                 style="max-width: 100%; height: auto;">
             <br>
             <br>
             <p><?php echo $field3name; ?></p>
-            <a href="#" class="read-more">Read More</a>
-            <div class="full-post">
+            <a href="newsBlog_user.php#<?php echo $id; ?>" class="read-more">Read More</a>
+            <!-- Add ID to the link -->
+            <div class="full-post" id="<?php echo $id; ?>">
                 <div class="full-post-inner">
                     <div class="close-btn">&times;</div>
                     <h2><?php echo $field2name; ?></h2>
@@ -223,13 +223,16 @@
         link.addEventListener('click', (e) => {
             e.preventDefault();
             fullPostContainers[index].style.display = 'block';
+            window.history.pushState({}, '', link.getAttribute('href'));
         });
     });
+
 
     backButtons.forEach((button) => {
         button.addEventListener('click', (e) => {
             e.preventDefault();
             button.parentElement.parentElement.style.display = 'none';
+            window.history.pushState({}, '', 'newsBlog_user.php');
         });
     });
 
@@ -237,8 +240,34 @@
         button.addEventListener('click', (e) => {
             e.preventDefault();
             button.parentElement.parentElement.style.display = 'none';
+            window.history.pushState({}, '', 'newsBlog_user.php');
         });
     });
+
+    const urlFragment = window.location.hash;
+    if (urlFragment) {
+        const postToOpen = document.querySelector(`#full-post${urlFragment}`);
+        if (postToOpen) {
+            postToOpen.style.display = 'block';
+        }
+    }
+    window.onload = function() {
+        // Get the id parameter from URL
+        var urlParams = new URLSearchParams(window.location.search);
+        var id = urlParams.get('id');
+
+        // If there's an id in the URL
+        if (id) {
+            // Get the element with the id same as the URL parameter
+            var targetModal = document.getElementById(id);
+
+            // If the element exists
+            if (targetModal) {
+                // Show the modal
+                targetModal.style.display = 'block';
+            }
+        }
+    }
     </script>
 </body>
 
