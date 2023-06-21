@@ -156,13 +156,13 @@ while ($row = mysqli_fetch_assoc($result)) {
                 echo '<h2 class="card-title text-center mb-3">' . $name . '</h2>';
                 echo '<p class="card-text">' . $description . '</p>';
                 echo '<form method="post" action="addtocart.php">';
-                echo '<a href="prod_details.php?id=' . @$id . '" class="btn btn-primary ms-auto">Details ansehen</a>';
-                echo '<div class="input-group mb-3">';
+                echo '<a href="prod_details.php?id=' . @$id . '" class="btn secondary-bg-color btn-block secondary-color ms-auto">Details ansehen</a>';
+                echo '<div class="input-group my-1">';
                 echo '<label class="input-group-text" for="quantity-' . $id . '">Quantity:</label>';
                 echo '<input type="number" class="form-control" id="quantity-' . $id . '" name="quantity" min="1" value="1">';
                 echo '</div>';
                 echo '<input type="hidden" name="product_id" value="' . $id . '">';
-                echo '<button type="submit" class="btn btn-primary">Add to Cart</button>';
+                echo '<button type="submit" class="btn secondary-bg-color btn-block secondary-color">Add to Cart</button>';
                 echo '</form>';
                 echo '<span class="text-end">€ ' . number_format($discountedPrice, 2, ',', '.') . '</span>'; // Display the discounted price
                 echo '</div></div></div>';

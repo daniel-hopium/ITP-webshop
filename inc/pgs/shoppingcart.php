@@ -89,7 +89,7 @@
         
     } else {
         // If the cart is empty, display a message
-        echo "<p>Your cart is empty. Please add some products.</p>";
+        echo "<h1 class='my-4'></h1>Your cart is empty. Please add some products.</h1>";
     }
 
     echo "</div>";
