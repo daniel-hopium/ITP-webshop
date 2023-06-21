@@ -64,14 +64,10 @@
         </div>
       </div>
     </div>
-    <div class="row fixed-bottom">
-      <div class="col">
-        <?php
-        include '../includes/footer.php';
-        ?>
-      </div>
-    </div>
-  </div>
+ 
+    
+
+  
 
   <?php
   // Process the form data and insert the product into the database
@@ -109,6 +105,12 @@
   // Close the database connection
   $db_obj->close();
   ?>
+
+ </div>
+ 
+<?php
+        include '../includes/footer.php';
+        ?>
 </body>
 
 </html>
