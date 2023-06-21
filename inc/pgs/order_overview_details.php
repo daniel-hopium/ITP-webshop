@@ -29,6 +29,7 @@ if (isset($_GET['id'])) {
 
     // Query to fetch the order from the database
     $query = "SELECT * FROM new_orders WHERE orderid = $orderId";
+    
     $result = mysqli_query($connection, $query);
 
     if ($result && mysqli_num_rows($result) > 0) {
@@ -46,12 +47,18 @@ if (isset($_GET['id'])) {
 
         // Fetch the associated products for the order
         $productId = $order['product_id'];
-        $productQuery = "SELECT * FROM products WHERE id = $productId";
+        // Fetch the associated products for the order
+        $productQuery = "SELECT * FROM products WHERE id IN (SELECT product_id FROM new_orders WHERE orderid = $orderId)";
         $productResult = mysqli_query($connection, $productQuery);
 
-        while ($product = mysqli_fetch_assoc($productResult)) {
-            echo '<tr><td>' . $product['name'] . '</td><td>' . $order['quantity'] . '</td><td>' . $order['total_price'] . '</td></tr>';
+        if ($productResult && mysqli_num_rows($productResult) > 0) {
+            while ($product = mysqli_fetch_assoc($productResult)) {
+                echo '<tr><td>' . $product['name'] . '</td><td>' . $order['quantity'] . '</td><td>' . $order['total_price'] . '</td></tr>';
+            }
+        } else {
+            echo '<tr><td colspan="3">No products found for this order.</td></tr>';
         }
+
 
         echo '</tbody>';
         echo '</table>';
