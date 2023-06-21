@@ -76,7 +76,7 @@ while ($row = $dailySalesResultYear->fetch_assoc()) {
 <body class="d-flex flex-column min-vh-100">
 
   <div class="container site-font-color text-center">
-    <h1 class="h1 my-5">Vollständige Finanzübersicht :</h1>
+    <h1 class="h1 my-5">Vollständige Finanzübersicht:</h1>
 
 
 
@@ -102,7 +102,7 @@ while ($row = $dailySalesResultYear->fetch_assoc()) {
         labels: <?= json_encode($monthlySalesData['labels']) ?>
         ,
         datasets: [{
-          label: 'Sales',
+          label: 'Monthly Sales',
           data: <?= json_encode($monthlySalesData['datasets'][0]['data']) ?>,
           backgroundColor: 'rgba(54, 162, 235, 0.5)',
           borderColor: 'rgb(54, 162, 235)',
@@ -238,15 +238,6 @@ foreach ($dailySalesDataYear as $monthData) {
     $datasets[] = $dataset;
 }
 ?>
-
-
-
-
-
-
-
-
-
   </div>
 
   <?php

@@ -20,7 +20,7 @@ if (isset($_POST["product_id"]) && isset($_POST["quantity"])) {
     // Check if the user is logged in
     if (!isset($_SESSION["user_id"])) {
         // If the user is not logged in, redirect to the login page
-        echo "<script>location.href='home.php?type=login'</script>";
+        echo "<script>location.href='login.php'</script>";
         exit();
     }
 

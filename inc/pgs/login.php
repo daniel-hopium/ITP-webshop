@@ -45,7 +45,7 @@
 
   if(isset($_SESSION['username'])) {
 
-      echo "<script>location.href='landing_page.php'</script>";
+      echo "<script>location.href='home.php'</script>";
 
   } else {
       if (isset($_POST['emailOrUsername'])) {

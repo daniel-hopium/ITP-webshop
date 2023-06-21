@@ -14,7 +14,7 @@
     <div class="container site-font-color">
         <div class="card card-bg shadow-2-strong card-registration mt-3 p-2 flex-column "
             style="border-radius: 15px; max-width: 600px;">
-            <h1 class="h1">Kontakt</h1>
+            <h1 class="h1 primary-color">Kontakt</h1>
             <form class="" action="contact.php" method="post">
                 <div class="form-floating col-md-12 shadow">
                     <input type="text" class="form-control mb-3" name="name" id="floatingName" placeholder="Name"
@@ -35,7 +35,7 @@
                         style="height: 100px" required></textarea>
                     <label for="message">Nachricht</label>
                 </div>
-                <button class="btn btn-primary mb-3 shadow col-md-3 site-font-color" type="submit"
+                <button class="btn btn-lg secondary-bg-color btn-block secondary-color col-4" type="submit"
                     name="submit">Abschicken</button>
             </form>
         </div>

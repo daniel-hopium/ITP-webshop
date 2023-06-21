@@ -96,10 +96,13 @@
             <div id="myCarousel" class="carousel slide my-4" data-bs-ride="carousel">
                 <!-- Wrapper for carousel items -->
                 <div class="carousel-inner">
+                    
                     <div class="carousel-item active">
                         <div class="row">
                             <div class="col-md-3">
-                                <img src="../../res/img/new_product_01.jpg" class="img-fluid" alt="Image 1">
+                            <a href="newsBlog_user.php">
+                                <img src="../../res/img/new_product_01.jpg" class="img-fluid" alt="Image 1"  >
+                            </a>
                             </div>
                             <div class="col-md-3">
                                 <img src="../../res/img/new_product_01.jpg" class="img-fluid" alt="Image 2">

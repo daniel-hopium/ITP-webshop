@@ -132,11 +132,11 @@ include '../../config/check_shoppingcart_amount.php';
 
             <li class="nav-item dropdown">
                 <a href="" class="nav-link dropdown-toggle" id="navbarDropdown4" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Produkt
+                    Produkte
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown4">
-                    <li><a href="prod_categories.php" class="dropdown-item">Produktkategorien</a></li>
-                    <li><a href="prod_display.php" class="dropdown-item">Produktdisplay</a></li>
+                    <li><a href="prod_display.php" class="dropdown-item">Alle Produkte</a></li>
+                    <li><a href="prod_categories.php" class="dropdown-item">Produkte nach Kategorien</a></li>
                 </ul>
             </li>
             <li class="nav-item ">

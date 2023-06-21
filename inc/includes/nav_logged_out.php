@@ -18,7 +18,15 @@ $active_page = basename($_SERVER['SCRIPT_NAME']);
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-
+            <li class="nav-item dropdown">
+                <a href="" class="nav-link dropdown-toggle" id="navbarDropdown4" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Produkte
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown4">
+                    <li><a href="prod_display.php" class="dropdown-item">Alle Produkte</a></li>
+                    <li><a href="prod_categories.php" class="dropdown-item">Produkte nach Kategorien</a></li>
+                </ul>
+            </li>
                 <li class="nav-item">
                     <a href="newsBlog_user.php" class="nav-link <?php if ($active_page == 'newsBlog_user.php') {
                         echo 'fw-bold active disabled';
@@ -34,10 +42,10 @@ $active_page = basename($_SERVER['SCRIPT_NAME']);
                     </a>
                 </li>
                 <li class="nav-item ">
-                    <a href="faq.php" class="nav-link <?php if ($active_page == 'faq.php') {
+                    <a href="help.php" class="nav-link <?php if ($active_page == 'faq.php') {
                         echo 'fw-bold active disabled';
                     } ?>">
-                        FAQ
+                        Help
                     </a>
                 </li>
                 <li class="nav-item ">
@@ -45,13 +53,6 @@ $active_page = basename($_SERVER['SCRIPT_NAME']);
                         echo 'fw-bold active disabled';
                     } ?>">
                         Login
-                    </a>
-                </li>
-                <li class="nav-item ">
-                    <a href="help.php" class="nav-link  <?php if ($active_page == 'help.php') {
-                        echo 'fw-bold active disabled';
-                    } ?>">
-                        Help
                     </a>
                 </li>
             </ul>
