@@ -120,23 +120,23 @@
                                             //$id = $row['created'];
                                             echo "<div>
                                     <h3>Products</h3>";
-                                                
+                                               
                                             echo '<div class="col mb-4">';
                                             echo '<div class="card h-100">';
                                             echo '<img src="https://via.placeholder.com/400x300/2D2D2D/FFFFFF/?text=' . $row['title'] . '" class="card-img-top" alt="' . $row['title'] . '">';
-                                            echo '<div class="card-body">';
+                                            echo '<div class="card-body bg-light">';
                                             echo '<h2 class="card-title text-center mb-3">' . $row['title'] . '</h2>';
                                             echo '<p class="card-text">' . $row['content'] . '</p>';
                                             echo '<form method="post" action="addtocart.php">';
-                                            echo '<a href="prod_details.php?id=' . @$row['created'] . '" class="btn btn-primary ms-auto">Details ansehen</a>';
-                                            echo '<div class="input-group mb-3">';
+                                            echo '<a href="prod_details.php?id=' . @$row['created'] . '" class="btn btn-lg secondary-bg-color btn-block secondary-color ms-auto">Details ansehen</a>';
+                                            echo '<div class="input-group my-1">';
                                             echo '<label class="input-group-text" for="quantity-' . $row['created'] . '">Quantity:</label>';
                                             echo '<input type="number" class="form-control" id="quantity-' . $row['created'] . '" name="quantity" min="1" value="1">';
                                             echo '</div>';
                                             echo '<input type="hidden" name="product_id" value="' . $row['created'] . '">';
-                                            echo '<button type="submit" class="btn btn-primary">Add to Cart</button>';
+                                            echo '<button type="submit" class="btn btn-lg secondary-bg-color btn-block secondary-color">Zum Warenkorb hinzufügen</button>';
                                             echo '</form>';
-                                            echo '<span class="text-end">€ ' . number_format($row['category_name'], 2, ',', '.') . '</span>';
+                                            echo '<span class="text-end h4">€ ' . number_format($row['category_name'], 2, ',', '.') . '</span>';
                                             echo '</div></div></div>';
                                             
 

@@ -67,16 +67,16 @@
                 <div id="carousel2" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <a href="newsBlog_user.php?id=<?php echo $blog_ids[1]; ?>">
+                            <a href="newsBlog_user.php?id=<?php echo $blog_ids[2]; ?>">
                                 <img src="../../res/img/sale3.jpg" class="d-block w-100" alt="Image 4">
                             </a>
                         </div>
-                        <a href="newsBlog_user.php?id=<?php echo $blog_ids[1]; ?>">
+                        <a href="newsBlog_user.php?id=<?php echo $blog_ids[2]; ?>">
                             <div class="carousel-item">
                                 <img src="../../res/img/sale3.jpg" class="d-block w-100" alt="Image 5">
                         </a>
                     </div>
-                    <a href="newsBlog_user.php?id=<?php echo $blog_ids[1]; ?>">
+                    <a href="newsBlog_user.php?id=<?php echo $blog_ids[2]; ?>">
                         <div class="carousel-item">
                             <img src="../../res/img/sale3.jpg" class="d-block w-100" alt="Image 6">
                     </a>

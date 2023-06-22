@@ -19,11 +19,19 @@ if (!isset($_SESSION["user_id"])) {
 if (isset($_GET['id'])) {
     // Retrieve the product ID from the URL
     $product_id = $_GET['id'];
+    $quantity = $_GET['quantity'];
 
     // Delete the item from the shopping cart in the database
     $user_id = $_SESSION["user_id"];
     $query = "DELETE FROM shoppingcart WHERE user_id = $user_id AND product_id = $product_id";
     mysqli_query($connection, $query);
+
+    // Update Products
+    $query = "UPDATE products   SET Stock = Stock + $quantity   WHERE id = $product_id";
+    mysqli_query($connection, $query);
+
+
+
 }
 echo "<script>location.href='shoppingcart.php'</script>";
 // Redirect to the shopping cart page

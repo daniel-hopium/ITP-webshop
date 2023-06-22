@@ -28,6 +28,11 @@ if (isset($_POST["product_id"]) && isset($_POST["quantity"])) {
     $product_id = intval($_POST["product_id"]);
     $quantity = intval($_POST["quantity"]);
 
+    //Update Products
+    $updateProductsQuery = "UPDATE products SET Stock = Stock - $quantity WHERE id = $product_id";
+    mysqli_query($connection, $updateProductsQuery);
+
+
     // Check if the product already exists in the shopping cart for the user
     $query = "SELECT * FROM shoppingcart WHERE user_id = '$user_id' AND product_id = '$product_id'";
     $result = mysqli_query($connection, $query);

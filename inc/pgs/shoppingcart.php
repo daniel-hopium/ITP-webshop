@@ -63,7 +63,7 @@
             $order_summary .= "<td>" . $row["price"] . " €</td>";
             $order_summary .= "<td class='discount'>" . $discount_text . "</td>";
             $order_summary .= "<td>" . $total_price_formatted . " €</td>";
-            $order_summary .= "<td><a href='removefromcart.php?id=" . $row["id"] . "'>Remove</a></td>";
+            $order_summary .= "<td><a href='removefromcart.php?id=" . $row["id"] . "&quantity=".$row["quantity"]."'>Remove</a></td>";
             $order_summary .= "</tr>";
 
    

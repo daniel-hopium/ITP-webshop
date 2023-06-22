@@ -33,6 +33,8 @@ while ($row = mysqli_fetch_assoc($result)) {
     // Calculate the total price for THIS product
     $total_price = $row["price"] * $row["quantity"];
 
+
+
     // Insert the order into the new_orders table
     $query = "INSERT INTO new_orders (orderid, buyer_name, buyer_email, product_id, quantity, total_price, status, order_date) VALUES (?, ?, ?, ?, ?, ?, 'pending', NOW())";
     $stmt = $connection->prepare($query);
