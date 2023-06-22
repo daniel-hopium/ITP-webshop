@@ -13,7 +13,7 @@
     require_once('../../config/dbaccess.php');
 
 	$db_obj = new mysqli($host, $user, $password, $database);
-    $sql = "SELECT * FROM blog_news ORDER BY ID DESC";
+    $sql = "SELECT * FROM blog_news ORDER BY ID DESC LIMIT 3";
     $result = $db_obj->query($sql);
     
     $blog_ids = [];
