@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 22. Jun 2023 um 13:08
+-- Erstellungszeit: 22. Jun 2023 um 13:05
 -- Server-Version: 10.4.27-MariaDB
 -- PHP-Version: 8.2.0
 
@@ -143,6 +143,28 @@ INSERT INTO `contact_query` (`id`, `created`, `name`, `email`, `subject`, `messa
 (1, '2023-01-14 23:05:08', 'Daniel Pfeifhofer', 'daniel.pfeifhofer.98@gmail.com', 'Reservierung stornieren bitte', 'Habe kein Geld mehr. Danke!'),
 (2, '2023-01-14 23:05:08', 'Daniel Holzner', 'daniel.pfeifhofer.98@gmail.com', 'Seven Summits', 'Servus'),
 (6, '2023-06-21 22:04:35', 'Daniel Pfeifhofer', 'daniel.pfeifhofer.98@gmail.com', 'C++ Test', 'Imagine');
+
+-- --------------------------------------------------------
+
+--
+-- Tabellenstruktur für Tabelle `news`
+--
+
+CREATE TABLE `news` (
+  `id` int(10) NOT NULL,
+  `created` timestamp NOT NULL DEFAULT current_timestamp(),
+  `title` varchar(256) NOT NULL,
+  `text` text NOT NULL,
+  `img_directory` varchar(256) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Daten für Tabelle `news`
+--
+
+INSERT INTO `news` (`id`, `created`, `title`, `text`, `img_directory`) VALUES
+(30, '2023-01-14 23:00:00', 'Ein neues wunderschönes Jahr', 'Wir hoffen Sie sind alle gut in das neue Jahr gerutscht! Wir freuen uns schon auf Sie!\r\n\r\nEin frohes Neues wünscht Ihnen das ganze Hotel Springer Team!', '.\\..\\..\\uploads\\news\\63c45a49452126.36598813.jpg'),
+(31, '2023-01-14 23:00:00', 'Zu Hause ist, wo die Berge sind!', 'Bergtage sind meine Lieblingstage\r\n\r\nLorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.', '.\\..\\..\\uploads\\news\\63c45aa5c5b902.42836897.jpg');
 
 -- --------------------------------------------------------
 
@@ -792,6 +814,21 @@ INSERT INTO `new_orders` (`id`, `orderid`, `buyer_name`, `buyer_email`, `product
 -- --------------------------------------------------------
 
 --
+-- Tabellenstruktur für Tabelle `orders`
+--
+
+CREATE TABLE `orders` (
+  `id` int(11) NOT NULL,
+  `buyer_name` varchar(50) NOT NULL,
+  `buyer_email` varchar(50) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `total_price` decimal(10,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Tabellenstruktur für Tabelle `products`
 --
 
@@ -1007,10 +1044,23 @@ ALTER TABLE `contact_query`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indizes für die Tabelle `news`
+--
+ALTER TABLE `news`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indizes für die Tabelle `new_orders`
 --
 ALTER TABLE `new_orders`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indizes für die Tabelle `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `product_id` (`product_id`);
 
 --
 -- Indizes für die Tabelle `products`
@@ -1069,10 +1119,22 @@ ALTER TABLE `contact_query`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
+-- AUTO_INCREMENT für Tabelle `news`
+--
+ALTER TABLE `news`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+
+--
 -- AUTO_INCREMENT für Tabelle `new_orders`
 --
 ALTER TABLE `new_orders`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=621;
+
+--
+-- AUTO_INCREMENT für Tabelle `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT für Tabelle `products`
@@ -1107,6 +1169,12 @@ ALTER TABLE `users`
 --
 -- Constraints der exportierten Tabellen
 --
+
+--
+-- Constraints der Tabelle `orders`
+--
+ALTER TABLE `orders`
+  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`);
 
 --
 -- Constraints der Tabelle `products`
