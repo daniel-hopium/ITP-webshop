@@ -95,13 +95,18 @@ while ($row = mysqli_fetch_assoc($result)) {
 
             // SQL-Abfrage zum Abrufen der Produkte aus der Datenbank
                 
-            $sql = "SELECT id, name, description, price,Discount FROM products WHERE category_id = $category_id";
+            $sql = "SELECT p.id, p.name, p.description, p.price, p.Discount, pi.image_path
+            FROM products p
+            LEFT JOIN product_images pi ON p.id = pi.product_id
+            WHERE p.category_id = $category_id";
+
             $result = mysqli_query($connection, $sql);
             while ($row = mysqli_fetch_assoc($result)) {
                 $id = $row['id'];
                 $name = $row['name'];
                 $description = $row['description'];
                 $price = $row['price'];
+                $img = $row['image_path'];
                 
                 // Retrieve the discount value from the same table
                 $discount = $row['Discount'];
@@ -111,7 +116,14 @@ while ($row = mysqli_fetch_assoc($result)) {
             
                 echo '<div class="col mb-4">';
                 echo '<div class="card h-100">';
-                echo '<img src="https://via.placeholder.com/400x300/2D2D2D/FFFFFF/?text=' . $name . '" class="card-img-top" alt="' . $name . '">';
+                if($img != NULL)
+                {
+                    echo '<img src='.$img.' class="card-img-top" alt="' . $name . '">';
+                }
+                else{
+
+                    echo '<img src="https://via.placeholder.com/400x300/2D2D2D/FFFFFF/?text=' . $name . '" class="card-img-top" alt="' . $name . '">';
+                }
                 echo '<div class="card-body">';
                 echo '<h2 class="card-title text-center mb-3">' . $name . '</h2>';
                 echo '<p class="card-text">' . $description . '</p>';
@@ -133,7 +145,9 @@ while ($row = mysqli_fetch_assoc($result)) {
             // Keine Kategorie-ID übergeben, alle Produkte anzeigen
             // SQL-Abfrage zum Abrufen der Produkte aus der Datenbank
                 
-            $sql = "SELECT id,name, description, price,Discount FROM products";
+            $sql = "SELECT p.id, p.name, p.description, p.price, p.Discount, pi.image_path
+            FROM products p
+            LEFT JOIN product_images pi ON p.id = pi.product_id";
             $result = mysqli_query($connection, $sql);
 
             // Schleife zum Anzeigen der Produkte
@@ -142,6 +156,7 @@ while ($row = mysqli_fetch_assoc($result)) {
                 $name = $row['name'];
                 $description = $row['description'];
                 $price = $row['price'];
+                $img = $row['image_path'];
                 
                 // Retrieve the discount value from the same table
                 $discount = $row['Discount'];
@@ -151,7 +166,14 @@ while ($row = mysqli_fetch_assoc($result)) {
             
                 echo '<div class="col mb-4">';
                 echo '<div class="card h-100">';
-                echo '<img src="https://via.placeholder.com/400x300/2D2D2D/FFFFFF/?text=' . $name . '" class="card-img-top" alt="' . $name . '">';
+                if($img != NULL)
+                {
+                    echo '<img src='.$img.' class="card-img-top" alt="' . $name . '">';
+                }
+                else{
+
+                    echo '<img src="https://via.placeholder.com/400x300/2D2D2D/FFFFFF/?text=' . $name . '" class="card-img-top" alt="' . $name . '">';
+                }
                 echo '<div class="card-body">';
                 echo '<h2 class="card-title text-center mb-3">' . $name . '</h2>';
                 echo '<p class="card-text">' . $description . '</p>';

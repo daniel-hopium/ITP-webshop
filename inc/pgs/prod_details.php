@@ -7,12 +7,18 @@ if ($conn->connect_error) {
 }
 
 $product_id = $_GET['id'];
-$sql = "SELECT * FROM products WHERE id = ?";
+$sql = "SELECT p.*, pi.image_path
+FROM products p
+LEFT JOIN product_images pi ON p.id = pi.product_id
+WHERE p.id = ?";
+
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $product_id);
 $stmt->execute();
 $result = $stmt->get_result();
 $product = $result->fetch_assoc();
+
+$img =  $product['image_path'];
 
 $stmt->close();
 $conn->close();
@@ -58,8 +64,17 @@ $conn->close();
 			</h1>
 			<div class="row">
 				<div class="col-md-6 mb-4">
-					<img src="https://via.placeholder.com/600x400/2D2D2D/FFFFFF/?text=Produktbild"
-						class="img-fluid rounded" alt="Produktbild">
+					<?php
+					if($img != NULL)
+					{
+						echo '<img src='.$img.' class="card-img-top" alt="' . $product['name'] . '">';
+					}
+					else{
+	
+						echo '<img src="https://via.placeholder.com/400x300/2D2D2D/FFFFFF/?text=' . $product['name'] . '" class="card-img-top" alt="' . $name . '">';
+					}
+					?>
+						
 				</div>
 				<div class="col-md-6 mb-4">
 					<div class="card h-100">
