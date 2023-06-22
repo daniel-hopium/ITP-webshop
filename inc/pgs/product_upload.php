@@ -83,7 +83,7 @@
       if (move_uploaded_file($_FILES['image']['tmp_name'], $imagePath)) {
         $sql = 'INSERT INTO products (seller_id, category_id, name, description, price) VALUES (?, ?, ?, ?, ?)';
         $stmt = $db_obj->prepare($sql);
-        $stmt->bind_param('isdi', $sellerId, $category_id, $name, $description, $price);
+        $stmt->bind_param('iissd', $sellerId, $category_id, $name, $description, $price);
         $stmt->execute();
 
         $productId = $db_obj->insert_id;

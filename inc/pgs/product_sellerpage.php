@@ -48,7 +48,7 @@
         }
 
         // Display the category selector
-        echo '<div class="mb-3">';
+        echo '<div class="m-3">';
         echo '<label for="category-select">Select Category:</label>';
         echo '<select class="form-control" id="category-select" onchange="changeCategory()">';
         echo '<option value="">All Categories</option>';
