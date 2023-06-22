@@ -39,10 +39,11 @@
       $destination = "zur Startseite weitergeleitet...";
       $destinationPage = "home.php";
     } elseif ($_GET['type'] == 'order_success') {
+      $id= $_GET['id'];
       $text1 = "Bestellung erfolgreich";
       $text2 = "";
       $destination = "zur Bestellübersicht weitergeleitet...";
-      $destinationPage = "order_status.php";
+      $destinationPage = "order_overview_details.php?id=".$id;
 
   }
 

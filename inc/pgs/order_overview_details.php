@@ -6,7 +6,7 @@
 
   <?php
   include '../includes/head.php';
-  if (!isset($_SESSION['username']) || ($_SESSION['username'] != 'admin')) {
+  if (!isset($_SESSION['username']) ) {
     header('Location: home.php');
   }
   require_once('../../config/dbaccess.php');
@@ -39,15 +39,23 @@ $connection = new mysqli($host, $user, $password, $database);
         echo '<h4 class="text-start">Order Date: ' . $order['order_date'] . '</h4>';
 
         // Display the select element for order status
-        echo '<form class="h4 col-9 d-flex align-items-center" method="POST">';
-echo '<label for="orderStatus" class=" col-4 text-start">Order Status:</label>';
-echo '<select class="form-select  " name="orderStatus" id="orderStatus">';
-echo '<option  value="pending" ' . ($order['status'] == 'pending' ? 'selected' : '') . '>Pending</option>';
-echo '<option value="in_progress" ' . ($order['status'] == 'in_progress' ? 'selected' : '') . '>In Progress</option>';
-echo '<option value="completed" ' . ($order['status'] == 'completed' ? 'selected' : '') . '>Completed</option>';
-echo '</select>';
-echo '<button type="submit" name="updateStatusBtn" class="btn col-3 btn-dark secondary-bg-color">Update Status</button>';
-echo '</form>';
+        if($role != 'customer')
+        {
+          echo '<form class="h4 col-9 d-flex align-items-center" method="POST">';
+  echo '<label for="orderStatus" class=" col-4 text-start">Order Status:</label>';
+  echo '<select class="form-select  " name="orderStatus" id="orderStatus">';
+  echo '<option  value="pending" ' . ($order['status'] == 'pending' ? 'selected' : '') . '>Pending</option>';
+  echo '<option value="in_progress" ' . ($order['status'] == 'in_progress' ? 'selected' : '') . '>In Progress</option>';
+  echo '<option value="completed" ' . ($order['status'] == 'completed' ? 'selected' : '') . '>Completed</option>';
+  echo '</select>';
+  echo '<button type="submit" name="updateStatusBtn" class="btn col-3 btn-dark secondary-bg-color">Update Status</button>';
+  echo '</form>';
+
+        }
+        else 
+        {
+          echo "<h4 class='h4 text-start'</h4>Order Status: " .$order['status'] ."</h4>";
+        }
 
 
         // Check if the form is submitted for updating the order status

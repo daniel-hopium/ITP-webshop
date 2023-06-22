@@ -23,6 +23,14 @@
 <body class="d-flex flex-column min-vh-100">
   <div class="container site-font-color">
     <div class="row mt-5 col-md-6">
+    <div class="card card-bg shadow-2-strong card-registration mt-3 p-2 flex-column "
+        style="border-radius: 15px; max-width: 600px;">
+        <div class="">
+        <a href="order_overview.php" target="">
+          <button class="btn btn-lg secondary-bg-color btn-block secondary-color col-12" >Meine Bestellungen</button>
+        </a>
+        </div>
+    </div>
       <div class="card card-bg shadow-2-strong card-registration mt-3 p-2 flex-column "
         style="border-radius: 15px; max-width: 600px;">
         <div class="col-md-6">

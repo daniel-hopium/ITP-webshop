@@ -65,6 +65,6 @@ function getNextFreeOrderID($connection) {
 
     
 }
-echo "<script>location.href='redirect_page.php?type=order_success'</script>";
+echo "<script>location.href='redirect_page.php?type=order_success&id=" . $orderid."'</script>";
 ?>
 

@@ -6,7 +6,7 @@
 
   <?php
         include '../includes/head.php';
-  if(!isset($_SESSION['username'])  || ($_SESSION['username'] != 'admin')) {
+  if(!isset($_SESSION['username']) ) {
       header('Location: home.php');
   }
   require_once('../../config/dbaccess.php');
@@ -25,9 +25,27 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Fetch data from the 'new_orders' table
-$sql = "SELECT * FROM new_orders GROUP BY orderid ORDER BY order_date DESC";
 
+// Fetch data from the 'new_orders' table
+if($role == 'administrator')
+{
+    $sql = "SELECT * FROM new_orders GROUP BY orderid ORDER BY order_date DESC";
+}
+else if($role == 'seller')
+{
+    $sql = "SELECT * FROM new_orders GROUP BY orderid ORDER BY order_date DESC";
+}
+else if($role == 'customer')
+{
+$username= $_SESSION['username'];
+
+$sql = "SELECT *
+FROM new_orders
+INNER JOIN users ON new_orders.buyer_email = users.useremail
+WHERE users.useremail = '$username'
+GROUP BY orderid
+ORDER BY order_date DESC";
+}
 
 $result = $conn->query($sql);
 
