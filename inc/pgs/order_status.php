@@ -58,43 +58,18 @@ function getProgressBarColor($status)
 <html lang="en">
 
 <head>
-<?php
-        include '../includes/head.php'; ?>
+    <?php
+    include '../includes/head.php';
+    ?>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bestellübersicht</title>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css"> -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script> -->
+    <!-- <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script> -->
 
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-promise/4.2.8/es6-promise.auto.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-control-geocoder/1.13.1/Control.Geocoder.js"></script>
-
-
-    <!-- Einbinden von Leaflet CSS und JS -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
-    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-
-
-
-    <!-- Wichtig!!! PROGRESS BAR -->
-    <style>
-        .progress-bar {
-            transition: width 2s;
-        }
-
-        .progress-bar.animated {
-            animation: progress-bar-stripes 2s linear infinite;
-        }
-
-        #map {
-            height: 400px;
-            width: 100%;
-        }
-    </style>
-
-   
 </head>
 
 <body>
@@ -114,20 +89,17 @@ function getProgressBarColor($status)
                     <tbody>
                         <?php
                         require_once('../../config/dbaccess.php');
-
-                        // Create connection
                         $conn = new mysqli($host, $user, $password, $database);
-                        // Check connection
                         if ($conn->connect_error) {
                             die("Connection failed: " . $conn->connect_error);
                         }
 
-                        // Select order status and product name from the database
+                        //order status and product name
                         $sql = "SELECT new_orders.id, products.name, products.price, new_orders.status FROM new_orders INNER JOIN products ON new_orders.product_id = products.id";
                         $result = $conn->query($sql);
 
                         if ($result->num_rows > 0) {
-                            // output data of each row
+                            //data of each row
                             while ($row = $result->fetch_assoc()) {
                                 echo "<tr data-id='{$row["id"]}' data-toggle='collapse' data-target='#collapse-{$row["id"]}' class='accordion-toggle'>";
                                 echo "<td>" . $row["id"] . "</td>";
@@ -138,19 +110,17 @@ function getProgressBarColor($status)
                                 echo "<td colspan='6' class='hiddenRow'>";
                                 echo "<div class='accordian-body collapse' id='collapse-{$row["id"]}'>";
 
-                                // additional information
+                                //information
                                 echo "<p>Produkt: " . $row["name"] . "</p>";
                                 echo "<p>Preis: " . $row["price"] . "</p>";
                                 echo "<p>Status: " . $row["status"] . "</p>";
                                 if ($row["status"] == "pending" || $row["status"] == "processing") {
-                                    echo "<button id='cancelButton-{$row["id"]}' class='btn btn-danger mb-1'>Bestellung Stornieren</button>";
+                                    echo "<button id='cancelButton-{$row["id"]}' class='btn btn-danger mb-3'>Bestellung Stornieren</button>";
                                 }
-                                if ($row["status"] == "shipped" || $row["status"] == "delivered") {
-                                    echo "<button id='mapButton-{$row["id"]}' class='btn btn-success mb-1'>Auf Karte anzeigen</button>";
-                                }
-                                // progress bar
-                                echo "<div class='progress'>";
-                                echo "<div id='progress-{$row["id"]}' class='progress-bar progress-bar-striped progress-bar-animated bg-" . getProgressBarColor($row["status"]) . "' role='progressbar' style='width: " . getStatusPercentage($row["status"]) . "%' aria-valuenow='" . getStatusPercentage($row["status"]) . "' aria-valuemin='0' aria-valuemax='100'></div>";
+                                //progress bar
+                                $progressValue = getStatusPercentage($row["status"]);
+                                echo "<div class='progress mb-3'>";
+                                echo "<div id='progress-{$row["id"]}' class='progress-bar progress-bar-striped progress-bar-animated bg-" . getProgressBarColor($row["status"]) . "' role='progressbar' style='width: {$progressValue}%' aria-valuenow='{$progressValue}' aria-valuemin='0' aria-valuemax='100'></div>";
                                 echo "</div>";
 
                                 echo "</div>";
@@ -160,40 +130,23 @@ function getProgressBarColor($status)
                         } else {
                             echo "0 results";
                         }
-
                         $conn->close();
-
-
                         ?>
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
-
-    <div class="modal fade" id="mapModal" tabindex="-1" aria-labelledby="mapModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="mapModalLabel">Karte anzeigen</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div id="map"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-
 </body>
+
 <script>
     const statuses = ["pending", "processing", "shipped", "delivered", "cancelled"];
     let currentStatus = 0;
-
     let selectedOrderId = null;
 
-    $("table tr").click(function() {
-        selectedOrderId = $(this).data("id");
+    $(".badge").click(function(event) {
+        event.stopPropagation(); //prvent accordion toggle
+        selectedOrderId = $(this).closest('tr').data('id');
         console.log(selectedOrderId);
     });
 
@@ -212,7 +165,6 @@ function getProgressBarColor($status)
             }
         });
     });
-
 
     document.getElementById("statusButton").addEventListener("click", () => {
         if (selectedOrderId !== null) {
@@ -239,49 +191,10 @@ function getProgressBarColor($status)
             }
         });
     }
-    let map;
-    let geocoder = L.Control.Geocoder.nominatim();
-
-    $("button[id^='mapButton']").click(function() {
-        $('#mapModal').modal('show');
-    });
-
-    $('#mapModal').on('shown.bs.modal', function() {
-        var mapHeight = $('#mapModal .modal-body').height();
-
-        if (map != undefined) {
-            map.remove();
-        }
-
-        map = L.map('map').setView([48.2082, 16.3738], 13);
-
-        $('#map').height(mapHeight);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19,
-        }).addTo(map);
-        map.invalidateSize();
-
-        // Punkt A
-        var addressA = "Höchstädtpl. 6, 1200 Wien";
-        geocoder.geocode(addressA, function(results) {
-            var latLng = results[0].center;
-            var markerA = L.marker(latLng).addTo(map);
-            markerA.bindPopup('Punkt A: ' + addressA).openPopup();
-        });
-
-        // Punkt B
-        var addressB = "Siccardsburggasse 27, 1100 Wien";
-        geocoder.geocode(addressB, function(results) {
-            var latLng = results[0].center;
-            var markerB = L.marker(latLng).addTo(map);
-            markerB.bindPopup('Punkt B: ' + addressB).openPopup();
-        });
-    });
 </script>
 
 <?php
 include '../includes/footer.php';
 ?>
-
 
 </html>

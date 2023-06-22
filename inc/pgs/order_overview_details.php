@@ -6,7 +6,7 @@
 
   <?php
   include '../includes/head.php';
-  if (!isset($_SESSION['username']) ) {
+  if (!isset($_SESSION['username'])) {
     header('Location: home.php');
   }
   require_once('../../config/dbaccess.php');
@@ -26,8 +26,8 @@ $connection = new mysqli($host, $user, $password, $database);
     if (isset($_GET['id'])) {
       $orderId = $_GET['id'];
 
-      // Query to fetch the order from the database
-      $query = "SELECT * FROM new_orders WHERE orderid = $orderId";
+      //Query heee
+      $query = "SELECT new_orders.orderid, users.username, new_orders.order_date, new_orders.status, new_orders.quantity, new_orders.total_price FROM new_orders JOIN users ON new_orders.user_id = users.id WHERE new_orders.orderid = $orderId";
 
       $result = mysqli_query($connection, $query);
 
@@ -35,26 +35,23 @@ $connection = new mysqli($host, $user, $password, $database);
         $order = mysqli_fetch_assoc($result);
 
         echo '<h2 class="text-start">Order ID: ' . $order['orderid'] . '</h2>';
-        echo '<h4 class="text-start">Customer Name: ' . $order['buyer_name'] . '</h4>';
+        echo '<h4 class="text-start">Username: ' . $order['username'] . '</h4>';
         echo '<h4 class="text-start">Order Date: ' . $order['order_date'] . '</h4>';
 
-        // Display the select element for order status
-        if($role != 'customer')
-        {
-          echo '<form class="h4 col-9 d-flex align-items-center" method="POST">';
-  echo '<label for="orderStatus" class=" col-4 text-start">Order Status:</label>';
-  echo '<select class="form-select  " name="orderStatus" id="orderStatus">';
-  echo '<option  value="pending" ' . ($order['status'] == 'pending' ? 'selected' : '') . '>Pending</option>';
-  echo '<option value="in_progress" ' . ($order['status'] == 'in_progress' ? 'selected' : '') . '>In Progress</option>';
-  echo '<option value="completed" ' . ($order['status'] == 'completed' ? 'selected' : '') . '>Completed</option>';
-  echo '</select>';
-  echo '<button type="submit" name="updateStatusBtn" class="btn col-3 btn-dark secondary-bg-color">Update Status</button>';
-  echo '</form>';
 
-        }
-        else 
-        {
-          echo "<h4 class='h4 text-start'</h4>Order Status: " .$order['status'] ."</h4>";
+        // Display the select element for order status
+        if ($role != 'customer') {
+          echo '<form class="h4 col-9 d-flex align-items-center" method="POST">';
+          echo '<label for="orderStatus" class=" col-4 text-start">Order Status:</label>';
+          echo '<select class="form-select  " name="orderStatus" id="orderStatus">';
+          echo '<option  value="pending" ' . ($order['status'] == 'pending' ? 'selected' : '') . '>Pending</option>';
+          echo '<option value="in_progress" ' . ($order['status'] == 'in_progress' ? 'selected' : '') . '>In Progress</option>';
+          echo '<option value="completed" ' . ($order['status'] == 'completed' ? 'selected' : '') . '>Completed</option>';
+          echo '</select>';
+          echo '<button type="submit" name="updateStatusBtn" class="btn col-3 btn-dark secondary-bg-color">Update Status</button>';
+          echo '</form>';
+        } else {
+          echo "<h4 class='h4 text-start'</h4>Order Status: " . $order['status'] . "</h4>";
         }
 
 

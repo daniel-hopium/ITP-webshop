@@ -108,3 +108,12 @@ nav {
 
   font-size: 22px;
 }
+
+/* Progress Bar */
+.progress-bar {
+  transition: width 2s;
+}
+
+.progress-bar.animated {
+  animation: progress-bar-stripes 2s linear infinite;
+}
