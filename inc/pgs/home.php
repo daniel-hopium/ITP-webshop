@@ -13,7 +13,7 @@
     require_once('../../config/dbaccess.php');
 
 	$db_obj = new mysqli($host, $user, $password, $database);
-    $sql = "SELECT * FROM blog_news ORDER BY ID DESC LIMIT 3";
+    $sql = "SELECT * FROM blog_news ORDER BY ID DESC LIMIT 2";
     $result = $db_obj->query($sql);
     
     $blog_ids = [];
@@ -23,7 +23,7 @@
     }
     
     // Keep only the first three IDs
-    $blog_ids = array_slice($blog_ids, 0, 3);
+    $blog_ids = array_slice($blog_ids, 0, 2);
     ?>
 
 <body class="d-flex flex-column min-vh-100">
@@ -67,16 +67,16 @@
                 <div id="carousel2" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <a href="newsBlog_user.php?id=<?php echo $blog_ids[2]; ?>">
+                            <a href="newsBlog_user.php?id=<?php echo $blog_ids[1]; ?>">
                                 <img src="../../res/img/sale3.jpg" class="d-block w-100" alt="Image 4">
                             </a>
                         </div>
-                        <a href="newsBlog_user.php?id=<?php echo $blog_ids[2]; ?>">
+                        <a href="newsBlog_user.php?id=<?php echo $blog_ids[1]; ?>">
                             <div class="carousel-item">
                                 <img src="../../res/img/sale3.jpg" class="d-block w-100" alt="Image 5">
                         </a>
                     </div>
-                    <a href="newsBlog_user.php?id=<?php echo $blog_ids[2]; ?>">
+                    <a href="newsBlog_user.php?id=<?php echo $blog_ids[1]; ?>">
                         <div class="carousel-item">
                             <img src="../../res/img/sale3.jpg" class="d-block w-100" alt="Image 6">
                     </a>
@@ -97,26 +97,26 @@
 
     <h2 class="h2 mt-4">NEUANKÖMMLINGE</h2>
     <div class="col-md-12 ">
-    <div id="carousel1" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-inner">
-        <div class="carousel-item active">
-            <a href="prod_details.php?id=69">
-                <img src="../../res/img/new-1.jpg" class="d-block w-100" alt="Image 1">
-                <div class="carousel-caption h5">
-                    Der neue Retro Look des Monitor 15 begeistert die Welt
+        <div id="carousel1" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <a href="prod_details.php?id=69">
+                        <img src="../../res/img/new-1.jpg" class="d-block w-100" alt="Image 1">
+                        <div class="carousel-caption h5">
+                            Der neue Retro Look des Monitor 15 begeistert die Welt
+                        </div>
+                    </a>
                 </div>
-            </a>
-        </div>
-        <div class="carousel-item">
-            <a href="prod_details.php?id=63">
-                <img src="../../res/img/dog.jpg" class="d-block w-100" alt="Image 2">
-                <div class="carousel-caption h5">
-                   Das neue IPad Pro 12 jetzt bei uns erhältlich!
+                <div class="carousel-item">
+                    <a href="prod_details.php?id=63">
+                        <img src="../../res/img/dog.jpg" class="d-block w-100" alt="Image 2">
+                        <div class="carousel-caption h5">
+                            Das neue IPad Pro 12 jetzt bei uns erhältlich!
+                        </div>
+                    </a>
                 </div>
-            </a>
+            </div>
         </div>
-    </div>
-</div>
 
 
 
