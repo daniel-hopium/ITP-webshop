@@ -22,7 +22,6 @@
     }
 
     header {
-
         background-color: hsla(210, 75%, 20%, 0.353);
         color: black;
         padding: 20px;
@@ -48,6 +47,8 @@
         background-color: #fff;
         box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
         border-radius: 4px;
+        display: flex;
+        flex-direction: column;
     }
 
     .blog-post h2 {
@@ -70,9 +71,9 @@
     }
 
     .blog-post .read-more {
+        margin-top: auto;
         display: block;
         text-align: right;
-        margin-top: 20px;
         text-decoration: none;
         color: #333;
         font-size: 1rem;
@@ -156,7 +157,7 @@
 </head>
 
 <body>
-    
+
     <header>
         <h1 class="text-center">News Blog</h1>
     </header>
@@ -164,18 +165,18 @@
         <?php
         require_once('../../config/dbaccess.php');
 
-	$db_obj = new mysqli($host, $user, $password, $database);
+        $db_obj = new mysqli($host, $user, $password, $database);
 
-	$sql = "SELECT * FROM blog_news ORDER BY ID DESC";
-	$result = $db_obj->query($sql);
+        $sql = "SELECT * FROM blog_news ORDER BY ID DESC";
+        $result = $db_obj->query($sql);
 
-	while ($row = $result->fetch_assoc()) {
-		$id = $row["id"]; // Fetch the ID from the database
-		$field1name = $row["created"];
-		$field2name = $row["title"];
-		$field3name = $row["content"];
-		$imageData = base64_encode($row["image"]);
-	?>
+        while ($row = $result->fetch_assoc()) {
+            $id = $row["id"]; // Fetch the ID from the database
+            $field1name = $row["created"];
+            $field2name = $row["title"];
+            $field3name = $row["content"];
+            $imageData = base64_encode($row["image"]);
+        ?>
         <div class="blog-post">
             <h2><?php echo $field2name; ?></h2>
             <div class="blog-post-meta"><?php echo $field1name; ?></div>
@@ -203,8 +204,8 @@
             </div>
         </div>
         <?php
-	}
-	?>
+        }
+        ?>
     </main>
 
     <?php include '../includes/footer.php'; ?>
@@ -248,18 +249,12 @@
         }
     }
     window.onload = function() {
-        // Get the id parameter from URL
         var urlParams = new URLSearchParams(window.location.search);
         var id = urlParams.get('id');
 
-        // If there's an id in the URL
         if (id) {
-            // Get the element with the id same as the URL parameter
             var targetModal = document.getElementById(id);
-
-            // If the element exists
             if (targetModal) {
-                // Show the modal
                 targetModal.style.display = 'block';
             }
         }
