@@ -25,11 +25,16 @@ if ($conn->connect_error) {
     die("Verbindung zur Datenbank fehlgeschlagen: " . $conn->connect_error);
 }
 
+$seller_id = $_SESSION['seller_id'];
 // Monatliche Verkäufe der letzten 12 Monate abrufen
-$monthlySalesQuery = "SELECT DATE_FORMAT(order_date, '%Y-%m') AS month, SUM(total_price) AS total_sales
-                     FROM new_orders
-                     WHERE order_date >= DATE_SUB(CURDATE(), INTERVAL 12 MONTH)
-                     GROUP BY DATE_FORMAT(order_date, '%Y-%m')";
+$monthlySalesQuery = 
+"SELECT DATE_FORMAT(order_date, '%Y-%m') AS month, SUM(total_price) AS total_sales
+FROM new_orders
+INNER JOIN products ON new_orders.product_id = products.id
+WHERE order_date >= DATE_SUB(CURDATE(), INTERVAL 12 MONTH)
+AND products.seller_id = $seller_id
+GROUP BY DATE_FORMAT(order_date, '%Y-%m')";
+
 
 $monthlySalesResult = $conn->query($monthlySalesQuery);
 $monthlySalesData = array();
@@ -42,9 +47,11 @@ while ($row = $monthlySalesResult->fetch_assoc()) {
 
 // Tägliche Verkäufe der letzten 30 Tage abrufen
 $dailySalesQuery = "SELECT DATE(order_date) AS day, SUM(total_price) AS total_sales
-                   FROM new_orders
-                   WHERE order_date >= DATE_SUB(CURDATE(), INTERVAL 30 DAY)
-                   GROUP BY DATE(order_date)";
+FROM new_orders
+INNER JOIN products ON new_orders.product_id = products.id
+WHERE order_date >= DATE_SUB(CURDATE(), INTERVAL 30 DAY)
+AND products.seller_id = $seller_id
+GROUP BY DATE(order_date)";
 
 $dailySalesResult = $conn->query($dailySalesQuery);
 $dailySalesData = array();
@@ -57,10 +64,12 @@ while ($row = $dailySalesResult->fetch_assoc()) {
 
 // Tägliche Verkäufe der letzten 30 Tage abrufen
 $dailySalesQueryYear = "SELECT DATE(order_date) AS day, SUM(total_price) AS total_sales
-                       FROM new_orders
-                       WHERE order_date >= DATE_SUB(CURDATE(), INTERVAL 365 DAY)
-                       GROUP BY DATE(order_date)
-                       ORDER BY DATE(order_date)";
+FROM new_orders
+INNER JOIN products ON new_orders.product_id = products.id
+WHERE order_date >= DATE_SUB(CURDATE(), INTERVAL 365 DAY)
+AND products.seller_id = $seller_id
+GROUP BY DATE(order_date)
+ORDER BY DATE(order_date)";
 
 $dailySalesResultYear = $conn->query($dailySalesQueryYear);
 $dailySalesDataYear = array();
@@ -112,20 +121,22 @@ while ($row = $dailySalesResultYear->fetch_assoc()) {
     <div id="monthly-sales" class="bg-light border border-black p-1 my-1" style="display: none;">
       <h1 class="h3 text-start">Monatliche Verkäufe</h1>
       <div>
-        <canvas id="monthly-sales-chart" style="height: 200px; width: 100%;"></canvas>
+        <canvas id="monthly-sales-chart" style="height: 100px; width: 100%;"></canvas>
       </div>
     </div>
 
     <div id="daily-sales" class="bg-light border border-black p-1 my-1" style="display: none;">
       <h1 class="h3 text-start mt-4">Täglich Verkäufe im Jänner</h1>
       <div>
-        <canvas id="myChart2" style="height: 200px; width: 100%;"></canvas>
+        <canvas id="myChart2" style="height: 100px; width: 100%;"></canvas>
+      </div>
       </div>
 
       <div id="yearly-sales" class="bg-light border border-black p-1 my-1" style="display: none;">
       <h1 class="h3 text-start mt-4">Tägliche Verkäufe Jahresübersicht</h1>
       <div>
-      <canvas id="myChart3" style="height: 200px; width: 100%;"></canvas>
+      <canvas id="myChart3" style="height: 100px; width: 100%;"></canvas>
+    </div>
     </div>
 
 

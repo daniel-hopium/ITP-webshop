@@ -97,21 +97,27 @@
 
     <h2 class="h2 mt-4">NEUANKÖMMLINGE</h2>
     <div class="col-md-12 ">
-        <div id="carousel1" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <a href="newsBlog_user.php?id=<?php echo $blog_ids[2]; ?>">
-                        <img src="../../res/img/new-1.jpg" class="d-block w-100" alt="Image 1">
-                    </a>
+    <div id="carousel1" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <a href="prod_details.php?id=69">
+                <img src="../../res/img/new-1.jpg" class="d-block w-100" alt="Image 1">
+                <div class="carousel-caption h5">
+                    Der neue Retro Look des Monitor 15 begeistert die Welt
                 </div>
-                <div class="carousel-item">
-                    <a href="newsBlog_user.php?id=<?php echo $blog_ids[2]; ?>">
-                        <img src="../../res/img/dog.jpg" class="d-block w-100" alt="Image 2">
-                    </a>
-                </div>
-            </div>
-
+            </a>
         </div>
+        <div class="carousel-item">
+            <a href="prod_details.php?id=63">
+                <img src="../../res/img/dog.jpg" class="d-block w-100" alt="Image 2">
+                <div class="carousel-caption h5">
+                   Das neue IPad Pro 12 jetzt bei uns erhältlich!
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+
 
 
         <h2 class="h2 mt-4">EMPFEHLUNGEN FÜR SIE</h2>
@@ -122,22 +128,22 @@
                 <div class="carousel-item active">
                     <div class="row">
                         <div class="col-md-3">
-                            <a href="newsBlog_user.php">
+                            <a href="prod_details.php?id=62">
                                 <img src="../../res/img/laptop-1.jpg" class="img-fluid" alt="Image 1">
                             </a>
                         </div>
                         <div class="col-md-3">
-                            <a href="newsBlog_user.php">
+                            <a href="prod_details.php?id=71">
                                 <img src="../../res/img/laptop-2.jpg" class="img-fluid" alt="Image 1">
                             </a>
                         </div>
                         <div class="col-md-3">
-                            <a href="newsBlog_user.php">
+                            <a href="prod_details.php?id=70">
                                 <img src="../../res/img/laptop-3.jpg" class="img-fluid" alt="Image 1">
                             </a>
                         </div>
                         <div class="col-md-3">
-                            <a href="newsBlog_user.php">
+                            <a href="prod_details.php?id=69">
                                 <img src="../../res/img/monitor-1.jpg" class="img-fluid" alt="Image 1">
                             </a>
                         </div>
@@ -146,22 +152,22 @@
                 <div class="carousel-item">
                     <div class="row">
                         <div class="col-md-3">
-                            <a href="newsBlog_user.php">
+                            <a href="prod_details.php?id=63">
                                 <img src="../../res/img/tablet-1.jpg" class="img-fluid" alt="Image 1">
                             </a>
                         </div>
                         <div class="col-md-3">
-                            <a href="newsBlog_user.php">
+                            <a href="prod_details.php?id=65">
                                 <img src="../../res/img/tablet-2.jpg" class="img-fluid" alt="Image 1">
                             </a>
                         </div>
                         <div class="col-md-3">
-                            <a href="newsBlog_user.php">
+                            <a href="prod_details.php?id=64">
                                 <img src="../../res/img/tablet-3.jpg" class="img-fluid" alt="Image 1">
                             </a>
                         </div>
                         <div class="col-md-3">
-                            <a href="newsBlog_user.php">
+                            <a href="prod_details.php?id=67">
                                 <img src="../../res/img/printer-1.jpg" class="img-fluid" alt="Image 1">
                             </a>
                         </div>
