@@ -5,13 +5,13 @@
   <title>Verkaufssübersicht</title>
 
   <?php
-  include '../includes/head.php';
   if(($role != 'seller')) {
-    var_dump($role);
-    //header('Location: home.php');
+    
+    header('Location: home.php');
     exit();
     
   }
+  include '../includes/head.php';
   require_once('../../config/dbaccess.php');
   ?>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

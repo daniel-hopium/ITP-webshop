@@ -44,6 +44,13 @@
               <label for="price" class="form-label">Price:</label>
               <input type="number" name="price" step="0.01" class="form-control" required>
             </div>
+            <?php if($role == "administrator")
+            echo "
+            <div class='mb-3'>
+              <label for='sellerid' class='form-label'>Seller ID:</label>
+              <input type='number' name='sellerid' step='0.01' class='form-control' required>
+            </div>
+            " ?>
             <div class="mb-3">
               <label for="category_id" class="form-label">Category:</label>
               <select name="category_id" class="form-select" required>
@@ -72,7 +79,9 @@
   <?php
   // Process the form data and insert the product into the database
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $sellerId = $currentUser['seller_id'];
+
+    $role == "administrator"? $sellerId = $_POST['sellerid']:  $sellerId = $currentUser['seller_id'];
+    
     $name = $_POST['name'];
     $description = $_POST['description'];
     $price = $_POST['price'];

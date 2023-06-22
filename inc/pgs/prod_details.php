@@ -17,8 +17,11 @@ $stmt->bind_param("i", $product_id);
 $stmt->execute();
 $result = $stmt->get_result();
 $product = $result->fetch_assoc();
-
 $img =  $product['image_path'];
+$stock= intval($product['Stock']);
+
+
+
 
 $stmt->close();
 $conn->close();
@@ -71,7 +74,7 @@ $conn->close();
 					}
 					else{
 	
-						echo '<img src="https://via.placeholder.com/400x300/2D2D2D/FFFFFF/?text=' . $product['name'] . '" class="card-img-top" alt="' . $name . '">';
+						echo '<img src="https://via.placeholder.com/400x300/2D2D2D/FFFFFF/?text=' . $product['name'] . '" class="card-img-top" alt="' . $product['name'] . '">';
 					}
 					?>
 						
@@ -94,24 +97,30 @@ $conn->close();
                                 // Calculate the discounted price
                                 $discountedPrice = $product['price'] - ($product['price'] * $discount / 100);
                                 
+
+
                                 echo number_format($discountedPrice, 2, ',', '.');
                                 ?>
 								€
 							</p>
 
 
+							
 							<div class="input-group mb-3">
 								<label class="input-group-text" for="quantity">Quantity:</label>
 								<input type="number" class="form-control" id="quantity" name="quantity" min="1"
-									value="1">
+									<?php echo $stock ==  0 ?  "value='0' disabled" :  "value='1'"; ?> max="<?php echo $stock; ?>" >
 							</div>
 							<input type="hidden" name="user_id"
 								value="<?php echo $user_id; ?>">
 							<input type="hidden" name="product_id"
 								value="<?php echo $product['id']; ?>">
+							<?php echo $stock == 0 ? " <button type='submit' class='btn secondary-bg-color btn-block secondary-color disabled'>Ausverkauft</button>" 
+							:
 
-							<button type="submit" class="btn secondary-bg-color btn-block secondary-color">In den Warenkorb</button>
-
+							" <button type='submit' class='btn secondary-bg-color btn-block secondary-color '>In den Warenkorb</button>";
+							?> 
+							
 						</div>
 					</div>
 				</div>

@@ -79,7 +79,6 @@ include '../../config/check_shoppingcart_amount.php';
                         <li><a href='product_adminpage.php' class='dropdown-item'>Produktverwaltung</a></li>
                         <li><a href='product_upload.php' class='dropdown-item'>Produktupload</a></li>
                         <li><a href='finance_overview.php' class='dropdown-item'>Finanzübersicht</a></li>
-                        <li><a href='finance_overview_seller.php' class='dropdown-item'>Verkaufsübersicht</a></li>
                         <li><a href='user_overview.php' class='dropdown-item'>Userverwaltung</a></li>
                         <li><a href='contact_overview.php' class='dropdown-item'>Anfragenverwaltung</a></li>
                         <li><a href='order_overview.php' class='dropdown-item'>Bestellübersicht</a></li>

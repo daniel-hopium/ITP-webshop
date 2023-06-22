@@ -95,7 +95,7 @@ while ($row = mysqli_fetch_assoc($result)) {
 
             // SQL-Abfrage zum Abrufen der Produkte aus der Datenbank
                 
-            $sql = "SELECT p.id, p.name, p.description, p.price, p.Discount, pi.image_path
+            $sql = "SELECT p.id, p.name, p.description, p.price, p.Discount, p.Stock, pi.image_path
             FROM products p
             LEFT JOIN product_images pi ON p.id = pi.product_id
             WHERE p.category_id = $category_id";
@@ -107,6 +107,7 @@ while ($row = mysqli_fetch_assoc($result)) {
                 $description = $row['description'];
                 $price = $row['price'];
                 $img = $row['image_path'];
+                $stock = intval($row['Stock']);
                 
                 // Retrieve the discount value from the same table
                 $discount = $row['Discount'];
@@ -131,10 +132,16 @@ while ($row = mysqli_fetch_assoc($result)) {
                 echo '<a href="prod_details.php?id=' . @$id . '" class="btn secondary-bg-color btn-block secondary-color ms-auto">Details ansehen</a>';
                 echo '<div class="input-group my-1">';
                 echo '<label class="input-group-text" for="quantity-' . $id . '">Quantity:</label>';
-                echo '<input type="number" class="form-control" id="quantity-' . $id . '" name="quantity" min="1" value="1">';
+                echo $stock == 0 ? 
+                '<input type="number" class="form-control" id="quantity-' . $id . '" name="quantity" min="1" value="0" disabled>'
+                :
+                 '<input type="number" class="form-control" id="quantity-' . $id . '" name="quantity" min="1" value="1" max='.$stock.'>';
                 echo '</div>';
                 echo '<input type="hidden" name="product_id" value="' . $id . '">';
-                echo '<button type="submit" class="btn secondary-bg-color btn-block secondary-color">Add to Cart</button>';
+                echo $stock == 0 ? 
+                '<button type="submit" class="btn secondary-bg-color btn-block secondary-color disabled">Ausverkauft</button>'
+                :
+                '<button type="submit" class="btn secondary-bg-color btn-block secondary-color">Zum Warenkorb hinzufügen</button>';
                 echo '</form>';
                 echo '<span class="text-end">€ ' . number_format($discountedPrice, 2, ',', '.') . '</span>'; // Display the discounted price
                 echo '</div></div></div>';
@@ -145,7 +152,7 @@ while ($row = mysqli_fetch_assoc($result)) {
             // Keine Kategorie-ID übergeben, alle Produkte anzeigen
             // SQL-Abfrage zum Abrufen der Produkte aus der Datenbank
                 
-            $sql = "SELECT p.id, p.name, p.description, p.price, p.Discount, pi.image_path
+            $sql = "SELECT p.id, p.name, p.description, p.price, p.Discount, p.Stock, pi.image_path
             FROM products p
             LEFT JOIN product_images pi ON p.id = pi.product_id";
             $result = mysqli_query($connection, $sql);
@@ -157,6 +164,8 @@ while ($row = mysqli_fetch_assoc($result)) {
                 $description = $row['description'];
                 $price = $row['price'];
                 $img = $row['image_path'];
+                $stock = intval($row['Stock']);
+                
                 
                 // Retrieve the discount value from the same table
                 $discount = $row['Discount'];
@@ -181,10 +190,16 @@ while ($row = mysqli_fetch_assoc($result)) {
                 echo '<a href="prod_details.php?id=' . @$id . '" class="btn secondary-bg-color btn-block secondary-color ms-auto">Details ansehen</a>';
                 echo '<div class="input-group my-1">';
                 echo '<label class="input-group-text" for="quantity-' . $id . '">Quantity:</label>';
-                echo '<input type="number" class="form-control" id="quantity-' . $id . '" name="quantity" min="1" value="1">';
+                echo $stock == 0 ? 
+                '<input type="number" class="form-control" id="quantity-' . $id . '" name="quantity" min="1" value="0" disabled>'
+                :
+                 '<input type="number" class="form-control" id="quantity-' . $id . '" name="quantity" min="1" value="1" max='.$stock.'>';
                 echo '</div>';
                 echo '<input type="hidden" name="product_id" value="' . $id . '">';
-                echo '<button type="submit" class="btn secondary-bg-color btn-block secondary-color">Add to Cart</button>';
+                echo $stock == 0 ? 
+                '<button type="submit" class="btn secondary-bg-color btn-block secondary-color disabled">Ausverkauft</button>'
+                :
+                '<button type="submit" class="btn secondary-bg-color btn-block secondary-color">Zum Warenkorb hinzufügen</button>';
                 echo '</form>';
                 echo '<span class="text-end">€ ' . number_format($discountedPrice, 2, ',', '.') . '</span>'; // Display the discounted price
                 echo '</div></div></div>';
