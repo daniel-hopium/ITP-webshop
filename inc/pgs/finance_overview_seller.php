@@ -5,9 +5,12 @@
   <title>Verkaufssübersicht</title>
 
   <?php
-        include '../includes/head.php';
-  if(!isset($_SESSION['username'])  || ($_SESSION['username'] != 'admin')) {
-      header('Location: home.php');
+  include '../includes/head.php';
+  if(($role != 'seller')) {
+    var_dump($role);
+    //header('Location: home.php');
+    exit();
+    
   }
   require_once('../../config/dbaccess.php');
   ?>

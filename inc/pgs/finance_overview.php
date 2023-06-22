@@ -5,10 +5,12 @@
   <title>Finanzübersicht</title>
 
   <?php
-        include '../includes/head.php';
-  if(!isset($_SESSION['username'])  || ($_SESSION['username'] != 'admin')) {
-      header('Location: home.php');
+  include '../includes/head.php';
+  if(($role != 'administrator')) {
+    header('Location: home.php');
+    exit();
   }
+  
   require_once('../../config/dbaccess.php');
   ?>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

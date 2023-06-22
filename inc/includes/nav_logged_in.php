@@ -96,7 +96,7 @@ include '../../config/check_shoppingcart_amount.php';
                     <ul class='dropdown-menu' aria-labelledby='navbarDropdown1'>
                         <li><a href='product_sellerpage.php' class='dropdown-item'>Produktverwaltung</a></li>
                         <li><a href='product_upload.php' class='dropdown-item'>Produktupload</a></li>
-                        <li><a href='finance_overview.php' class='dropdown-item'>Finanzübersicht</a></li>
+                        <li><a href='finance_overview_seller.php' class='dropdown-item'>Verkaufsübersicht</a></li>
                     </ul>
                 </li>";
             }
