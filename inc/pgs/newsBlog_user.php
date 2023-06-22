@@ -22,8 +22,9 @@
     }
 
     header {
-        background-color: #333;
-        color: #fff;
+
+        background-color: hsla(210, 75%, 20%, 0.353);
+        color: black;
         padding: 20px;
     }
 
@@ -127,18 +128,12 @@
     }
 
     .back-button {
-        background-color: #333;
-        color: #fff;
         border: none;
         padding: 10px 20px;
         border-radius: 4px;
         font-size: 1rem;
         cursor: pointer;
         transition: background-color 0.2s;
-    }
-
-    .back-button:hover {
-        background-color: #555;
     }
 
     .close-btn {
@@ -161,8 +156,9 @@
 </head>
 
 <body>
+    
     <header>
-        <h1>News Blog</h1>
+        <h1 class="text-center">News Blog</h1>
     </header>
     <main>
         <?php
@@ -202,7 +198,7 @@
                     <br>
                     <br>
                     <p><?php echo $field3name; ?></p>
-                    <button class="back-button">Back</button>
+                    <button class="back-button btn btn-lg secondary-bg-color btn-block secondary-color">Back</button>
                 </div>
             </div>
         </div>

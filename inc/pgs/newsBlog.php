@@ -48,7 +48,7 @@
             <br>
             <br>
 
-            <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" name="submit" class="btn btn-lg secondary-bg-color btn-block secondary-color">Submit</button>
         </form>
 
         <div id="articles-container"></div>
