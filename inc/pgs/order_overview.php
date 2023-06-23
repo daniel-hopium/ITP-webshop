@@ -10,6 +10,24 @@
         header('Location: home.php');
     }
     require_once('../../config/dbaccess.php');
+
+    function getStatusBadgeColor($status)
+    {
+        switch ($status) {
+            case "pending":
+                return "primary";
+            case "in_progress":
+                return "warning";
+            case "shipped":
+                return "info";
+            case "completed":
+                return "success";
+            case "cancelled":
+                return "danger";
+            default:
+                return "secondary";
+        }
+    }
     ?>
 </head>
 
@@ -73,13 +91,14 @@
                     echo '<td>' . $order['id'] . '</td>';
                     echo '<td>' . $order['username'] . '</td>';
                     echo '<td>' . $order['order_date'] . '</td>';
-                    echo '<td>' . $order['status'] . '</td>';
+                    echo '<td><span class="badge bg-' . getStatusBadgeColor($order['status']) . '">' . $order['status'] . '</span></td>';
                     echo '<td><a href="order_overview_details.php?id=' . $order['id'] . '" class="btn btn-dark secondary-bg-color ">View Details</a></td>';
                     echo '</tr>';
                 }
                 ?>
             </tbody>
         </table>
+
 
     </div>
 

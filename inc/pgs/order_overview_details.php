@@ -10,6 +10,42 @@
     header('Location: home.php');
   }
   require_once('../../config/dbaccess.php');
+
+  function getStatusPercentage($status)
+  {
+    switch ($status) {
+      case "pending":
+        return 25;
+      case "in_progress":
+        return 50;
+      case "shipped":
+        return 75;
+      case "completed":
+        return 100;
+      case "cancelled":
+        return 100;
+      default:
+        return 0;
+    }
+  }
+
+  function getProgressBarColor($status)
+  {
+    switch ($status) {
+      case "pending":
+        return "primary";
+      case "in_progress":
+        return "warning";
+      case "shipped":
+        return "info";
+      case "completed":
+        return "success";
+      case "cancelled":
+        return "danger";
+      default:
+        return "secondary";
+    }
+  }
   ?>
 
 </head>
@@ -46,7 +82,9 @@ $connection = new mysqli($host, $user, $password, $database);
           echo '<select class="form-select  " name="orderStatus" id="orderStatus">';
           echo '<option  value="pending" ' . ($order['status'] == 'pending' ? 'selected' : '') . '>Pending</option>';
           echo '<option value="in_progress" ' . ($order['status'] == 'in_progress' ? 'selected' : '') . '>In Progress</option>';
+          echo '<option value="shipped" ' . ($order['status'] == 'shipped' ? 'selected' : '') . '>Shipped</option>';
           echo '<option value="completed" ' . ($order['status'] == 'completed' ? 'selected' : '') . '>Completed</option>';
+          echo '<option value="cancelled" ' . ($order['status'] == 'cancelled' ? 'selected' : '') . '>Cancelled</option>';
           echo '</select>';
           echo '<button type="submit" name="updateStatusBtn" class="btn col-3 btn-dark secondary-bg-color">Update Status</button>';
           echo '</form>';
@@ -87,12 +125,22 @@ $connection = new mysqli($host, $user, $password, $database);
         } else {
           echo '<tr><td colspan="3">No products found for this order.</td></tr>';
         }
-
         echo '</tbody>';
         echo '</table>';
       } else {
         echo '<p>Order not found.</p>';
       }
+
+      // progress bar
+      $status = $order['status'];
+      $percentage = getStatusPercentage($status);
+      $color = getProgressBarColor($status);
+
+      // Display the progress bar with animation and custom label
+      echo "<div class='progress my-4 position-relative'>";
+      echo "<div class='progress-bar progress-bar-striped progress-bar-animated bg-$color' role='progressbar' style='width: $percentage%' aria-valuenow='$percentage' aria-valuemin='0' aria-valuemax='100'></div>";
+      echo "<div class='position-absolute w-100 h-100 d-flex justify-content-center'><span>$status ($percentage%)</span></div>";
+      echo "</div>";
 
       // Return button
       echo '<a href="order_overview.php" class="btn btn-dark secondary-bg-color mt-3">Return to Order Overview</a>';
