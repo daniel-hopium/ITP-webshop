@@ -70,15 +70,8 @@
     if (isset($_GET['seller_id'])) {
       // Get the selected seller's products
       $sql = 'SELECT * FROM products WHERE seller_id = ?';
-      if ($selectedCategoryId) {
-        $sql .= ' AND category_id = ?';
-      }
       $stmt = $db_obj->prepare($sql);
-      if ($selectedCategoryId) {
-        $stmt->bind_param('ii', $_GET['seller_id'], $selectedCategoryId);
-      } else {
-        $stmt->bind_param('i', $_GET['seller_id']);
-      }
+      $stmt->bind_param('i', $_GET['seller_id']);
       $stmt->execute();
       $result = $stmt->get_result();
       $products = $result->fetch_all(MYSQLI_ASSOC);
