@@ -28,26 +28,6 @@ $category_id = "";
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Elektronik-Webshop</title>
 
-    <style>
-        .card {
-            height: 100%;
-        }
-
-        .card-body {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .card-text {
-            text-align: left;
-            flex-grow: 1;
-        }
-
-        .btn {
-            align-self: flex-start;
-        }
-    </style>
-
 </head>
 
 <body>
