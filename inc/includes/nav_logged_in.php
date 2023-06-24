@@ -13,10 +13,14 @@ include '../../config/check_shoppingcart_amount.php';
 
     <div class="container ">
         <a href='#' class="navbar-brand mb-0 h1">
-            <img class="d-inline-block align top" src="https://icons.iconarchive.com/icons/iconka/business-finance/256/handshake-icon.png" width="20" height="20">
+            <img class="d-inline-block align top"
+                src="https://icons.iconarchive.com/icons/iconka/business-finance/256/handshake-icon.png" width="20"
+                height="20">
         </a>
-        <a href='home.php' class="navbar-brand mb-0 h1 mt-2" id="shopName" style="font-family:'Alex Brush'; font-size: 20px;">Nix Für Arme Shop</a>
-        <button type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" class="navbar-toggler" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <a href='home.php' class="navbar-brand mb-0 h1 mt-2" id="shopName"
+            style="font-family:'Alex Brush'; font-size: 20px;">Nix Für Arme Shop</a>
+        <button type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" class="navbar-toggler"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
@@ -24,7 +28,8 @@ include '../../config/check_shoppingcart_amount.php';
                 <li class="nav-item col-12 ">
                     <div class="input-group ">
                         <form class="d-flex col-12" method="post" action="search.php">
-                            <input id="search-input" type="text" class="form-control form-control-sm" name="search" placeholder="Search" aria-describedby="search-button" />
+                            <input id="search-input" type="text" class="form-control form-control-sm" name="search"
+                                placeholder="Search" aria-describedby="search-button" />
                             <button id="search-button" name="submit-search" type="submit" class="btn bg-light btn-sm">
                                 <i class="fas fa-search"></i>
                             </button>
@@ -130,12 +135,14 @@ include '../../config/check_shoppingcart_amount.php';
             ?>
 
             <li class="nav-item dropdown">
-                <a href="" class="nav-link dropdown-toggle" id="navbarDropdown4" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <a href="" class="nav-link dropdown-toggle" id="navbarDropdown4" role="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">
                     Produkte
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown4">
                     <li><a href="prod_display.php" class="dropdown-item">Alle Produkte</a></li>
                     <li><a href="prod_categories.php" class="dropdown-item">Produkte nach Kategorien</a></li>
+                    <li><a href='refund.php' class='dropdown-item'>Refund</a></li>
                 </ul>
             </li>
             <li class="nav-item ">
