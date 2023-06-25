@@ -1,9 +1,9 @@
 <footer class="mt-auto text-center footer secondary-bg-color" id="footer">
     <div class="container-fluid col-12 ">
         <div class="text-center p-1 mt-2  ">
-            <a class="text-white-50 mx-2" href="help.php">Hilfe</a>
+            <a class="text-white-50 mx-2" href="help.php">Help</a>
             <a class="text-white-50 mx-2" href="impressum.php">Impressum</a>
-            <a class="text-white-50 mx-2" href="contact.php">Kontaktformular</a>
+            <a class="text-white-50 mx-2" href="contact.php">Contactform</a>
         </div>
 
         <div class="text-center text-white-50 p-1 mb-2">

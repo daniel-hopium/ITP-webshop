@@ -3,22 +3,22 @@
         action="" method="post">
         <div class="container ">
             <div>
-                <h1 class="h3 mt-4">Kontodaten ändern</h1>
+                <h1 class="h3 mt-4">Change Userdata</h1>
 
                 <div class="form-floating col-md-12">
                     <input type="text" minlength="4" class="form-control mb-3 shadow" name="newUsername"
                         id="newUsername" placeholder="Neuer Username" required>
-                    <label class="" for="newUsername">Neuer Username</label>
+                    <label class="" for="newUsername">New Username</label>
                 </div>
                 <div class="form-floating col-md-12">
                     <input type="text" minlength="4" class="form-control mb-3 shadow" name="confirmUsername"
                         id="confirmUsername" placeholder="Username bestätigen" required>
-                    <label class="" for="confirmUsername">Username bestätigen</label>
+                    <label class="" for="confirmUsername">Confirm Username</label>
                 </div>
 
                 <div class="my-2">
-                    <button class="btn btn-primary btn-light shadow me-1" type="reset">Zurücksetzen</button>
-                    <button class="btn btn-primary btn-light shadow" type="submit">Bestätigen</button>
+                    <button class="btn btn-primary btn-light shadow me-1" type="reset">Reset</button>
+                    <button class="btn btn-primary btn-light shadow" type="submit">Confirm</button>
                 </div>
             </div>
         </div>

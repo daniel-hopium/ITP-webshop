@@ -3,21 +3,21 @@
         action="" method="post">
         <div class="container ">
             <div>
-                <h1 class="h3 mt-4">Email ändern</h1>
+                <h1 class="h3 mt-4">Change Email</h1>
             </div>
             <div class="form-floating col-md-12">
                 <input type="email" class="form-control mb-3 shadow" name="newEmail" id="newEmail"
                     placeholder="Neue Email" required>
-                <label class="" for="newEmail">Neue Email</label>
+                <label class="" for="newEmail">New Mail Adress</label>
             </div>
             <div class="form-floating col-md-12">
                 <input type="email" class="form-control mb-3 shadow" name="confirmEmail" id="confirmEmail"
                     placeholder="Email bestätigen" required>
-                <label class="" for="confirmEmail">Email bestätigen</label>
+                <label class="" for="confirmEmail">Confirm Email</label>
             </div>
             <div class="my-2">
-                <button class="btn btn-primary btn-light shadow me-1" type="reset">Zurücksetzen</button>
-                <button class="btn btn-primary btn-light shadow" type="submit">Bestätigen</button>
+                <button class="btn btn-primary btn-light shadow me-1" type="reset">Reset</button>
+                <button class="btn btn-primary btn-light shadow" type="submit">Confirm</button>
             </div>
         </div>
     </form>

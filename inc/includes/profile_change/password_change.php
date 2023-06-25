@@ -3,26 +3,26 @@
         action="" method="post">
         <div class="container ">
             <div>
-                <h1 class="h3 mt-4">Passwort ändern</h1>
+                <h1 class="h3 mt-4">Change Password</h1>
             </div>
             <div class="form-floating col-md-12">
                 <input type="password" class="form-control mb-3 shadow" name="oldPassword" id="oldPassword"
                     placeholder="Altes Passwort" required>
-                <label class="" for="oldPassword">Altes Passwort</label>
+                <label class="" for="oldPassword">Old Password</label>
             </div>
             <div class="form-floating col-md-12">
                 <input type="password" minlength="8" class="form-control mb-3 shadow" name="newPassword"
                     id="newPassword" placeholder="Neues Passwort" required>
-                <label class="" for="newPassword">Neues Passwort</label>
+                <label class="" for="newPassword">New Password</label>
             </div>
             <div class="form-floating col-md-12">
                 <input type="password" minlength="8" class="form-control mb-3 shadow" name="confirmPassword"
                     id="confirmPassword" placeholder="Passwort bestätigen" required>
-                <label class="" for="confirmPassword">Passwort bestätigen</label>
+                <label class="" for="confirmPassword">Confirm Password</label>
             </div>
             <div class="my-2">
-                <button class="btn btn-primary btn-light shadow me-1" type="reset">Zurücksetzen</button>
-                <button class="btn btn-primary btn-light shadow" type="submit">Bestätigen</button>
+                <button class="btn btn-primary btn-light shadow me-1" type="reset">Reset</button>
+                <button class="btn btn-primary btn-light shadow" type="submit">Confirm</button>
             </div>
         </div>
     </form>

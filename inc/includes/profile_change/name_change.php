@@ -12,7 +12,7 @@ $has_newsletter = $currentUser['has_newsletter'];
         action="" method="post">
         <div class="container ">
             <div>
-                <h1 class="h3 mt-4">Kontodaten ändern</h1>
+                <h1 class="h3 mt-4">Change Userdata</h1>
             </div>
             <div class=" form-floating form-label select-label shadow  ">
                 <select name="formOfAdress" id="floatingSelect" class="form-select">
