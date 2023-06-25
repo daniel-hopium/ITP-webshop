@@ -32,7 +32,7 @@ $conn->close();
 
 <head>
 	
-	<title>Elektronik-Webshop</title>
+	<title>Electronics-Shop</title>
 	
 	<?php
         include '../includes/head.php';
@@ -82,13 +82,13 @@ $conn->close();
 				<div class="col-md-6 mb-4">
 					<div class="card h-100">
 						<div class="card-body">
-							<h2 class="card-title mb-4">Beschreibung</h2>
+							<h2 class="card-title mb-4">Description</h2>
 							<p class="card-text">
 								<?php echo htmlspecialchars($product['description']); ?>
 							</p>
 							
 							</ul>
-							<h2 class="card-title mt-5 mb-4">Preis</h2>
+							<h2 class="card-title mt-5 mb-4">Price</h2>
 							<p class="card-text display-4">
 								<?php
                                 // Retrieve the discount value from the same table

@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>Meine Buchungen</title>
+  <title>My Bookings</title>
 
   <?php
         include '../includes/head.php';
@@ -17,7 +17,7 @@
 <body class="d-flex flex-column min-vh-100">
 
   <div class="container site-font-color text-center">
-    <h1 class="h1 mt-5">Userübersicht:</h1>
+    <h1 class="h1 mt-5">Useroverview:</h1>
 
     <?php
 

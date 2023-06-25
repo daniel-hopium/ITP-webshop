@@ -9,16 +9,16 @@ include '../../config/check_shoppingcart_amount.php';
 <link href='https://fonts.googleapis.com/css?family=Alex Brush' rel='stylesheet'>
 
 
-<nav class="navbar sticky-top navbar-expand-sm navbar-dark  " id="nav-primary">
+<nav class="navbar sticky-top navbar-expand-sm navbar-dark" id="nav-primary">
 
-    <div class="container ">
+    <div class="container">
         <a href='#' class="navbar-brand mb-0 h1">
             <img class="d-inline-block align top"
                 src="https://icons.iconarchive.com/icons/iconka/business-finance/256/handshake-icon.png" width="20"
                 height="20">
         </a>
         <a href='home.php' class="navbar-brand mb-0 h1 mt-2" id="shopName"
-            style="font-family:'Alex Brush'; font-size: 20px;">Nix Für Arme Shop</a>
+            style="font-family:'Alex Brush'; font-size: 20px;">Not For Poor Shop</a>
         <button type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" class="navbar-toggler"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -37,23 +37,24 @@ include '../../config/check_shoppingcart_amount.php';
                     </div>
                 </li>
             </ul>
-            <ul class="navbar-nav align-items-center  ms-auto">
-                <li class="nav-item ">
-                    <div class="container ">
+            <ul class="navbar-nav align-items-center ms-auto">
+                <li class="nav-item">
+                    <div class="container">
                         <a href="userProfile.php" class="">
-                            <i class="fa-solid fa-user fa-xl " style="color: #ffffff;"></i>
+                            <i class="fa-solid fa-user fa-xl" style="color: #ffffff;"></i>
+                        </a>
                     </div>
                 </li>
 
                 <li class="nav-item">
                     <div class="container">
-                        <div class=" position-relative ">
+                        <div class="position-relative">
                             <a href="shoppingcart.php">
                                 <?php
                                 if ($currentShoppingcartAmount != 0) {
                                     echo '
                                     <span
-                                        class="  badge position-absolute mt-1 start-100 translate-middle shadow p-1 border border-dark tertiary-bg-color rounded-circle"
+                                        class="badge position-absolute mt-1 start-100 translate-middle shadow p-1 border border-dark tertiary-bg-color rounded-circle"
                                         id="shopping-cart-amount">';
                                     echo $currentShoppingcartAmount;
                                     echo '
@@ -70,8 +71,8 @@ include '../../config/check_shoppingcart_amount.php';
         </div>
 </nav>
 
-<nav id="nav-secondary" class="navbar  navbar-expand-sm navbar-dark  ">
-    <div class="container ">
+<nav id="nav-secondary" class="navbar navbar-expand-sm navbar-dark">
+    <div class="container">
         <ul class="navbar-nav">
 
             <?php if ($role == 'administrator') {
@@ -81,12 +82,12 @@ include '../../config/check_shoppingcart_amount.php';
                         Administration
                     </a>
                     <ul class='dropdown-menu' aria-labelledby='navbarDropdown1'>
-                        <li><a href='product_adminpage.php' class='dropdown-item'>Produktverwaltung</a></li>
-                        <li><a href='product_upload.php' class='dropdown-item'>Produktupload</a></li>
-                        <li><a href='finance_overview.php' class='dropdown-item'>Finanzübersicht</a></li>
-                        <li><a href='user_overview.php' class='dropdown-item'>Userverwaltung</a></li>
-                        <li><a href='contact_overview.php' class='dropdown-item'>Anfragenverwaltung</a></li>
-                        <li><a href='order_overview.php' class='dropdown-item'>Bestellübersicht</a></li>
+                        <li><a href='product_adminpage.php' class='dropdown-item'>Product Management</a></li>
+                        <li><a href='product_upload.php' class='dropdown-item'>Product Upload</a></li>
+                        <li><a href='finance_overview.php' class='dropdown-item'>Financial Overview</a></li>
+                        <li><a href='user_overview.php' class='dropdown-item'>User Management</a></li>
+                        <li><a href='contact_overview.php' class='dropdown-item'>Inquiry Management</a></li>
+                        <li><a href='order_overview.php' class='dropdown-item'>Order Overview</a></li>
                     </ul>
                 </li>";
             }
@@ -98,9 +99,9 @@ include '../../config/check_shoppingcart_amount.php';
                         Administration
                     </a>
                     <ul class='dropdown-menu' aria-labelledby='navbarDropdown1'>
-                        <li><a href='product_sellerpage.php' class='dropdown-item'>Produktverwaltung</a></li>
-                        <li><a href='product_upload.php' class='dropdown-item'>Produktupload</a></li>
-                        <li><a href='finance_overview_seller.php' class='dropdown-item'>Verkaufsübersicht</a></li>
+                        <li><a href='product_sellerpage.php' class='dropdown-item'>Product Management</a></li>
+                        <li><a href='product_upload.php' class='dropdown-item'>Product Upload</a></li>
+                        <li><a href='finance_overview_seller.php' class='dropdown-item'>Sales Overview</a></li>
                     </ul>
                 </li>";
             }
@@ -137,19 +138,19 @@ include '../../config/check_shoppingcart_amount.php';
             <li class="nav-item dropdown">
                 <a href="" class="nav-link dropdown-toggle" id="navbarDropdown4" role="button" data-bs-toggle="dropdown"
                     aria-expanded="false">
-                    Produkte
+                    Products
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown4">
-                    <li><a href="prod_display.php" class="dropdown-item">Alle Produkte</a></li>
-                    <li><a href="prod_categories.php" class="dropdown-item">Produkte nach Kategorien</a></li>
+                    <li><a href="prod_display.php" class="dropdown-item">All Products</a></li>
+                    <li><a href="prod_categories.php" class="dropdown-item">Products by Category</a></li>
                     <li><a href='refund.php' class='dropdown-item'>Refund</a></li>
                 </ul>
             </li>
-            <li class="nav-item ">
-                <a href="logout.php" class="nav-link  <?php if ($active_page == 'logout.php') {
-                                                            echo 'fw-bold active ';
-                                                        } ?>">
-                    Abmelden
+            <li class="nav-item">
+                <a href="logout.php" class="nav-link <?php if ($active_page == 'logout.php') {
+                                                        echo 'fw-bold active ';
+                                                    } ?>">
+                    Logout
                 </a>
             </li>
 

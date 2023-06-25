@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Bestellübersicht</title>
+    <title>Order Overview</title>
 
     <?php
     include '../includes/head.php';
@@ -73,7 +73,7 @@
         $conn->close();
         ?>
 
-        <h1 class="h1 my-5">Bestellübersicht</h1>
+        <h1 class="h1 my-5">Order Overview</h1>
         <table class="table">
             <thead>
                 <tr>

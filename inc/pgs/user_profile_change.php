@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Mein Profil</title>
+    <title>My Profile</title>
 
     <?php
         include '../includes/head.php';

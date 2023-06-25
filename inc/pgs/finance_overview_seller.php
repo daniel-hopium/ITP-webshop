@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>Verkaufssübersicht</title>
+  <title>Sales Overview</title>
 
   <?php
   if(($role != 'seller')) {
@@ -22,11 +22,11 @@
 $conn = new mysqli($host, $user, $password, $database);
 
 if ($conn->connect_error) {
-    die("Verbindung zur Datenbank fehlgeschlagen: " . $conn->connect_error);
+    die("Connection to the database failed: " . $conn->connect_error);
 }
 
 $seller_id = $_SESSION['seller_id'];
-// Monatliche Verkäufe der letzten 12 Monate abrufen
+// Get monthly sales for the last 12 months
 $monthlySalesQuery = 
 "SELECT DATE_FORMAT(order_date, '%Y-%m') AS month, SUM(total_price) AS total_sales
 FROM new_orders
@@ -45,7 +45,7 @@ while ($row = $monthlySalesResult->fetch_assoc()) {
     $monthlySalesData['datasets'][0]['data'][] = $row['total_sales'];
 }
 
-// Tägliche Verkäufe der letzten 30 Tage abrufen
+// Get daily sales for the last 30 days
 $dailySalesQuery = "SELECT DATE(order_date) AS day, SUM(total_price) AS total_sales
 FROM new_orders
 INNER JOIN products ON new_orders.product_id = products.id
@@ -62,7 +62,7 @@ while ($row = $dailySalesResult->fetch_assoc()) {
     $dailySalesData['datasets'][0]['data'][] = $row['total_sales'];
 }
 
-// Tägliche Verkäufe der letzten 30 Tage abrufen
+// Get daily sales for the last 365 days
 $dailySalesQueryYear = "SELECT DATE(order_date) AS day, SUM(total_price) AS total_sales
 FROM new_orders
 INNER JOIN products ON new_orders.product_id = products.id
@@ -88,28 +88,28 @@ while ($row = $dailySalesResultYear->fetch_assoc()) {
 <body class="d-flex flex-column min-vh-100">
 
   <div class="container site-font-color ">
-    <h1 class="h1 my-5">Verkaufsübersicht:</h1>
+    <h1 class="h1 my-5">Sales Overview:</h1>
 
     <div class="container">
       <div class="row d-flex justify-content-between align-items-center">
         <div class="card" style="width: 18rem;" id="daily">
           <div class="card-body">
             <h5 class="card-title d-flex align-items-center "><i class="fa-solid fa-briefcase fa-xl me-3"></i>
-              Heute</h5>
+              Today</h5>
             <h2 class="card-text">3</h2>
           </div>
         </div>
         <div class="card inline" style="width: 18rem;" id="monthly">
           <div class="card-body">
             <h5 class="card-title d-flex align-items-center "><i class="fa-solid fa-briefcase fa-xl me-3"></i>
-              Monatlich</h5>
+              Monthly</h5>
             <h2 class="card-text">56</h2>
           </div>
         </div>
         <div class="card" style="width: 18rem;" id="yearly">
           <div class="card-body">
             <h5 class="card-title d-flex align-items-center "><i class="fa-solid fa-briefcase fa-xl me-3"></i>
-              Totale</h5>
+              Total</h5>
             <h2 class="card-text">2542</h2>
           </div>
         </div>
@@ -119,21 +119,21 @@ while ($row = $dailySalesResultYear->fetch_assoc()) {
 
 
     <div id="monthly-sales" class="bg-light border border-black p-1 my-1" style="display: none;">
-      <h1 class="h3 text-start">Monatliche Verkäufe</h1>
+      <h1 class="h3 text-start">Monthly Sales</h1>
       <div>
         <canvas id="monthly-sales-chart" style="height: 100px; width: 100%;"></canvas>
       </div>
     </div>
 
     <div id="daily-sales" class="bg-light border border-black p-1 my-1" style="display: none;">
-      <h1 class="h3 text-start mt-4">Täglich Verkäufe im Jänner</h1>
+      <h1 class="h3 text-start mt-4">Daily Sales in January</h1>
       <div>
         <canvas id="myChart2" style="height: 100px; width: 100%;"></canvas>
       </div>
       </div>
 
       <div id="yearly-sales" class="bg-light border border-black p-1 my-1" style="display: none;">
-      <h1 class="h3 text-start mt-4">Tägliche Verkäufe Jahresübersicht</h1>
+      <h1 class="h3 text-start mt-4">Yearly Sales Overview</h1>
       <div>
       <canvas id="myChart3" style="height: 100px; width: 100%;"></canvas>
     </div>

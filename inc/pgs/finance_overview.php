@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>Finanzübersicht</title>
+  <title>Financial Overview</title>
 
   <?php
   include '../includes/head.php';
@@ -21,10 +21,10 @@
 $conn = new mysqli($host, $user, $password, $database);
 
 if ($conn->connect_error) {
-    die("Verbindung zur Datenbank fehlgeschlagen: " . $conn->connect_error);
+    die("Connection to the database failed: " . $conn->connect_error);
 }
 
-// Monatliche Verkäufe der letzten 12 Monate abrufen
+// Retrieve monthly sales of the last 12 months
 $monthlySalesQuery = "SELECT DATE_FORMAT(order_date, '%Y-%m') AS month, SUM(total_price) AS total_sales
                      FROM new_orders
                      WHERE order_date >= DATE_SUB(CURDATE(), INTERVAL 12 MONTH)
@@ -39,7 +39,7 @@ while ($row = $monthlySalesResult->fetch_assoc()) {
     $monthlySalesData['datasets'][0]['data'][] = $row['total_sales'];
 }
 
-// Tägliche Verkäufe der letzten 30 Tage abrufen
+// Retrieve daily sales of the last 30 days
 $dailySalesQuery = "SELECT DATE(order_date) AS day, SUM(total_price) AS total_sales
                    FROM new_orders
                    WHERE order_date >= DATE_SUB(CURDATE(), INTERVAL 30 DAY)
@@ -54,7 +54,7 @@ while ($row = $dailySalesResult->fetch_assoc()) {
     $dailySalesData['datasets'][0]['data'][] = $row['total_sales'];
 }
 
-// Tägliche Verkäufe der letzten 30 Tage abrufen
+// Retrieve daily sales of the last 365 days
 $dailySalesQueryYear = "SELECT DATE(order_date) AS day, SUM(total_price) AS total_sales
                        FROM new_orders
                        WHERE order_date >= DATE_SUB(CURDATE(), INTERVAL 365 DAY)
@@ -78,22 +78,22 @@ while ($row = $dailySalesResultYear->fetch_assoc()) {
 <body class="d-flex flex-column min-vh-100">
 
   <div class="container site-font-color text-center">
-    <h1 class="h1 my-5 primary-color">Vollständige Finanzübersicht:</h1>
+    <h1 class="h1 my-5 primary-color">Complete Financial Overview:</h1>
 
 
 
 
-    <h1 class="h3 text-start primary-color">Monatliche Verkäufe der letzten 12 Monate</h1>
+    <h1 class="h3 text-start primary-color">Monthly Sales of the Last 12 Months</h1>
     <div>
       <canvas id="monthly-sales-chart" style="height: 400px; width: 100%;"></canvas>
     </div>
 
-    <h1 class="h3 text-start mt-4 primary-color">Tägliche Verkäufe der letzten 30 Tage</h1>
+    <h1 class="h3 text-start mt-4 primary-color">Daily Sales of the Last 30 Days</h1>
     <div>
       <canvas id="myChart2" style="height: 400px; width: 100%;"></canvas>
     </div>
 
-    <h1 class="h3 text-start mt-4 primary-color">Kumulative Verkäufe der letzten 365 Tage</h1>
+    <h1 class="h3 text-start mt-4 primary-color">Cumulative Sales of the Last 365 Days</h1>
     <div>
       <canvas id="myChart3" style="height: 400px; width: 100%;"></canvas>
     </div>
@@ -101,8 +101,7 @@ while ($row = $dailySalesResultYear->fetch_assoc()) {
     <script>
       // Data for the chart
       const data = {
-        labels: <?= json_encode($monthlySalesData['labels']) ?>
-        ,
+        labels: <?= json_encode($monthlySalesData['labels']) ?>,
         datasets: [{
           label: 'Monthly Sales',
           data: <?= json_encode($monthlySalesData['datasets'][0]['data']) ?>,

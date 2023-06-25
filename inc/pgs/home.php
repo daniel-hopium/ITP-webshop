@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Startseite</title>
+    <title>Home</title>
 
     <?php
     include '../includes/head.php';
@@ -28,7 +28,7 @@
 
 <body class="d-flex flex-column min-vh-100">
     <div class="container">
-        <h2 class="h2 mt-4">RABATTAKTIONEN</h2>
+        <h2 class="h2 mt-4">DISCOUNTS</h2>
         <div class="row ">
             <div class="col-md-6">
                 <div id="carousel1" class="carousel slide" data-bs-ride="carousel">
@@ -95,7 +95,7 @@
     </div>
 
 
-    <h2 class="h2 mt-4">NEUANKÖMMLINGE</h2>
+    <h2 class="h2 mt-4">NEW ARRIVALS</h2>
     <div class="col-md-12 ">
         <div id="carousel1" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
@@ -103,7 +103,7 @@
                     <a href="prod_details.php?id=69">
                         <img src="../../res/img/new-1.jpg" class="d-block w-100" alt="Image 1">
                         <div class="carousel-caption h5">
-                            Der neue Retro Look des Monitor 15 begeistert die Welt
+                            The new Look of the Retro 15 inspires the World!
                         </div>
                     </a>
                 </div>
@@ -111,7 +111,7 @@
                     <a href="prod_details.php?id=63">
                         <img src="../../res/img/dog.jpg" class="d-block w-100" alt="Image 2">
                         <div class="carousel-caption h5">
-                            Das neue IPad Pro 12 jetzt bei uns erhältlich!
+                            The New IPAD PRO 11 arrived !
                         </div>
                     </a>
                 </div>
@@ -120,7 +120,7 @@
 
 
 
-        <h2 class="h2 mt-4">EMPFEHLUNGEN FÜR SIE</h2>
+        <h2 class="h2 mt-4">Recommendations for you!</h2>
         <div id="myCarousel" class="carousel slide my-4" data-bs-ride="carousel">
             <!-- Wrapper for carousel items -->
             <div class="carousel-inner">

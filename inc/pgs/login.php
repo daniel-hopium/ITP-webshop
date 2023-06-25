@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -9,33 +9,33 @@
   ?>
 </head>
 
-<body class="d-flex  flex-column min-vh-100">
+<body class="d-flex flex-column min-vh-100">
   <div class="text-center login site-font-color">
     <form method="post" action="login.php" style="max-width:350px;margin:auto">
       <img class="mt-4" src="https://icons.iconarchive.com/icons/iconka/business-finance/256/handshake-icon.png"
         height="72" alt="Logo">
-      <h1 class=" h3 mb-3 ">Anmeldung</h1>
+      <h1 class=" h3 mb-3 ">Log in</h1>
 
       <div class="form-floating shadow mb-2">
-        <input type="text" name="emailOrUsername" id="emailOrUsername" placeholder="Email oder Username" required
+        <input type="text" name="emailOrUsername" id="emailOrUsername" placeholder="Email or Username" required
           autofocus class="form-control mt-1">
-        <label for="emailOrUsername" class="">Email oder Username</label>
+        <label for="emailOrUsername" class="">Email or Username</label>
       </div>
 
       <div class="form-floating shadow">
-        <input type="password" name="password" id="floatingPassword" placeholder="Passwort" class="form-control mt-1">
-        <label for="floatingPassword" class="">Passwort</label>
+        <input type="password" name="password" id="floatingPassword" placeholder="Password" class="form-control mt-1">
+        <label for="floatingPassword" class="">Password</label>
       </div>
 
       <div class="mt-3 d-grid shadow">
         <button type="submit" class="btn btn-lg secondary-bg-color btn-block secondary-color">
-          <h1 class="h4">Anmelden</h1>
+          <h1 class="h4">Log in</h1>
         </button>
       </div>
     </form>
 
     <div class="col mt-2">
-      <a href="registration.php" class="site-font-color">Noch nicht registriert?</a>
+      <a href="registration.php" class="site-font-color">Not registered yet?</a>
     </div>
   </div>
 
@@ -59,11 +59,11 @@
           $active = ($active->fetch_assoc());
 
           if (mysqli_num_rows($emailOrUsernameExist) < 1) {
-              echo "Ungültiger Username oder Email!";
+              echo "Invalid username or email!";
           } elseif ($active['status'] == 'inactive') {
-              echo "Ihr Account ist nicht aktiv!";
+              echo "Your account is inactive!";
           } else {
-              // finds old hashed passwort and checks via password_verify
+              // finds old hashed password and checks via password_verify
               $hashvalue = mysqli_query($db_obj, "SELECT password FROM users WHERE useremail =  '$emailOrUsername' OR username =  '$emailOrUsername'");
               $hashvalue = ($hashvalue->fetch_assoc());
               $hashvalue = ($hashvalue['password']);
@@ -78,7 +78,7 @@
 
                   echo "<script>location.href='home.php?type=login'</script>";
               } else {
-                  echo "Falsches Passwort!";
+                  echo "Incorrect password!";
               }
           }
       }
