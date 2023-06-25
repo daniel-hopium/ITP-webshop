@@ -115,10 +115,10 @@ $conn->close();
 								value="<?php echo $user_id; ?>">
 							<input type="hidden" name="product_id"
 								value="<?php echo $product['id']; ?>">
-							<?php echo $stock == 0 ? " <button type='submit' class='btn secondary-bg-color btn-block secondary-color disabled'>Ausverkauft</button>" 
+							<?php echo $stock == 0 ? " <button type='submit' class='btn secondary-bg-color btn-block secondary-color disabled'>Out of Stock</button>" 
 							:
 
-							" <button type='submit' class='btn secondary-bg-color btn-block secondary-color '>In den Warenkorb</button>";
+							" <button type='submit' class='btn secondary-bg-color btn-block secondary-color '>Add to Shoppincart</button>";
 							?> 
 							
 						</div>

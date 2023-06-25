@@ -171,9 +171,9 @@ $category_id = "";
                     echo '</div>';
                     echo '<input type="hidden" name="product_id" value="' . $id . '">';
                     echo $stock == 0 ?
-                        '<button type="submit" class="btn secondary-bg-color btn-block secondary-color disabled">Ausverkauft</button>'
+                        '<button type="submit" class="btn secondary-bg-color btn-block secondary-color disabled">Out of Stock</button>'
                         :
-                        '<button type="submit" class="btn secondary-bg-color btn-block secondary-color">Zum Warenkorb hinzufügen</button>';
+                        '<button type="submit" class="btn secondary-bg-color btn-block secondary-color">Add to Shoppincart</button>';
                     echo '</form>';
                     echo '<span class="text-end">€ ' . number_format($discountedPrice, 2, ',', '.') . '</span>'; // Display the discounted price
                     echo '</div></div></div>';
