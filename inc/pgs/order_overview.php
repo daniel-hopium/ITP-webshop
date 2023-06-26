@@ -47,7 +47,16 @@
         if ($role == 'administrator') {
             $sql = "SELECT new_orders.orderid, users.username, MAX(new_orders.order_date) AS order_date, MAX(new_orders.status) AS status FROM new_orders INNER JOIN users ON new_orders.user_id = users.id GROUP BY new_orders.orderid, users.username ORDER BY order_date DESC";
         } else if ($role == 'seller') {
-            $sql = "SELECT new_orders.orderid, users.username, MAX(new_orders.order_date) AS order_date, MAX(new_orders.status) AS status FROM new_orders INNER JOIN users ON new_orders.user_id = users.id GROUP BY new_orders.orderid, users.username ORDER BY order_date DESC";
+            $seller_id = $_SESSION['seller_id'];
+            $sql = "
+            SELECT new_orders.orderid, users.username, MAX(new_orders.order_date) AS order_date, MAX(new_orders.status) AS status
+FROM new_orders
+INNER JOIN users ON new_orders.user_id = users.id
+INNER JOIN products ON new_orders.product_id = products.id
+WHERE products.seller_id = '$seller_id'
+GROUP BY new_orders.orderid, users.username
+ORDER BY order_date DESC;
+";
         } else if ($role == 'customer') {
             $user_id = $_SESSION['user_id'];
             $sql = "SELECT new_orders.orderid, users.username, MAX(new_orders.order_date) AS order_date, MAX(new_orders.status) AS status FROM new_orders INNER JOIN users ON new_orders.user_id = users.id WHERE users.id = '$user_id' GROUP BY new_orders.orderid, users.username ORDER BY order_date DESC";
