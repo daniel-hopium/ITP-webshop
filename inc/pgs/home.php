@@ -120,7 +120,13 @@
 
 
 
-        <h2 class="h2 mt-4">Recommendations for you!</h2>
+        
+        <h2 class="h2 mt-4"><?php if ($role == "customer")
+        echo "Recommendations for you!";
+        else {
+    echo "Interesting Products" ;
+} ?>
+        </h2>
         <div id="myCarousel" class="carousel slide my-4" data-bs-ride="carousel">
             <!-- Wrapper for carousel items -->
             <div class="carousel-inner">
