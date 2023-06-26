@@ -75,8 +75,6 @@
         (SELECT NULL as created, NULL as title, NULL as content, NULL as category_name, NULL as contact_name, NULL as email, NULL as subject, NULL as message, name, surname, username, useremail, 'users' as type, 'users' as source FROM users WHERE name LIKE '%$search%' OR surname LIKE '%$search%' OR username LIKE '%$search%' OR useremail LIKE '%$search%')";
 
 
-
-
                                 $result = mysqli_query($conn, $sql);
                                 $queryResults = mysqli_num_rows($result);
 
