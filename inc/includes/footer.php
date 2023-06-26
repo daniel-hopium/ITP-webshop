@@ -8,8 +8,7 @@
 
         <div class="text-center text-white-50 p-1 mb-2">
             <span class="mx-2">©
-                <?php echo date("Y");?> Nix Für
-                Arme Shop </span>
+                <?php echo date("Y");?>Not For Poor Shop </span>
             <div class="d-inline">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                     class="bi bi-telephone " viewBox="0 0 16 16">
