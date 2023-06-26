@@ -85,74 +85,93 @@
     </div>
   </div>
 
+  <!-- Modal mit Lieferzeit -->
+  <div class="modal fade" id="deliveryModal" tabindex="-1" aria-labelledby="deliveryModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="deliveryModalLabel">Delivery Information</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p id="distance"></p>
+          <p id="deliveryTime"></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
   <?php
   include '../includes/footer.php';
   ?>
-  <!-- Include Leaflet CSS -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
-  <style>
-    #map {
-      height: 500px;
-      margin-top: 20px;
-      border-radius: 15px;
-    }
-  </style>
-
-  <!-- Include Leaflet JS -->
-  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-
-  <script>
-    var map = L.map('map').setView([48.198232, 16.346632], 15); // Set the initial view to Mariahilferstrasse 116, 1070 Vienna
-    var fixedLocation = L.latLng(48.198232, 16.346632); // Mariahilferstrasse 116, 1070 Vienna
-    var marker1 = L.marker(fixedLocation).addTo(map);
-    var marker2 = null;
-    var polyline = null;
-
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    }).addTo(map);
-
-    var clickListener = function(e) {
-      if (marker2 === null) {
-        marker2 = L.marker(e.latlng).addTo(map);
-        polyline = L.polyline([fixedLocation, marker2.getLatLng()], {
-          color: 'blue'
-        }).addTo(map);
-        var distance = fixedLocation.distanceTo(marker2.getLatLng());
-        var deliveryTime = calculateDeliveryTime(distance);
-        alert('The distance is: ' + distance.toFixed(2) + ' meters\n' +
-          'The delivery time is: ' + deliveryTime + ' days');
-      } else {
-        // Remove the existing marker2 and polyline
-        marker2.removeFrom(map);
-        polyline.removeFrom(map);
-        marker2 = null;
-        polyline = null;
-      }
-    };
-
-    map.on('click', clickListener);
-
-    marker1.on('mouseover', function(e) {
-      var address = 'Our Location'; // Insert the address of the first point here
-      marker1.bindPopup(address).openPopup();
-    });
-
-    marker1.on('mouseout', function(e) {
-      marker1.closePopup();
-    });
-
-    function calculateDeliveryTime(distance) {
-      if (distance < 5000) {
-        return 1;
-      } else if (distance < 10000) {
-        return 2;
-      } else {
-        return 3;
-      }
-    }
-  </script>
 
 </body>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
+<script>
+  var map = L.map('map').setView([48.198232, 16.346632], 15); //initial view
+  var fixedLocation = L.latLng(48.198232, 16.346632); // Mariahilferstrasse 116, 1070 Vienna
+  var marker1 = L.marker(fixedLocation).addTo(map);
+  var marker2 = null;
+  var polyline = null;
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+  }).addTo(map);
+
+  var clickListener = function(e) {
+    if (marker2 === null) {
+      marker2 = L.marker(e.latlng).addTo(map);
+      polyline = L.polyline([fixedLocation, marker2.getLatLng()], {
+        color: 'blue'
+      }).addTo(map);
+      var distance = fixedLocation.distanceTo(marker2.getLatLng()) / 1000; // Umrechnung in Kilometer
+      var deliveryTime = calculateDeliveryTime(distance);
+      document.getElementById('distance').innerText = 'The distance is: ' + distance.toFixed(2) + ' km';
+      document.getElementById('deliveryTime').innerText = 'The estimated delivery time is: ' + deliveryTime + ' business days';
+      var modal = new bootstrap.Modal(document.getElementById('deliveryModal'));
+      modal.show();
+    } else {
+      // Remove the existing marker2 and polyline
+      marker2.removeFrom(map);
+      polyline.removeFrom(map);
+      marker2 = null;
+      polyline = null;
+    }
+  };
+
+
+  map.on('click', clickListener);
+
+  marker1.on('mouseover', function(e) {
+    var address = 'Our Location';
+    marker1.bindPopup(address).openPopup();
+  });
+
+  marker1.on('mouseout', function(e) {
+    marker1.closePopup();
+  });
+
+  function calculateDeliveryTime(distance) {
+    // old
+    // var averageSpeed = 30;
+    // var workingHoursPerDay = 8;
+    // var deliveryTimeInDays = Math.ceil(distance / (averageSpeed * workingHoursPerDay));
+
+    if (distance < 5000) {
+      return 1;
+    } else if (distance < 10000) {
+      return 2;
+    } else {
+      return 3;
+    }
+  }
+</script>
 
 </html>

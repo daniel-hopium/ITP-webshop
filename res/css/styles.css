@@ -117,3 +117,11 @@ nav {
 .progress-bar.animated {
   animation: progress-bar-stripes 2s linear infinite;
 }
+
+
+/* Map */
+#map {
+  height: 500px;
+  margin-top: 20px;
+  border-radius: 15px;
+}
