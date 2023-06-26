@@ -28,8 +28,8 @@
     if (isset($_POST['quantity'])) {
         // Loop through the items in the cart
         foreach ($_POST['quantity'] as $key => $value) {
-            $id = (int)$key;
-            $quantity = (int)$value;
+            $id = (int) $key;
+            $quantity = (int) $value;
             $query = "UPDATE shoppingcart SET quantity=$quantity WHERE user_id=$user_id AND product_id=$id";
             mysqli_query($connection, $query);
         }
@@ -84,7 +84,7 @@
 
         echo "<form action='bestell_sim.php' method='post'>";
         echo "<input type='hidden' name='user_id' value='" . $_SESSION["user_id"] . "'>";
-        echo "<input type='submit' value='Simulate Checkout'>";
+        echo "<input type='submit'  class='btn btn-lg secondary-bg-color btn-block secondary-color' value='Simulate Checkout'>";
         echo "</form>";
     } else {
         // If the cart is empty, display a message
