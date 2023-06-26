@@ -91,8 +91,6 @@
         }
         ?>
 
-
-
         <?php include '../includes/navbar.php'; ?>
         <main>
             <div class="container">
