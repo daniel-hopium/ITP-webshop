@@ -118,7 +118,7 @@ $conn->close();
 							<?php echo $stock == 0 ? " <button type='submit' class='btn secondary-bg-color btn-block secondary-color disabled'>Out of Stock</button>" 
 							:
 
-							" <button type='submit' class='btn secondary-bg-color btn-block secondary-color '>Add to Shoppincart</button>";
+							" <button type='submit' class='btn secondary-bg-color btn-block secondary-color '>Add to Shoppingcart</button>";
 							?> 
 							
 						</div>
