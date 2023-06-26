@@ -102,6 +102,7 @@ include '../../config/check_shoppingcart_amount.php';
                         <li><a href='product_sellerpage.php' class='dropdown-item'>Product Management</a></li>
                         <li><a href='product_upload.php' class='dropdown-item'>Product Upload</a></li>
                         <li><a href='finance_overview_seller.php' class='dropdown-item'>Sales Overview</a></li>
+                        <li><a href='order_overview.php' class='dropdown-item'>Order Overview</a></li>
                     </ul>
                 </li>";
             }
@@ -131,6 +132,12 @@ include '../../config/check_shoppingcart_amount.php';
                         <ul class='dropdown-menu' aria-labelledby='navbarDropdown3'>
                             <li><a href='newsBlog_user.php' class='dropdown-item'>News Blog</a></li>
                         </ul>
+                    </li>";
+            }
+            if ($role == 'customer' ) {
+                echo "
+                    <li class='nav-item'> 
+                       <a href='order_overview.php' class='nav-link'>Order Overview</a>
                     </li>";
             }
             ?>
