@@ -1,37 +1,3 @@
-<?php
-// Database connection
-$host = "localhost";
-$user = "webshop_user";
-$password = "admin";
-$database = "webshop";
-
-$conn = new mysqli($host, $user, $password, $database);
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-if (isset($_POST['submit-search'])) {
-    $search = mysqli_real_escape_string($conn, $_POST['search']);
-
-    // Redirect to "newsBlog_user.php" page if search query matches "news blog"
-    if (strtolower($search) == "news blog") {
-        echo '<script>window.location.href = "newsBlog_user.php";</script>';
-        exit();
-    }
-
-    if (strtolower($search) == "products") {
-        echo '<script>window.location.href = "prod_display.php";</script>';
-        exit();
-    }
-
-    if (strtolower($search) == "category") {
-        echo '<script>window.location.href = "prod_categories.php";</script>';
-        exit();
-    }
-}
-
-?>
-
 <!DOCTYPE html>
 <html>
 
@@ -62,6 +28,40 @@ if (isset($_POST['submit-search'])) {
 </head>
 
 <body class="d-flex flex-column min-vh-100">
+    <?php
+    // Database connection
+    $host = "localhost";
+    $user = "webshop_user";
+    $password = "admin";
+    $database = "webshop";
+
+    $conn = new mysqli($host, $user, $password, $database);
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    include '../includes/head.php';
+
+    if (isset($_POST['submit-search'])) {
+        $search = mysqli_real_escape_string($conn, $_POST['search']);
+    
+        // Redirect to "newsBlog_user.php" page if search query matches "news blog"
+        if (strtolower($search) == "news blog") {
+            echo '<script>window.location.href = "newsBlog_user.php";</script>';
+            exit();
+        }
+        if (strtolower($search) == "products") {
+            echo '<script>window.location.href = "prod_display.php";</script>';
+            exit();
+        }
+    
+        if (strtolower($search) == "category") {
+            echo '<script>window.location.href = "prod_categories.php";</script>';
+            exit();
+        }
+    }
+    
+    ?>
 
     <main>
         <div class="container site-font-color">
