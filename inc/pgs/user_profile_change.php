@@ -14,7 +14,8 @@
     $db_obj = new mysqli($host, $user, $password, $database);
 
     $currentUser = $_SESSION['username'];
-    $currentUser = mysqli_query($db_obj, "SELECT * FROM users WHERE username = '$currentUser' ");
+    $currentUser = mysqli_query($db_obj, "SELECT users.*, address.*  FROM users  JOIN address ON users.id = address.user_id
+    WHERE users.username = '$user';");
     $currentUser =($currentUser->fetch_assoc());
     ?>
 
@@ -34,7 +35,10 @@
     } elseif ($_GET['change'] == 'username') {
         include '../includes/profile_change/username_change.php';
     
-    }
+    }   elseif ($_GET['change'] == 'address') {
+    include '../includes/profile_change/address_change.php';
+
+}
 
     include '../includes/footer.php';
     ?>

@@ -56,8 +56,8 @@ $has_newsletter = $currentUser['has_newsletter'];
             </div>
 
             <div class="my-2">
-                <button class="btn btn-primary btn-light shadow me-1" type="reset">Reset</button>
-                <button class="btn btn-primary btn-light shadow" type="submit">Confirm</button>
+                <button class="btn btn-lg secondary-bg-color btn-block secondary-color" type="reset">Reset</button>
+                <button class="btn btn-lg secondary-bg-color btn-block secondary-color" type="submit">Confirm</button>
             </div>
         </div>
     </form>

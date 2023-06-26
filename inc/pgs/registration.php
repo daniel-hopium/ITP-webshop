@@ -168,8 +168,6 @@
                     $row = $result->fetch_assoc();
                     $userId = $row['id'];
                     
-                    
-
                     $sql = "INSERT INTO address (`user_id`, `street`, `city`, `state`, `zip_code`, `country`)
          VALUES (?, ?, ?, ?, ?, ?)";
 
