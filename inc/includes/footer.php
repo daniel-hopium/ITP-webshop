@@ -8,7 +8,8 @@
 
         <div class="text-center text-white-50 p-1 mb-2">
             <span class="mx-2">©
-                <?php echo date("Y");?>Not For Poor Shop </span>
+                <?php echo date("Y"); ?> Not For Poor Shop
+            </span>
             <div class="d-inline">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                     class="bi bi-telephone " viewBox="0 0 16 16">
@@ -23,6 +24,6 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous">
-</script>
+    </script>
 <!-- Stripe JS library -->
 <script src="https://js.stripe.com/v3/"></script>
