@@ -20,8 +20,8 @@
 </head>
 
 <body>
-    <div class="container">
-        <h2>Refund Request</h2>
+    <div class="container mt-2">
+        <h1></h1>
 
         <?php
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -91,7 +91,7 @@
         }
         ?>
 
-        <?php include '../includes/navbar.php'; ?>
+    
         <main>
             <div class="container">
                 <h2>Refund Request</h2>
@@ -118,7 +118,7 @@
                         <label for="reason">Reason for Refund:</label>
                         <textarea class="form-control" id="reason" name="reason" required></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit Refund Request</button>
+                    <button type="submit" class="btn btn-lg secondary-bg-color btn-block secondary-color mt-2">Submit Refund Request</button>
                 </form>
             </div>
 
