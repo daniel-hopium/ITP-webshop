@@ -12,7 +12,7 @@ if ($db_obj->connect_error) {
 // Filters out role of current user
 // if(isset($_SESSION['username']))
 
-$query = "SELECT SUM(quantity) AS totalQuantity FROM shoppingcart";
+$query = "SELECT SUM(quantity) AS totalQuantity FROM shoppingcart WHERE user_id = " . $_SESSION['user_id'];
 $result = mysqli_query($db_obj, $query);
 
 if ($result) {
