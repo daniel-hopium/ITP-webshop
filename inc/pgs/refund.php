@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     <title>Refund Page</title>
@@ -43,7 +43,7 @@
                 $alterTableStmt = $conn->prepare("ALTER TABLE $table ADD COLUMN IF NOT EXISTS total_price DECIMAL(10, 2)");
 
                 $selectStmt = $conn->prepare("SELECT price FROM $productsTable WHERE name = ?");
-                $insertStmt = $conn->prepare("INSERT INTO $table (product_name, quantity, order_date, reason, total_price) VALUES (?, ?, ?, ?, ?)");
+                $insertStmt = $conn->prepare("INSERT INTO $table (product_name, quantity, order_date, reason, total_price, status) VALUES (?, ?, ?, ?, ?, 'pending')");
 
                 foreach ($productNames as $key => $productName) {
                     $quantity = $quantities[$key];
@@ -57,29 +57,10 @@
 
                     // Insert refund request data into the "refund" table
                     $insertStmt->execute([$productName, $quantity, $orderDate, $reason, $totalPrice]);
-
-                    $updateStmt = $conn->prepare("UPDATE $newOrdersTable SET quantity = quantity - ?, total_price = total_price - ? WHERE product_id IN (SELECT id FROM $productsTable WHERE name = ?) AND order_date = ?");
-
-                    foreach ($productNames as $key => $productName) {
-                        $quantity = $quantities[$key];
-
-                        // Retrieve the price from the "products" table based on the product name
-                        $selectStmt->execute([$productName]);
-                        $price = $selectStmt->fetchColumn();
-
-                        // Calculate the total price
-                        $totalPrice = $quantity * $price;
-
-                        // Insert refund request data into the "refund" table
-                        $insertStmt->execute([$productName, $quantity, $orderDate, $reason, $totalPrice]);
-
-                        // Update the quantity and total price in the "new_orders" table
-                        $updateStmt->execute([$quantity, $totalPrice, $productName, $orderDate]);
-                    }
                 }
 
                 // Display success message
-                echo "<p>Refund request submitted successfully.</p>";
+                echo "<p>Refund request submitted successfully. Please wait for admin approval.</p>";
             } catch (PDOException $e) {
                 // Display error message
                 echo "Error: " . $e->getMessage();

@@ -39,6 +39,63 @@
             die("Connection failed: " . $conn->connect_error);
         }
 
+        // Handle form submission
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Check if the form was submitted
+            if (isset($_POST['refund_id']) && isset($_POST['action'])) {
+                $refundId = $_POST['refund_id'];
+                $action = $_POST['action'];
+
+                if ($action === 'accept') {
+                    // Update the refund status to approved
+                    $updateStmt = $conn->prepare("UPDATE refund SET status = 'approved' WHERE id = ?");
+                    $updateStmt->bind_param("i", $refundId);
+                    $updateStmt->execute();
+
+                    // Get the refund details
+                    $selectStmt = $conn->prepare("SELECT product_name, quantity, order_date FROM refund WHERE id = ?");
+                    $selectStmt->bind_param("i", $refundId);
+                    $selectStmt->execute();
+                    $selectResult = $selectStmt->get_result();
+                    $refundDetails = $selectResult->fetch_assoc();
+
+                    if ($refundDetails) {
+                        $productName = $refundDetails['product_name'];
+                        $quantity = $refundDetails['quantity'];
+                        $orderDate = $refundDetails['order_date'];
+
+                        // Update the quantity and total_price in the "new_orders" table
+                        $updateOrdersStmt = $conn->prepare("UPDATE new_orders SET quantity = quantity - ?, total_price = total_price - (SELECT total_price FROM refund WHERE id = ?) WHERE product_id IN (SELECT id FROM products WHERE name = ?) AND order_date = ?");
+                        $updateOrdersStmt->bind_param("iiss", $quantity, $refundId, $productName, $orderDate);
+                        $updateOrdersStmt->execute();
+                    }
+                } elseif ($action === 'cancel') {
+                    // Update the refund status to rejected
+                    $updateStmt = $conn->prepare("UPDATE refund SET status = 'rejected' WHERE id = ?");
+                    $updateStmt->bind_param("i", $refundId);
+                    $updateStmt->execute();
+
+                    // Get the refund details
+                    $selectStmt = $conn->prepare("SELECT product_name, quantity, order_date FROM refund WHERE id = ?");
+                    $selectStmt->bind_param("i", $refundId);
+                    $selectStmt->execute();
+                    $selectResult = $selectStmt->get_result();
+                    $refundDetails = $selectResult->fetch_assoc();
+
+                    if ($refundDetails) {
+                        $productName = $refundDetails['product_name'];
+                        $quantity = $refundDetails['quantity'];
+                        $orderDate = $refundDetails['order_date'];
+
+                        // Update the quantity and total_price in the "new_orders" table
+                        $updateOrdersStmt = $conn->prepare("UPDATE new_orders SET quantity = quantity + ?, total_price = total_price + (SELECT total_price FROM refund WHERE id = ?) WHERE product_id IN (SELECT id FROM products WHERE name = ?) AND order_date = ?");
+                        $updateOrdersStmt->bind_param("iiss", $quantity, $refundId, $productName, $orderDate);
+                        $updateOrdersStmt->execute();
+                    }
+                }
+            }
+        }
+
         // Fetch data from 'refund' table
         if ($role == 'administrator') {
             $sql = "SELECT * FROM refund ORDER BY created_at DESC";
@@ -63,7 +120,8 @@
                     'order_date' => $row['order_date'],
                     'reason' => $row['reason'],
                     'created_at' => $row['created_at'],
-                    'total_price' => $row['total_price']
+                    'total_price' => $row['total_price'],
+                    'status' => $row['status']
                 ];
                 $refunds[] = $refund;
             }
@@ -83,6 +141,8 @@
                     <th>Reason</th>
                     <th>Created At</th>
                     <th>Total Price</th>
+                    <th>Status</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -96,6 +156,16 @@
                     echo '<td>' . $refund['reason'] . '</td>';
                     echo '<td>' . $refund['created_at'] . '</td>';
                     echo '<td>' . $refund['total_price'] . '</td>';
+                    echo '<td><span class="badge bg-' . getStatusBadgeColor($refund['status']) . '">' . $refund['status'] . '</span></td>';
+                    echo '<td>';
+                    echo '<form action="" method="post">';
+                    echo '<input type="hidden" name="refund_id" value="' . $refund['id'] . '">';
+                    echo '<div class="btn-group">';
+                    echo '<button type="submit" class="btn btn-success" name="action" value="accept">Accept</button>';
+                    echo '<button type="submit" class="btn btn-danger" name="action" value="cancel">Cancel</button>';
+                    echo '</div>';
+                    echo '</form>';
+                    echo '</td>';
                     echo '</tr>';
                 }
                 ?>
@@ -104,7 +174,7 @@
     </div>
 
     <?php
-        include '../includes/footer.php';
-        ?>
+    include '../includes/footer.php';
+    ?>
 
 </html>
