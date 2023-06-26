@@ -2,9 +2,9 @@
 <html lang="en">
 
 <head>
-    <title>Refund Page</title>
     <?php include '../includes/head.php'; ?>
-
+    <br>
+    <title>Refund Page</title>
     <style>
     body {
         display: flex;
@@ -14,6 +14,24 @@
 
     main {
         flex: 1;
+    }
+
+    .success-message {
+        background-color: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+        border-radius: 4px;
+        padding: 10px;
+        margin-bottom: 20px;
+    }
+
+    .error-message {
+        background-color: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+        border-radius: 4px;
+        padding: 10px;
+        margin-bottom: 20px;
     }
     </style>
 
@@ -60,10 +78,10 @@
                 }
 
                 // Display success message
-                echo "<p>Refund request submitted successfully. Please wait for admin approval.</p>";
+                echo "<div class='success-message'>Refund request submitted successfully. Please wait for admin approval.</div>";
             } catch (PDOException $e) {
                 // Display error message
-                echo "Error: " . $e->getMessage();
+                echo "<div class='error-message'>Error: " . $e->getMessage() . "</div>";
             }
 
             $conn = null;

@@ -1,3 +1,37 @@
+<?php
+// Database connection
+$host = "localhost";
+$user = "webshop_user";
+$password = "admin";
+$database = "webshop";
+
+$conn = new mysqli($host, $user, $password, $database);
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+if (isset($_POST['submit-search'])) {
+    $search = mysqli_real_escape_string($conn, $_POST['search']);
+
+    // Redirect to "newsBlog_user.php" page if search query matches "news blog"
+    if (strtolower($search) == "news blog") {
+        echo '<script>window.location.href = "newsBlog_user.php";</script>';
+        exit();
+    }
+
+    if (strtolower($search) == "products") {
+        echo '<script>window.location.href = "prod_display.php";</script>';
+        exit();
+    }
+
+    if (strtolower($search) == "category") {
+        echo '<script>window.location.href = "prod_categories.php";</script>';
+        exit();
+    }
+}
+
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -28,20 +62,6 @@
 </head>
 
 <body class="d-flex flex-column min-vh-100">
-    <?php
-    // Database connection
-    $host = "localhost";
-    $user = "webshop_user";
-    $password = "admin";
-    $database = "webshop";
-
-    $conn = new mysqli($host, $user, $password, $database);
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-
-    include '../includes/head.php';
-    ?>
 
     <main>
         <div class="container site-font-color">
@@ -56,11 +76,6 @@
                             if (isset($_POST['submit-search'])) {
                                 $search = mysqli_real_escape_string($conn, $_POST['search']);
 
-                                // Redirect to "newsBlog_user.php" page if search query matches "news blog"
-                                if (strtolower($search) == "news blog") {
-                                    header("Location: newsBlog_user.php");
-                                    exit();
-                                }
 
                                 $sql = "(SELECT created, title, content, NULL as category_name, NULL as contact_name, 
                                 NULL as email, NULL as subject, NULL as message, NULL as name, NULL as surname, NULL as username, NULL as useremail, 
