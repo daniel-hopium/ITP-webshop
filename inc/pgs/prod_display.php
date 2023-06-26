@@ -61,7 +61,8 @@ $category_id = "";
         </form>
 
 
-        <h1 class="text-center mb-4"><?php echo $category_name; ?>
+        <h1 class="text-center mb-4">
+            <?php echo $category_name; ?>
         </h1>
 
         <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-4">
@@ -70,11 +71,11 @@ $category_id = "";
             if (isset($_GET['category_id'])) {
                 $category_id = $_GET['category_id'];
             }
-            if (isset($_GET['category_id']) && $category_id >= 1  && $category_id <= 15) {
+            if (isset($_GET['category_id']) && $category_id >= 1 && $category_id <= 15) {
                 $category_id = $_GET['category_id'];
 
                 // SQL-Abfrage zum Abrufen der Produkte aus der Datenbank
-
+            
                 $sql = "SELECT p.id, p.name, p.description, p.price, p.Discount, p.Stock, pi.image_path
             FROM products p
             LEFT JOIN product_images pi ON p.id = pi.product_id
@@ -107,7 +108,7 @@ $category_id = "";
                     echo '<h2 class="card-title text-center mb-3">' . $name . '</h2>';
                     echo '<p class="card-text">' . $description . '</p>';
                     echo '<form method="post" action="addtocart.php">';
-                    echo '<a href="prod_details.php?id=' . @$id . '" class="btn secondary-bg-color btn-block secondary-color ms-auto">Details ansehen</a>';
+                    echo '<a href="prod_details.php?id=' . @$id . '" class="btn secondary-bg-color btn-block secondary-color ms-auto">Details</a>';
                     echo '<div class="input-group my-1">';
                     echo '<label class="input-group-text" for="quantity-' . $id . '">Quantity:</label>';
                     echo $stock == 0 ?
@@ -117,9 +118,9 @@ $category_id = "";
                     echo '</div>';
                     echo '<input type="hidden" name="product_id" value="' . $id . '">';
                     echo $stock == 0 ?
-                        '<button type="submit" class="btn secondary-bg-color btn-block secondary-color disabled">Ausverkauft</button>'
+                        '<button type="submit" class="btn secondary-bg-color btn-block secondary-color disabled">Sold Out</button>'
                         :
-                        '<button type="submit" class="btn secondary-bg-color btn-block secondary-color">Zum Warenkorb hinzufügen</button>';
+                        '<button type="submit" class="btn secondary-bg-color btn-block secondary-color">Add to Shoppingcart</button>';
                     echo '</form>';
                     echo '<span class="text-end">€ ' . number_format($discountedPrice, 2, ',', '.') . '</span>'; // Display the discounted price
                     echo '</div></div></div>';
@@ -127,7 +128,7 @@ $category_id = "";
             } else {
                 // Keine Kategorie-ID übergeben, alle Produkte anzeigen
                 // SQL-Abfrage zum Abrufen der Produkte aus der Datenbank
-
+            
                 $sql = "SELECT p.id, p.name, p.description, p.price, p.Discount, p.Stock, pi.image_path
             FROM products p
             LEFT JOIN product_images pi ON p.id = pi.product_id";
@@ -161,7 +162,7 @@ $category_id = "";
                     echo '<h2 class="card-title text-center mb-3">' . $name . '</h2>';
                     echo '<p class="card-text">' . $description . '</p>';
                     echo '<form method="post" action="addtocart.php">';
-                    echo '<a href="prod_details.php?id=' . @$id . '" class="btn secondary-bg-color btn-block secondary-color ms-auto">Details ansehen</a>';
+                    echo '<a href="prod_details.php?id=' . @$id . '" class="btn secondary-bg-color btn-block secondary-color ms-auto">Details</a>';
                     echo '<div class="input-group my-1">';
                     echo '<label class="input-group-text" for="quantity-' . $id . '">Quantity:</label>';
                     echo $stock == 0 ?
@@ -173,7 +174,7 @@ $category_id = "";
                     echo $stock == 0 ?
                         '<button type="submit" class="btn secondary-bg-color btn-block secondary-color disabled">Out of Stock</button>'
                         :
-                        '<button type="submit" class="btn secondary-bg-color btn-block secondary-color">Add to Shoppincart</button>';
+                        '<button type="submit" class="btn secondary-bg-color btn-block secondary-color">Add to Shoppingcart</button>';
                     echo '</form>';
                     echo '<span class="text-end">€ ' . number_format($discountedPrice, 2, ',', '.') . '</span>'; // Display the discounted price
                     echo '</div></div></div>';
