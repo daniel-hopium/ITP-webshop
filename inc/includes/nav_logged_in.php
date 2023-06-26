@@ -88,6 +88,7 @@ include '../../config/check_shoppingcart_amount.php';
                         <li><a href='user_overview.php' class='dropdown-item'>User Management</a></li>
                         <li><a href='contact_overview.php' class='dropdown-item'>Inquiry Management</a></li>
                         <li><a href='order_overview.php' class='dropdown-item'>Order Overview</a></li>
+                        <li><a href='refund_overview.php' class='dropdown-item'>Refund Overview</a></li>
                     </ul>
                 </li>";
             }

@@ -69,7 +69,7 @@
                 $orders[] = $order;
             }
         }
-
+        
         $conn->close();
         ?>
 
@@ -99,10 +99,10 @@
             </tbody>
         </table>
 
+        <?php
+    include '../includes/footer.php';
+    ?>
 
 </body>
-<?php
-include '../includes/footer.php';
-?>
 
 </html>
