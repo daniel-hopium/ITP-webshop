@@ -6,22 +6,22 @@
     <?php include '../includes/head.php'; ?>
 
     <style>
-    body {
-        display: flex;
-        flex-direction: column;
-        min-height: 100vh;
-    }
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
 
-    main {
-        flex: 1;
-    }
+        main {
+            flex: 1;
+        }
     </style>
 
 </head>
 
 <body>
     <div class="container">
-        <h2>Refund Request</h2>
+
 
         <?php
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -91,7 +91,6 @@
         }
         ?>
 
-        <?php include '../includes/navbar.php'; ?>
         <main>
             <div class="container">
                 <h2>Refund Request</h2>
@@ -123,41 +122,41 @@
             </div>
 
             <script>
-            $(document).ready(function() {
-                // Add more product fields dynamically
-                var maxProducts = 10; // Maximum number of product fields
-                var productCount = 1; // Initial product field count
+                $(document).ready(function() {
+                    // Add more product fields dynamically
+                    var maxProducts = 10; // Maximum number of product fields
+                    var productCount = 1; // Initial product field count
 
-                $("#add_product").click(function() {
-                    if (productCount < maxProducts) {
-                        productCount++;
-                        var html = '<div class="form-group">';
-                        html += '<label for="product_name_' + productCount +
-                            '">Product Name:</label>';
-                        html += '<input type="text" class="form-control" id="product_name_' +
-                            productCount +
-                            '" name="product_name[]" required>';
-                        html += '</div>';
-                        html += '<div class="form-group">';
-                        html += '<label for="quantity_' + productCount + '">Quantity:</label>';
-                        html += '<input type="number" class="form-control" id="quantity_' +
-                            productCount +
-                            '" name="quantity[]" required>';
-                        html += '</div>';
+                    $("#add_product").click(function() {
+                        if (productCount < maxProducts) {
+                            productCount++;
+                            var html = '<div class="form-group">';
+                            html += '<label for="product_name_' + productCount +
+                                '">Product Name:</label>';
+                            html += '<input type="text" class="form-control" id="product_name_' +
+                                productCount +
+                                '" name="product_name[]" required>';
+                            html += '</div>';
+                            html += '<div class="form-group">';
+                            html += '<label for="quantity_' + productCount + '">Quantity:</label>';
+                            html += '<input type="number" class="form-control" id="quantity_' +
+                                productCount +
+                                '" name="quantity[]" required>';
+                            html += '</div>';
 
-                        $("#product_fields").append(html);
-                    }
+                            $("#product_fields").append(html);
+                        }
+                    });
+
+                    // Remove product fields dynamically
+                    $("#remove_product").click(function() {
+                        if (productCount > 1) {
+                            $("#product_fields .form-group:last-child").remove();
+                            $("#product_fields .form-group:last-child").remove();
+                            productCount--;
+                        }
+                    });
                 });
-
-                // Remove product fields dynamically
-                $("#remove_product").click(function() {
-                    if (productCount > 1) {
-                        $("#product_fields .form-group:last-child").remove();
-                        $("#product_fields .form-group:last-child").remove();
-                        productCount--;
-                    }
-                });
-            });
             </script>
         </main>
     </div>
