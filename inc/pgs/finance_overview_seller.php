@@ -5,30 +5,32 @@
   <title>Sales Overview</title>
 
   <?php
-  if(($role != 'seller')) {
-    
+  include '../includes/head.php';
+
+  if (($role != 'seller')) {
+
     header('Location: home.php');
     exit();
-    
+
+
   }
-  include '../includes/head.php';
   require_once('../../config/dbaccess.php');
   ?>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="./../../res/js/finance_overview_seller.js"></script>
 </head>
 
-<?php 
+<?php
 $conn = new mysqli($host, $user, $password, $database);
 
 if ($conn->connect_error) {
-    die("Connection to the database failed: " . $conn->connect_error);
+  die("Connection to the database failed: " . $conn->connect_error);
 }
 
 $seller_id = $_SESSION['seller_id'];
 // Get monthly sales for the last 12 months
-$monthlySalesQuery = 
-"SELECT DATE_FORMAT(order_date, '%Y-%m') AS month, SUM(total_price) AS total_sales
+$monthlySalesQuery =
+  "SELECT DATE_FORMAT(order_date, '%Y-%m') AS month, SUM(total_price) AS total_sales
 FROM new_orders
 INNER JOIN products ON new_orders.product_id = products.id
 WHERE order_date >= DATE_SUB(CURDATE(), INTERVAL 12 MONTH)
@@ -40,9 +42,9 @@ $monthlySalesResult = $conn->query($monthlySalesQuery);
 $monthlySalesData = array();
 
 while ($row = $monthlySalesResult->fetch_assoc()) {
-    $month = date('F', strtotime($row['month'])); // Convert month number to month name
-    $monthlySalesData['labels'][] = $month;
-    $monthlySalesData['datasets'][0]['data'][] = $row['total_sales'];
+  $month = date('F', strtotime($row['month'])); // Convert month number to month name
+  $monthlySalesData['labels'][] = $month;
+  $monthlySalesData['datasets'][0]['data'][] = $row['total_sales'];
 }
 
 // Get daily sales for the last 30 days
@@ -57,9 +59,9 @@ $dailySalesResult = $conn->query($dailySalesQuery);
 $dailySalesData = array();
 
 while ($row = $dailySalesResult->fetch_assoc()) {
-    $day = date('F j', strtotime($row['day'])); // Convert date to month name and day
-    $dailySalesData['labels'][] = $day;
-    $dailySalesData['datasets'][0]['data'][] = $row['total_sales'];
+  $day = date('F j', strtotime($row['day'])); // Convert date to month name and day
+  $dailySalesData['labels'][] = $day;
+  $dailySalesData['datasets'][0]['data'][] = $row['total_sales'];
 }
 
 // Get daily sales for the last 365 days
@@ -76,10 +78,10 @@ $dailySalesDataYear = array();
 $cumulativeSum = 0;
 
 while ($row = $dailySalesResultYear->fetch_assoc()) {
-    $day = date('F j', strtotime($row['day'])); // Convert date to month name and day
-    $cumulativeSum += $row['total_sales'];
-    $dailySalesDataYear['labels'][] = $day;
-    $dailySalesDataYear['datasets'][0]['data'][] = $cumulativeSum;
+  $day = date('F j', strtotime($row['day'])); // Convert date to month name and day
+  $cumulativeSum += $row['total_sales'];
+  $dailySalesDataYear['labels'][] = $day;
+  $dailySalesDataYear['datasets'][0]['data'][] = $cumulativeSum;
 }
 ?>
 
@@ -130,36 +132,76 @@ while ($row = $dailySalesResultYear->fetch_assoc()) {
       <div>
         <canvas id="myChart2" style="height: 100px; width: 100%;"></canvas>
       </div>
-      </div>
+    </div>
 
-      <div id="yearly-sales" class="bg-light border border-black p-1 my-1" style="display: none;">
+    <div id="yearly-sales" class="bg-light border border-black p-1 my-1" style="display: none;">
       <h1 class="h3 text-start mt-4">Yearly Sales Overview</h1>
       <div>
-      <canvas id="myChart3" style="height: 100px; width: 100%;"></canvas>
-    </div>
-    </div>
-
-
+        <canvas id="myChart3" style="height: 100px; width: 100%;"></canvas>
+      </div>
     </div>
 
-      <script>
-      // Data for the chart
-      const data = {
-        labels: <?= json_encode($monthlySalesData['labels']) ?>
-        ,
+
+  </div>
+
+  <script>
+    // Data for the chart
+    const data = {
+      labels: <?= json_encode($monthlySalesData['labels']) ?>
+      ,
+      datasets: [{
+        label: 'Monthly Sales',
+        data: <?= json_encode($monthlySalesData['datasets'][0]['data']) ?>,
+        backgroundColor: '#0d3359b5',
+        borderColor: '#0d3359',
+        borderWidth: 1
+      }]
+    };
+
+    // Configuration options for the chart
+    const options = {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true
+          }
+        }]
+      }
+    };
+
+    // Create a new bar chart
+    const ctx = document.getElementById('monthly-sales-chart').getContext('2d');
+    const chart = new Chart(ctx, {
+      type: 'bar',
+      data: data,
+      options: options
+    });
+  </script>
+
+
+  <script>
+
+    document.addEventListener('DOMContentLoaded', function () {
+      // Your chart code goes here
+      // Get a reference to the canvas element
+      var ctx1 = document.getElementById('myChart2').getContext('2d');
+      console.log(ctx1);
+      // Define the dataset for the line chart
+      var data = {
+        labels: <?= json_encode($dailySalesData['labels']) ?>,
         datasets: [{
-          label: 'Monthly Sales',
-          data: <?= json_encode($monthlySalesData['datasets'][0]['data']) ?>,
+          label: 'Daily Sales',
+          data: <?= json_encode($dailySalesData['datasets'][0]['data']) ?>,
           backgroundColor: '#0d3359b5',
           borderColor: '#0d3359',
           borderWidth: 1
         }]
       };
 
-      // Configuration options for the chart
-      const options = {
-        responsive: true,
-        maintainAspectRatio: false,
+      // Define the options for the line chart
+      var options = {
         scales: {
           yAxes: [{
             ticks: {
@@ -169,127 +211,88 @@ while ($row = $dailySalesResultYear->fetch_assoc()) {
         }
       };
 
-      // Create a new bar chart
-      const ctx = document.getElementById('monthly-sales-chart').getContext('2d');
-      const chart = new Chart(ctx, {
-        type: 'bar',
+      // Create a new line chart instance
+      var myChart2 = new Chart(ctx1, {
+        type: 'line',
         data: data,
         options: options
       });
-    </script>
+    });
+  </script>
 
+  <script>
 
-    <script>
-      
-      document.addEventListener('DOMContentLoaded', function() {
-        // Your chart code goes here
-        // Get a reference to the canvas element
-        var ctx1 = document.getElementById('myChart2').getContext('2d');
-        console.log(ctx1);
-        // Define the dataset for the line chart
-        var data = {
-          labels: <?= json_encode($dailySalesData['labels']) ?>,
-          datasets: [{
-            label: 'Daily Sales',
-            data: <?= json_encode($dailySalesData['datasets'][0]['data']) ?>,
-            backgroundColor: '#0d3359b5',
-            borderColor: '#0d3359',
-            borderWidth: 1
+    document.addEventListener('DOMContentLoaded', function () {
+      // Your chart code goes here
+      // Get a reference to the canvas element
+      var ctx1 = document.getElementById('myChart3').getContext('2d');
+      console.log(ctx1);
+      // Define the dataset for the line chart
+      var data = {
+        labels: <?= json_encode($dailySalesDataYear['labels']) ?>,
+        datasets: [{
+          label: 'Daily Sales',
+          data: <?= json_encode($dailySalesDataYear['datasets'][0]['data']) ?>,
+          backgroundColor: '#0d3359b5',
+          borderColor: '#0d3359',
+          borderWidth: 1
+        }]
+      };
+
+      // Define the options for the line chart
+      var options = {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true
+            }
           }]
-        };
+        }
+      };
 
-        // Define the options for the line chart
-        var options = {
-          scales: {
-            yAxes: [{
-              ticks: {
-                beginAtZero: true
-              }
-            }]
-          }
-        };
-
-        // Create a new line chart instance
-        var myChart2 = new Chart(ctx1, {
-          type: 'line',
-          data: data,
-          options: options
-        });
+      // Create a new line chart instance
+      var myChart2 = new Chart(ctx1, {
+        type: 'line',
+        data: data,
+        options: options
       });
-    </script>
+    });
+  </script>
 
-<script>
-      
-      document.addEventListener('DOMContentLoaded', function() {
-        // Your chart code goes here
-        // Get a reference to the canvas element
-        var ctx1 = document.getElementById('myChart3').getContext('2d');
-        console.log(ctx1);
-        // Define the dataset for the line chart
-        var data = {
-          labels: <?= json_encode($dailySalesDataYear['labels']) ?>,
-          datasets: [{
-            label: 'Daily Sales',
-            data: <?= json_encode($dailySalesDataYear['datasets'][0]['data']) ?>,
-            backgroundColor: '#0d3359b5',
-            borderColor: '#0d3359',
-            borderWidth: 1
-          }]
-        };
+  <?php
+  // Retrieve $dailySalesDataYear from the database or wherever it is stored
+  
+  // Prepare the data
+  $labels = array_keys($dailySalesDataYear);
+  $datasets = [];
 
-        // Define the options for the line chart
-        var options = {
-          scales: {
-            yAxes: [{
-              ticks: {
-                beginAtZero: true
-              }
-            }]
-          }
-        };
-
-        // Create a new line chart instance
-        var myChart2 = new Chart(ctx1, {
-          type: 'line',
-          data: data,
-          options: options
-        });
-      });
-    </script>
-
-<?php
-// Retrieve $dailySalesDataYear from the database or wherever it is stored
-
-// Prepare the data
-$labels = array_keys($dailySalesDataYear);
-$datasets = [];
-
-// Iterate over each month
-foreach ($dailySalesDataYear as $monthData) {
+  // Iterate over each month
+  foreach ($dailySalesDataYear as $monthData) {
     $salesData = [];
 
     // Iterate over each day
     foreach ($labels as $day) {
-        $sales = $monthData[$day] ?? 0;
-        $salesData[] = $sales;
+      $sales = $monthData[$day] ?? 0;
+      $salesData[] = $sales;
     }
 
     // Create a dataset array
     $dataset = [
-        'label' => reset($monthData), // Use the month name as the label
-        'data' => $salesData,
-        'fill' => false
+      'label' => reset($monthData),
+      // Use the month name as the label
+      'data' => $salesData,
+      'fill' => false
     ];
 
     $datasets[] = $dataset;
-}
-?>
+  }
+  ?>
 
   </div>
-</div>
+  </div>
 
   <?php
- include '../includes/footer.php';
+  include '../includes/footer.php';
   ?>
 
 </body>
