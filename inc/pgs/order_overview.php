@@ -78,7 +78,7 @@
             <thead>
                 <tr>
                     <th>Order ID</th>
-                    <th>Customer Name</th>
+                    <th>Customer</th>
                     <th>Order Date</th>
                     <th>Status</th>
                     <th>Action</th>
