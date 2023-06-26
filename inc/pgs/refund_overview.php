@@ -31,10 +31,7 @@
 
     <div class="container site-font-color text-center">
         <?php
-        // Assuming you have established a database connection
         $conn = new mysqli($host, $user, $password, $database);
-
-        // Check connection
         if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
         }
@@ -70,27 +67,36 @@
                         $updateOrdersStmt->execute();
                     }
                 } elseif ($action === 'cancel') {
-                    // Update the refund status to rejected
-                    $updateStmt = $conn->prepare("UPDATE refund SET status = 'rejected' WHERE id = ?");
-                    $updateStmt->bind_param("i", $refundId);
-                    $updateStmt->execute();
-
-                    // Get the refund details
-                    $selectStmt = $conn->prepare("SELECT product_name, quantity, order_date FROM refund WHERE id = ?");
+                    // Check if the refund is already approved
+                    $selectStmt = $conn->prepare("SELECT status FROM refund WHERE id = ?");
                     $selectStmt->bind_param("i", $refundId);
                     $selectStmt->execute();
                     $selectResult = $selectStmt->get_result();
                     $refundDetails = $selectResult->fetch_assoc();
 
-                    if ($refundDetails) {
-                        $productName = $refundDetails['product_name'];
-                        $quantity = $refundDetails['quantity'];
-                        $orderDate = $refundDetails['order_date'];
+                    if ($refundDetails['status'] === 'approved') {
+                        // Update the refund status to rejected
+                        $updateStmt = $conn->prepare("UPDATE refund SET status = 'rejected' WHERE id = ?");
+                        $updateStmt->bind_param("i", $refundId);
+                        $updateStmt->execute();
 
-                        // Update the quantity and total_price in the "new_orders" table
-                        $updateOrdersStmt = $conn->prepare("UPDATE new_orders SET quantity = quantity + ?, total_price = total_price + (SELECT total_price FROM refund WHERE id = ?) WHERE product_id IN (SELECT id FROM products WHERE name = ?) AND order_date = ?");
-                        $updateOrdersStmt->bind_param("iiss", $quantity, $refundId, $productName, $orderDate);
-                        $updateOrdersStmt->execute();
+                        // Get the refund details
+                        $selectStmt = $conn->prepare("SELECT product_name, quantity, order_date FROM refund WHERE id = ?");
+                        $selectStmt->bind_param("i", $refundId);
+                        $selectStmt->execute();
+                        $selectResult = $selectStmt->get_result();
+                        $refundDetails = $selectResult->fetch_assoc();
+
+                        if ($refundDetails) {
+                            $productName = $refundDetails['product_name'];
+                            $quantity = $refundDetails['quantity'];
+                            $orderDate = $refundDetails['order_date'];
+
+                            // Update the quantity and total_price in the "new_orders" table
+                            $updateOrdersStmt = $conn->prepare("UPDATE new_orders SET quantity = quantity + ?, total_price = total_price + (SELECT total_price FROM refund WHERE id = ?) WHERE product_id IN (SELECT id FROM products WHERE name = ?) AND order_date = ?");
+                            $updateOrdersStmt->bind_param("iiss", $quantity, $refundId, $productName, $orderDate);
+                            $updateOrdersStmt->execute();
+                        }
                     }
                 }
             }
