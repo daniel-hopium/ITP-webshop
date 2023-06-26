@@ -19,12 +19,12 @@
                     <h1 class="h3 mt-4">Registration</h1>
                 </div>
                 <div class="form-floating form-label select-label shadow">
-                    <select name="formOfAddress" id="floatingSelect" class="form-select">
+                    <select name="formOfAddress" id="formOfAddress" class="form-select">
                         <option label="Mr" value="Mr">Mr</option>
                         <option label="Ms" value="Ms">Ms</option>
                         <option label="Other" value="Other">Other</option>
                     </select>
-                    <label for="floatingSelect">Title</label>
+                    <label for="formOfAddress">Title</label>
                 </div>
                 <div class="row">
                     <div class="form-floating col-md-6">
@@ -45,6 +45,28 @@
                     <div class="form-floating col-md-6">
                         <input type="email" class="form-control mb-3 shadow" name="emailConfirmation" id="emailConfirmation" placeholder="Confirm Email" required>
                         <label class="ms-2" for="email">Confirm Email</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-floating col-md-6">
+                        <input type="text" class="form-control mb-3 shadow" name="street" id="street" placeholder="Street" required>
+                        <label class="ms-2" for="street">Street</label>
+                    </div>
+                    <div class="form-floating col-md-6">
+                        <input type="text" class="form-control mb-3 shadow" name="city" id="city" placeholder="City" required>
+                        <label class="ms-2" for="city">City</label>
+                    </div>
+                    <div class="form-floating col-md-6">
+                        <input type="text" class="form-control mb-3 shadow" name="state" id="state" placeholder="State" required>
+                        <label class="ms-2" for="state">State</label>
+                    </div>
+                    <div class="form-floating col-md-6">
+                        <input type="text" class="form-control mb-3 shadow" name="zip" id="zip" placeholder="Zip" required>
+                        <label class="ms-2" for="zip">Zip Code</label>
+                    </div>
+                    <div class="form-floating col-md-6">
+                        <input type="text" class="form-control mb-3 shadow" name="country" id="country" placeholder="Country" required>
+                        <label class="ms-2" for="country">Country</label>
                     </div>
                 </div>
                 <div class="row">
@@ -78,8 +100,8 @@
                     <input type="radio" id="false" name="newsletter" value="false" required>
                 </div>
                 <div class="my-2">
-                    <button class="btn btn-primary btn-light shadow me-1" type="reset">Reset</button>
-                    <button class="btn btn-primary btn-light shadow" type="submit">Register</button>
+                    <button class="btn btn-lg secondary-bg-color btn-block secondary-color" type="reset">Reset</button>
+                    <button class="btn btn-lg secondary-bg-color btn-block secondary-color" type="submit">Register</button>
                 </div>
             </div>
 
@@ -104,24 +126,32 @@
             //create $db_obj, create sql statement, prepare it and bind the variables to it
             $db_obj = new mysqli($host, $user, $password, $database);
 
-            $sql = "INSERT INTO `users` (`form_of_address`, `name`, `surname`, `username`, `password`, `user_email`, `birth_date`, `has_newsletter`)
+            $sql = "INSERT INTO users (`form_of_adress`, `name`, `surname`, `username`, `password`, `useremail`, `birth_date`, `has_newsletter`)
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            
 
             $stmt = $db_obj->prepare($sql);
-
             $stmt->bind_param('ssssssss', $formOfAddress, $name, $surname, $username, $password, $email, $birthdate, $has_newsletter);
 
+            
             $formOfAddress = $_POST["formOfAddress"];
+          
             $name = $_POST["name"];
             $surname = $_POST["surname"];
+            $city = $_POST['city'];
+            $state = $_POST['state'];
+            $street = $_POST['street'];
+            $zip_code = $_POST['zip'];
+            $country = $_POST['country'];
             $username = $_POST["username"];
             $password = $_POST["password"];
             $email = $_POST["email"];
             $birthdate = $_POST["birthdate"];
             $has_newsletter = $_POST["newsletter"];
 
-
-            $duplicateEmail = mysqli_query($db_obj, "SELECT * FROM users WHERE user_email = '$email' ");
+            
+            
+            $duplicateEmail = mysqli_query($db_obj, "SELECT * FROM users WHERE useremail = '$email' ");
             $duplicateUsername = mysqli_query($db_obj, "SELECT * FROM users WHERE username = '$username'");
             if (mysqli_num_rows($duplicateEmail) > 0) {
                 echo "Email already registered!";
@@ -130,9 +160,24 @@
             } else {
 
                 if ($stmt->execute()) {
+                    $query = "SELECT id FROM users WHERE useremail = ?";
+                    $stmt = $db_obj->prepare($query);
+                    $stmt->bind_param('s', $email);
+                    $stmt->execute();
+                    $result = $stmt->get_result();
+                    $row = $result->fetch_assoc();
+                    $userId = $row['id'];
+                    
+                    $sql = "INSERT INTO address (`user_id`, `street`, `city`, `state`, `zip_code`, `country`)
+         VALUES (?, ?, ?, ?, ?, ?)";
+
+                    $stmt = $db_obj->prepare($sql);
+                    $stmt->bind_param('isssis', $userId, $street, $city, $state, $zip_code, $country);
+                    $stmt->execute();
+
                     echo "<script>location.href='redirect_page.php?type=registration'</script>";
                 } else {
-                    echo "Error";
+                    echo "Error: " . $stmt->error;
                 }
                 $stmt->close();
                 $db_obj->close();

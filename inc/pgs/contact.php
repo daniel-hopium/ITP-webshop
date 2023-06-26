@@ -6,6 +6,8 @@
 
     <?php
         include '../includes/head.php';
+        require_once('../../config/dbaccess.php');
+
     ?>
 
 </head>
