@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Order Overview</title>
+    <title>Refund Overview</title>
 
     <?php
     include '../includes/head.php';
@@ -16,13 +16,9 @@
         switch ($status) {
             case "pending":
                 return "primary";
-            case "in_progress":
-                return "warning";
-            case "shipped":
-                return "info";
-            case "completed":
+            case "approved":
                 return "success";
-            case "cancelled":
+            case "rejected":
                 return "danger";
             default:
                 return "secondary";
@@ -43,56 +39,63 @@
             die("Connection failed: " . $conn->connect_error);
         }
 
-        // Fetch data from 'new_orders' table
+        // Fetch data from 'refund' table
         if ($role == 'administrator') {
-            $sql = "SELECT new_orders.orderid, users.username, new_orders.order_date, new_orders.status FROM new_orders INNER JOIN users ON new_orders.user_id = users.id GROUP BY new_orders.orderid ORDER BY new_orders.order_date DESC";
+            $sql = "SELECT * FROM refund ORDER BY created_at DESC";
         } else if ($role == 'seller') {
-            $sql = "SELECT new_orders.orderid, users.username, new_orders.order_date, new_orders.status FROM new_orders INNER JOIN users ON new_orders.user_id = users.id GROUP BY new_orders.orderid ORDER BY new_orders.order_date DESC";
+            $sql = "SELECT * FROM refund ORDER BY created_at DESC";
         } else if ($role == 'customer') {
             $user_id = $_SESSION['user_id'];
-            $sql = "SELECT new_orders.orderid, users.username, new_orders.order_date, new_orders.status FROM new_orders INNER JOIN users ON new_orders.user_id = users.id WHERE users.id = '$user_id' GROUP BY new_orders.orderid ORDER BY new_orders.order_date DESC";
+            $sql = "SELECT * FROM refund WHERE user_id = '$user_id' ORDER BY created_at DESC";
         }
 
         $result = $conn->query($sql);
 
-        //empty array to store fetched orders
-        $orders = [];
+        // Empty array to store fetched refunds
+        $refunds = [];
 
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
-                $order = [
-                    'id' => $row['orderid'],
-                    'username' => $row['username'],
+                $refund = [
+                    'id' => $row['id'],
+                    'product_name' => $row['product_name'],
+                    'quantity' => $row['quantity'],
                     'order_date' => $row['order_date'],
-                    'status' => $row['status']
+                    'reason' => $row['reason'],
+                    'created_at' => $row['created_at'],
+                    'total_price' => $row['total_price']
                 ];
-                $orders[] = $order;
+                $refunds[] = $refund;
             }
         }
-        
+
         $conn->close();
         ?>
 
-        <h1 class="h1 my-5">Order Overview</h1>
+        <h1 class="h1 my-5">Refund Overview</h1>
         <table class="table">
             <thead>
                 <tr>
-                    <th>Order ID</th>
-                    <th>Customer Name</th>
+                    <th>Refund ID</th>
+                    <th>Product Name</th>
+                    <th>Quantity</th>
                     <th>Order Date</th>
-                    <th>Status</th>
-                    <th>Action</th>
+                    <th>Reason</th>
+                    <th>Created At</th>
+                    <th>Total Price</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
-                foreach ($orders as $order) {
+                foreach ($refunds as $refund) {
                     echo '<tr>';
-                    echo '<td>' . $order['id'] . '</td>';
-                    echo '<td>' . $order['username'] . '</td>';
-                    echo '<td>' . $order['order_date'] . '</td>';
-                    echo '<td><span class="badge bg-' . getStatusBadgeColor($order['status']) . '">' . $order['status'] . '</span></td>';
-                    echo '<td><a href="order_overview_details.php?id=' . $order['id'] . '" class="btn btn-dark secondary-bg-color ">View Details</a></td>';
+                    echo '<td>' . $refund['id'] . '</td>';
+                    echo '<td>' . $refund['product_name'] . '</td>';
+                    echo '<td>' . $refund['quantity'] . '</td>';
+                    echo '<td>' . $refund['order_date'] . '</td>';
+                    echo '<td>' . $refund['reason'] . '</td>';
+                    echo '<td>' . $refund['created_at'] . '</td>';
+                    echo '<td>' . $refund['total_price'] . '</td>';
                     echo '</tr>';
                 }
                 ?>
@@ -100,8 +103,8 @@
         </table>
 
         <?php
-    include '../includes/footer.php';
-    ?>
+        include '../includes/footer.php';
+        ?>
 
 </body>
 

@@ -14,7 +14,6 @@
   $db_obj = new mysqli($host, $user, $password, $database);
 
   $user = $_SESSION['username'];
-    
   $currentUser = mysqli_query($db_obj, "SELECT users.*, address.*  FROM users  JOIN address ON users.id = address.user_id
   WHERE users.username = '$user';"  );
   $currentUser =($currentUser->fetch_assoc());
@@ -23,7 +22,7 @@
 
 <body class="d-flex flex-column min-vh-100">
   <div class="container site-font-color">
-    <div class="row mt-5 col-md-12">
+    <div class="row mt-5 col-md-6">
       <div class="card card-bg shadow-2-strong card-registration mt-3 p-2 flex-column "
         style="border-radius: 15px; max-width: 600px;">
         <div class="">
@@ -34,7 +33,7 @@
       </div>
       <div class="card card-bg shadow-2-strong card-registration mt-3 p-2 flex-column "
         style="border-radius: 15px; max-width: 600px;">
-        <div class="col-md-6">
+        <div class="col-md-12">
           <h1 class="h1">My Profile</h1>
 
           <div class="site-font-color">

@@ -13,9 +13,9 @@
 
     $db_obj = new mysqli($host, $user, $password, $database);
 
-    $currentUser = $_SESSION['username'];
+    $username = $_SESSION['username'];
     $currentUser = mysqli_query($db_obj, "SELECT users.*, address.*  FROM users  JOIN address ON users.id = address.user_id
-    WHERE users.username = '$user';");
+    WHERE users.username = '$username';"  );
     $currentUser =($currentUser->fetch_assoc());
     ?>
 

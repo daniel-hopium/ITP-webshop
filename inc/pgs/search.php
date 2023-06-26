@@ -6,24 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search page</title>
     <style>
-        body {
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
+    body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+    }
 
-        main {
-            flex: 1;
-        }
+    main {
+        flex: 1;
+    }
 
-        .card-container {
-            display: flex;
-            justify-content: center;
-        }
+    .card-container {
+        display: flex;
+        justify-content: center;
+    }
 
-        .card {
-            min-height: 600px;
-        }
+    .card {
+        min-height: 600px;
+    }
     </style>
 </head>
 
@@ -70,13 +70,9 @@
         UNION 
         (SELECT created, NULL as title, NULL as content, NULL as category_name, name AS contact_name, email, subject, message, NULL as name, NULL as surname, NULL as username, NULL as useremail, 'contact_query' as type, 'contact_query' as source FROM contact_query WHERE created LIKE '%$search%' OR name LIKE '%$search%' OR email LIKE '%$search%' OR subject LIKE '%$search%' OR message LIKE '%$search%')
         UNION
-        (SELECT created, title, text as content, NULL as category_name, NULL as contact_name, NULL as email, NULL as subject, NULL as message, NULL as name, NULL as surname, NULL as username, NULL as useremail, 'news' as type, 'news' as source FROM news WHERE created LIKE '%$search%' OR title LIKE '%$search%' OR text LIKE '%$search%')
-        UNION
         (SELECT id as created, name as title, description as content, price as category_name, NULL as contact_name, NULL as email, NULL as subject, NULL as message, NULL as name, NULL as surname, NULL as username, NULL as useremail, 'products' as type, 'products' as source FROM products WHERE name LIKE '%$search%' OR description LIKE '%$search%')
         UNION
         (SELECT NULL as created, NULL as title, NULL as content, NULL as category_name, NULL as contact_name, NULL as email, NULL as subject, NULL as message, name, surname, username, useremail, 'users' as type, 'users' as source FROM users WHERE name LIKE '%$search%' OR surname LIKE '%$search%' OR username LIKE '%$search%' OR useremail LIKE '%$search%')";
-
-
 
 
                                 $result = mysqli_query($conn, $sql);
@@ -120,7 +116,7 @@
                                             //$id = $row['created'];
                                             echo "<div>
                                     <h3>Products</h3>";
-                                               
+
                                             echo '<div class="col mb-4">';
                                             echo '<div class="card h-100">';
                                             echo '<img src="https://via.placeholder.com/400x300/2D2D2D/FFFFFF/?text=' . $row['title'] . '" class="card-img-top" alt="' . $row['title'] . '">';
@@ -138,8 +134,6 @@
                                             echo '</form>';
                                             echo '<span class="text-end h4">€ ' . number_format($row['category_name'], 2, ',', '.') . '</span>';
                                             echo '</div></div></div>';
-                                            
-
                                         } elseif ($row['source'] == 'users') {
                                             echo "<div>
                                     <h3>Users</h3>
@@ -155,7 +149,7 @@
                                     echo "There are no results matching your search!";
                                 }
                             }
-    ?>
+                            ?>
                         </div>
                     </div>
                 </div>
