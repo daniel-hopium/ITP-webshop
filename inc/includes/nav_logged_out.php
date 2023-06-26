@@ -1,5 +1,6 @@
 <?php
 $active_page = basename($_SERVER['SCRIPT_NAME']);
+require_once '../../config/check_if_admin.php';
 ?>
 
 <link href='https://fonts.googleapis.com/css?family=Alex Brush' rel='stylesheet'>

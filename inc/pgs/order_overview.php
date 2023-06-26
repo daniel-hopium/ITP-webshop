@@ -45,12 +45,12 @@
 
         // Fetch data from 'new_orders' table
         if ($role == 'administrator') {
-            $sql = "SELECT new_orders.orderid, users.username, new_orders.order_date, new_orders.status FROM new_orders INNER JOIN users ON new_orders.user_id = users.id GROUP BY new_orders.orderid ORDER BY new_orders.order_date DESC";
+            $sql = "SELECT new_orders.orderid, users.username, MAX(new_orders.order_date) AS order_date, MAX(new_orders.status) AS status FROM new_orders INNER JOIN users ON new_orders.user_id = users.id GROUP BY new_orders.orderid, users.username ORDER BY order_date DESC";
         } else if ($role == 'seller') {
-            $sql = "SELECT new_orders.orderid, users.username, new_orders.order_date, new_orders.status FROM new_orders INNER JOIN users ON new_orders.user_id = users.id GROUP BY new_orders.orderid ORDER BY new_orders.order_date DESC";
+            $sql = "SELECT new_orders.orderid, users.username, MAX(new_orders.order_date) AS order_date, MAX(new_orders.status) AS status FROM new_orders INNER JOIN users ON new_orders.user_id = users.id GROUP BY new_orders.orderid, users.username ORDER BY order_date DESC";
         } else if ($role == 'customer') {
             $user_id = $_SESSION['user_id'];
-            $sql = "SELECT new_orders.orderid, users.username, new_orders.order_date, new_orders.status FROM new_orders INNER JOIN users ON new_orders.user_id = users.id WHERE users.id = '$user_id' GROUP BY new_orders.orderid ORDER BY new_orders.order_date DESC";
+            $sql = "SELECT new_orders.orderid, users.username, MAX(new_orders.order_date) AS order_date, MAX(new_orders.status) AS status FROM new_orders INNER JOIN users ON new_orders.user_id = users.id WHERE users.id = '$user_id' GROUP BY new_orders.orderid, users.username ORDER BY order_date DESC";
         }
 
         $result = $conn->query($sql);
@@ -78,7 +78,7 @@
             <thead>
                 <tr>
                     <th>Order ID</th>
-                    <th>Customer Name</th>
+                    <th>Customer</th>
                     <th>Order Date</th>
                     <th>Status</th>
                     <th>Action</th>
@@ -99,10 +99,12 @@
             </tbody>
         </table>
 
+    </div>
+    <?php
+    include '../includes/footer.php';
+    ?>
 
 </body>
-<?php
-include '../includes/footer.php';
-?>
+
 
 </html>
